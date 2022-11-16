@@ -9,17 +9,10 @@ import { Team } from '../shared/models/team.model';
 })
 export class OrgComponent implements OnInit {
 
-  orga: Organization = {
-    id: 1,
-    name: 'Lakeside Mutual',
-    teams: new Set<Team>()
-  };
-
   constructor() { }
 
   ngOnInit(): void {
-    this.orga.teams?.add({id: 1, name: "a rng team", organization: this.orga})
-    this.orga.teams?.add({id: 2, name: "another rng team", organization: this.orga})
+
   }
 
 }
