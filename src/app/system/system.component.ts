@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Microservice } from '../shared/models/microservice.model';
+import { MemberService } from '../shared/services/member.service';
 import { MicroserviceService } from '../shared/services/microservice.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { MicroserviceService } from '../shared/services/microservice.service';
 })
 export class SystemComponent implements OnInit {
 
-  constructor(private microserviceService: MicroserviceService) { }
+  constructor(private microserviceService: MicroserviceService, private memberService: MemberService) { }
 
   selectedMicroservice?: Microservice;
   microservices?: Microservice[];
@@ -24,7 +25,9 @@ export class SystemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.memberService.createMember("jonas", "sorgalla", "jonas@fh-dortmund.de").subscribe(
+      member => console.log('There is a new member: '+member)
+    )    
   }
 
 }
