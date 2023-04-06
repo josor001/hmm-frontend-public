@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ModelartifactService } from './modelartifact.service';
+import { ModelArtifactService } from './modelartifact.service';
 
 describe('ModelartifactService', () => {
-  let service: ModelartifactService;
+  let service: ModelArtifactService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ModelartifactService);
+    service = TestBed.inject(ModelArtifactService);
   });
 
   it('should be created', () => {

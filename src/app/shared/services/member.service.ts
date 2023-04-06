@@ -44,7 +44,7 @@ export class MemberService {
   }
 
   /** DELETE a member */
-  deleteHero(id: number): Observable<unknown> {
+  deleteMember(id: number): Observable<unknown> {
     const url = `${this.entityUrl}/${id}`;
     return this.http.delete(url, httpOptions)
      .pipe(catchError(this.handleError));
