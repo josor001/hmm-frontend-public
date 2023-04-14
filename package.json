@@ -1,6 +1,6 @@
 {
-  "name": "chmmm",
-  "version": "0.1.0",
+  "name": "HMM",
+  "version": "0.2.0-beta",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -16,7 +16,7 @@
     "@angular/compiler": "~13.3.0",
     "@angular/core": "~13.3.0",
     "@angular/forms": "~13.3.0",
-    "@angular/material": "^13.3.5",
+    "@angular/material": "^13.3.9",
     "@angular/platform-browser": "~13.3.0",
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",

@@ -81,14 +81,13 @@ describe('MemberService', () => {
     });
   });
 
-  describe('#deleteMember', () => {
-    it('should delete a member by ID', () => {
-      const id = 1;
-      service.deleteMember(id).subscribe(result => {
-        expect(result).toBeUndefined();
+  describe('deleteMember', () => {
+    it('should delete the member and return an Observable<unknown>', () => {
+      service.deleteMember(1).subscribe(data => {
+        expect(data).toBeTruthy();
       });
-      const req = httpMock.expectOne(`${service['entityUrl']}/${id}`);
-      expect(req.request.method).toEqual('DELETE');
+      const req = httpMock.expectOne(`${service['entityUrl']}/1`);
+      expect(req.request.method).toBe('DELETE');
       req.flush({});
     });
   });

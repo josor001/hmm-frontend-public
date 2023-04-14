@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Cooperative Holistic Microservice Model Management';
+  title = 'Holistic Microservice Management Platform';
 }
