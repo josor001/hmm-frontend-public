@@ -1,28 +1,49 @@
-<mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span>{{title}}</span>
-    <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
-    </button>
-  </mat-toolbar>
-
-<mat-sidenav-container>
-    <mat-sidenav class="sidenav"><p>NAV</p></mat-sidenav>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport
+                 [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+                 [mode]="(isHandset$ | async) ? 'over' : 'side'"
+                 [opened]="(isHandset$ | async) === false">
+        <mat-toolbar><img src="/assets/img/logo_simple.jpeg" alt="image" class="logo"></mat-toolbar>
+        <mat-nav-list>
+            <a mat-list-item routerLink="/dashboard" routerLinkActive="active-link">
+                <mat-icon>dashboard</mat-icon><span class="menu_item_text">Dashboard</span>
+            </a>
+            <div mat-subheader>Technical</div>
+            <a mat-list-item routerLink="/system" routerLinkActive="active-link">
+                <mat-icon>webhook</mat-icon>
+                <span class="menu_item_text">System</span>
+            </a>
+            <a mat-list-item routerLink="/microservices" routerLinkActive="active-link">
+                <mat-icon>code</mat-icon>
+                <span class="menu_item_text">Microservices</span>
+            </a>
+            <div mat-subheader>Organizational</div>
+            <a mat-list-item routerLink="/organization" routerLinkActive="active-link">
+                <mat-icon>domain</mat-icon>
+                <span class="menu_item_text">Organization</span>
+            </a>
+            <a mat-list-item routerLink="/teams" routerLinkActive="active-link">
+                <mat-icon>groups</mat-icon>
+                <span class="menu_item_text">Teams</span>
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
     <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <button
+                    type="button"
+                    aria-label="Toggle sidenav"
+                    mat-icon-button
+                    (click)="drawer.toggle()"
+                    *ngIf="isHandset$ | async">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <span>{{title}}</span>
+        </mat-toolbar>
+
         <router-outlet></router-outlet>
-        <h1>{{title}}</h1>
-        <p>mat-grid-list here?</p>
-        <app-system></app-system>
-        <app-teams></app-teams>
-        <app-org></app-org>
+
     </mat-sidenav-content>
 </mat-sidenav-container>
 
-
-
+<!-- more useful icons here: https://fonts.google.com/icons?hl=de&selected=Material+Symbols+Outlined:groups:FILL@0;wght@400;GRAD@0;opsz@48&icon.query=Team -->

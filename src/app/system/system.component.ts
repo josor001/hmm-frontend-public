@@ -12,6 +12,10 @@ export class SystemComponent implements OnInit {
 
   constructor(private microserviceService: MicroserviceService, private memberService: MemberService) { }
 
+  ngOnInit(): void {
+        throw new Error('Method not implemented.');
+    }
+
   selectedMicroservice?: Microservice;
   microservices?: Microservice[];
   serviceId?: number;
@@ -23,11 +27,4 @@ export class SystemComponent implements OnInit {
   getMicroservice(id: number): void {
     this.microserviceService.getMicroservice(id).subscribe(microservice => this.selectedMicroservice = microservice)
   }
-
-  ngOnInit(): void {
-    this.memberService.createMember("jonas", "sorgalla", "jonas@fh-dortmund.de").subscribe(
-      member => console.log('There is a new member: '+member)
-    )    
-  }
-
 }

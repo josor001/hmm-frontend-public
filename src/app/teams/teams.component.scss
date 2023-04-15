@@ -1,0 +1,34 @@
+.grid-container {
+  margin: 20px;
+}
+
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+}
+
+.toolbar-icon {
+  padding: 0 14px;
+}
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+/* CSS classes for 2nd menu bar */
+.menu-section {
+  display: table;
+}
+.mat-button {
+  margin-right: 10px;
+}
+
+.menu_item_text {
+  padding-left: 1em;
+}
+
+.menu-button-row {
+  display: table-cell;
+}
