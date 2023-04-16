@@ -5,12 +5,14 @@ import {TeamsComponent} from "./teams/teams.component";
 import {MicroservicesComponent} from "./microservices/microservices.component";
 import {OrganizationComponent} from "./organization/organization.component";
 import {SystemComponent} from "./system/system.component";
+import {MembersComponent} from "./members/members.component";
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'system', component: SystemComponent },
   { path: 'teams', component: TeamsComponent },
   { path: 'organization', component: OrganizationComponent },
+  { path: 'members', component: MembersComponent },
   { path: 'microservices', component: MicroservicesComponent }
 ];
 

@@ -23,6 +23,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MicroservicesComponent } from './microservices/microservices.component';
 import { OrganizationComponent } from './organization/organization.component';
+import {MatSelectModule} from "@angular/material/select";
+import { MembersComponent } from './members/members.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatChipsModule} from "@angular/material/chips";
+import { EditMemberComponent } from './members/edit-member/edit-member.component';
 
 
 @NgModule({
@@ -32,7 +37,9 @@ import { OrganizationComponent } from './organization/organization.component';
     SystemComponent,
     DashboardComponent,
     MicroservicesComponent,
-    OrganizationComponent
+    OrganizationComponent,
+    MembersComponent,
+    EditMemberComponent
   ],
     imports: [
         BrowserModule,
@@ -52,7 +59,10 @@ import { OrganizationComponent } from './organization/organization.component';
         LayoutModule,
         MatGridListModule,
         MatCardModule,
-        MatMenuModule
+        MatMenuModule,
+        MatSelectModule,
+        MatTableModule,
+        MatChipsModule
     ],
   providers: [],
   bootstrap: [AppComponent]

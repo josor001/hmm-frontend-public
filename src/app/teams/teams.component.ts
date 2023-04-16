@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {Observable, of} from 'rxjs';
+import {map, shareReplay} from 'rxjs/operators';
 import {Team} from "../shared/models/team.model";
-import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
-import {map} from "rxjs/operators";
+import {TeamService} from "../shared/services/team.service";
 
 @Component({
   selector: 'app-teams',
@@ -9,30 +11,34 @@ import {map} from "rxjs/operators";
   styleUrls: ['./teams.component.scss']
 })
 export class TeamsComponent implements OnInit {
-  /** Based on the screen size, switch from standard to one column per row */
-  teams = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-      map(({ matches }) => {
-        if (matches) {
-          return [
-            { title: 'Card 1', cols: 1, rows: 1 },
-            { title: 'Card 2', cols: 1, rows: 1 },
-            { title: 'Card 3', cols: 1, rows: 1 },
-            { title: 'Card 4', cols: 1, rows: 1 }
-          ];
-        }
+    // Declaration of teams Array
+    teams: Team[] = [];
 
-        return [
-          { title: 'Card 1', cols: 2, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 2 },
-          { title: 'Card 4', cols: 1, rows: 1 }
-        ];
-      })
-  );
+    // set number of columns based on screen size
+    cols$: Observable<number> = this.breakpointObserver
+        .observe([Breakpoints.Small, Breakpoints.XSmall])
+        .pipe(
+            map((result) => {
+                if (result.breakpoints[Breakpoints.XSmall]) {
+                    return 1;
+                } else if (result.breakpoints[Breakpoints.Small]) {
+                    return 2;
+                } else {
+                    return 3;
+                }
+            }),
+            shareReplay()
+        );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+    constructor(private breakpointObserver: BreakpointObserver, private teamService: TeamService) {
+    }
 
-  ngOnInit(): void {
-  }
+    getTeams(): void {
+        this.teamService.getTeams().subscribe(teams => this.teams = teams);
+    }
+
+    ngOnInit(): void {
+        this.getTeams();
+    }
 
 }

@@ -22,6 +22,10 @@
                 <mat-icon>domain</mat-icon>
                 <span class="menu_item_text">Organization</span>
             </a>
+            <a mat-list-item routerLink="/members" routerLinkActive="active-link">
+                <mat-icon>person</mat-icon>
+                <span class="menu_item_text">People</span>
+            </a>
             <a mat-list-item routerLink="/teams" routerLinkActive="active-link">
                 <mat-icon>groups</mat-icon>
                 <span class="menu_item_text">Teams</span>
@@ -29,7 +33,7 @@
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-        <mat-toolbar color="primary">
+        <mat-toolbar class="mat-elevation-z4" color="primary">
             <button
                     type="button"
                     aria-label="Toggle sidenav"
@@ -39,11 +43,21 @@
                 <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
             <span>{{title}}</span>
+            <span class="toolbar-spacer"></span>
+            <form>
+                <mat-form-field appearance="fill">
+                    <mat-label>System</mat-label>
+                    <mat-select [(ngModel)]="selectedSystem" name="system">
+                        <mat-option *ngFor="let system of systems" [value]="system.name" (click)="onSelect(system)">
+                            {{system.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </form>
         </mat-toolbar>
-
         <router-outlet></router-outlet>
-
+        <p> DUMMY selected system: {{selectedSystem.name}} </p>
     </mat-sidenav-content>
 </mat-sidenav-container>
-
 <!-- more useful icons here: https://fonts.google.com/icons?hl=de&selected=Material+Symbols+Outlined:groups:FILL@0;wght@400;GRAD@0;opsz@48&icon.query=Team -->

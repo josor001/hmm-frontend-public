@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  useMockData: true,
   production: false,
   serverUrl: 'http://localhost:8080'
 };

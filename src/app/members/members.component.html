@@ -1,0 +1,85 @@
+<mat-toolbar>
+    <mat-toolbar-row>
+        <span>People</span>
+        <span class="toolbar-spacer"></span>
+        <div class="example-button-row">
+            <button mat-flat-button color="primary" (click)="addData()">
+                <mat-icon>person_add</mat-icon>
+                <span class="menu_item_text">Add</span>
+            </button>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<button (click)="toggleMe()">CLICK ME</button>
+<app-edit-member  *ngIf="showEditComponent"></app-edit-member>
+
+<div class="table-container">
+    <table mat-table
+           [dataSource]="dataSource" multiTemplateDataRows
+           class="mat-elevation-z1">
+        <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+            <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+            <td mat-cell *matCellDef="let member"> {{member[column]}} </td>
+        </ng-container>
+        <ng-container matColumnDef="expand">
+            <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+            <td mat-cell *matCellDef="let member">
+                <button mat-icon-button aria-label="expand row"
+                        (click)="(expandedMember = expandedMember === member ? null : member); $event.stopPropagation()">
+                    <mat-icon *ngIf="expandedMember !== member">keyboard_arrow_down</mat-icon>
+                    <mat-icon *ngIf="expandedMember === member">keyboard_arrow_up</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let member" [attr.colspan]="columnsToDisplayWithExpand.length">
+                <div class="member-detail"
+                     [@detailExpand]="member == expandedMember ? 'expanded' : 'collapsed'">
+                    <mat-card class="expanded-content">
+                        <mat-card-header>
+                            <mat-card-subtitle>Actions</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <mat-list class="detail-list">
+                                <a mat-button class="expanded-button">Edit</a>
+                                <a mat-button class="expanded-button" color="warn">Delete</a>
+                            </mat-list>
+                        </mat-card-content>
+                    </mat-card>
+                    <mat-card class="expanded-content">
+                        <mat-card-header>
+                            <mat-card-subtitle>Expertise</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <mat-list class="detail-list">
+                                <button mat-button disabled class="expanded-button" *ngFor="let expertise of member.expertise">{{expertise}}</button>
+                            </mat-list>
+                        </mat-card-content>
+                    </mat-card>
+                    <mat-card class="expanded-content">
+                        <mat-card-header>
+                            <mat-card-subtitle>Profile Link</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <mat-list class="detail-list">
+                                <a mat-button href="{{member.profileLink}}" target="_blank" class="expanded-button">Profile</a>
+                            </mat-list>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+        <tr mat-row *matRowDef="let member; columns: columnsToDisplayWithExpand;"
+            class="example-element-row"
+            [class.example-expanded-row]="expandedMember === member"
+            (click)="expandedMember = expandedMember === member ? null : member">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
+</div>
+

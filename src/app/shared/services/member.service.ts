@@ -1,8 +1,10 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import {catchError, Observable, of, throwError} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Member } from '../models/member.model';
+import {TEAMS} from "../../../assets/mock-data/mock-teams";
+import {MEMBERS} from "../../../assets/mock-data/mock-members";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -27,7 +29,11 @@ export class MemberService {
 
   /** GET all members */
   getMembers(): Observable<Member[]> {
-    return this.http.get<Member[]>(this.entityUrl)
+    if (environment.useMockData) {
+      return of(MEMBERS);
+    } else {
+      return this.http.get<Member[]>(this.entityUrl);
+    }
   }
 
   /** POST a new member */  
