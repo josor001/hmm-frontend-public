@@ -26,8 +26,12 @@ import { OrganizationComponent } from './organization/organization.component';
 import {MatSelectModule} from "@angular/material/select";
 import { MembersComponent } from './members/members.component';
 import {MatTableModule} from "@angular/material/table";
-import {MatChipsModule} from "@angular/material/chips";
 import { EditMemberComponent } from './members/edit-member/edit-member.component';
+import {MatInputModule} from "@angular/material/input";
+import { AddMemberComponent } from './members/add-member/add-member.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { EditTeamComponent } from './teams/edit-team/edit-team.component';
+import { EditServiceComponent } from './microservices/edit-service/edit-service.component';
 
 
 @NgModule({
@@ -39,7 +43,10 @@ import { EditMemberComponent } from './members/edit-member/edit-member.component
     MicroservicesComponent,
     OrganizationComponent,
     MembersComponent,
-    EditMemberComponent
+    EditMemberComponent,
+    AddMemberComponent,
+    EditTeamComponent,
+    EditServiceComponent
   ],
     imports: [
         BrowserModule,
@@ -62,7 +69,9 @@ import { EditMemberComponent } from './members/edit-member/edit-member.component
         MatMenuModule,
         MatSelectModule,
         MatTableModule,
-        MatChipsModule
+        MatInputModule,
+        MatSnackBarModule,
+
     ],
   providers: [],
   bootstrap: [AppComponent]

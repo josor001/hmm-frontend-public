@@ -7,7 +7,7 @@ export const MEMBERS: Member[] = [
         lastname: 'Sorgalla',
         email: 'jonas.sorgalla@fh-dortmund.de',
         profileLink: 'https://example.com/janedoe',
-        expertise: ['Angular', 'JavaScript', 'CSS'],
+        expertise: 'Despair',
         id: 1,
     },
     {
@@ -15,7 +15,7 @@ export const MEMBERS: Member[] = [
         lastname: 'Wizenty',
         email: 'philip.wizenty@fh-dortmund.de',
         profileLink: 'https://github.com/pwizenty',
-        expertise: ['Vue.js', 'TypeScript', 'GraphQL'],
+        expertise: 'Operations, PaaS like AWS, Azure etc.',
         id: 2,
     },
     {
@@ -23,13 +23,13 @@ export const MEMBERS: Member[] = [
         lastname: 'Rademacher',
         email: 'rademacher@se-rwth.de',
         profileLink: 'https://github.com/frademacher',
-        expertise: ['React Native', 'Firebase', 'MongoDB'],
+        expertise: 'Model-Driven Engineering and LEMMA',
         id: 3,
     }, {
         firstname: 'Philipp',
         lastname: 'Heisig',
         email: 'philipp.heisig@fh-dortmund.de',
-        expertise: ['Express', 'PostgreSQL', 'Docker'],
+        expertise: 'Data-intensive Applications',
         id: 4,
     }
 ];

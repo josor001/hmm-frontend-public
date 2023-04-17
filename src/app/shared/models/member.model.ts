@@ -3,6 +3,6 @@ export interface Member {
     lastname?: string;
     email?: string;
     profileLink?: string;
-    expertise?: Array<string>;
+    expertise?: string;
     id?: number;
 }

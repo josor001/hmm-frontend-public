@@ -15,6 +15,11 @@
 .mat-flat-button:hover {
   background-color: #4527A0;
 }
+
+.full-width {
+  width: 100%;
+}
+
 /* CSS for cards */
 
 .card {
@@ -28,8 +33,17 @@
 .mat-card-actions {
   position: absolute;
   bottom: 15px;
+  margin-left: 16px;
 }
 
+.team-card-content {
+  margin-left: 16px;
+}
+
+.table-member-expertise {
+  text-overflow: ellipsis;
+  color: dimgray;
+}
 
 /* CSS classes for 2nd menu bar */
 .menu-section {

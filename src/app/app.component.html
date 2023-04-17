@@ -44,20 +44,12 @@
             </button>
             <span>{{title}}</span>
             <span class="toolbar-spacer"></span>
-            <form>
-                <mat-form-field appearance="fill">
-                    <mat-label>System</mat-label>
-                    <mat-select [(ngModel)]="selectedSystem" name="system">
-                        <mat-option *ngFor="let system of systems" [value]="system.name" (click)="onSelect(system)">
-                            {{system.name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-            </form>
+            <button mat-flat-button color="primary" disabled matTooltip="Not Yet Implemented">
+                <mat-icon>person</mat-icon>
+                <span class="menu_item_text">Profile</span>
+            </button>
         </mat-toolbar>
         <router-outlet></router-outlet>
-        <p> DUMMY selected system: {{selectedSystem.name}} </p>
     </mat-sidenav-content>
 </mat-sidenav-container>
 <!-- more useful icons here: https://fonts.google.com/icons?hl=de&selected=Material+Symbols+Outlined:groups:FILL@0;wght@400;GRAD@0;opsz@48&icon.query=Team -->

@@ -2,17 +2,17 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Member} from "../../shared/models/member.model";
 import {MemberService} from "../../shared/services/member.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Subscription} from 'rxjs';
+import { Subscription } from 'rxjs';
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
-  selector: 'app-edit-member',
-  templateUrl: './edit-member.component.html',
-  styleUrls: ['./edit-member.component.scss']
+  selector: 'app-add-member',
+  templateUrl: './add-member.component.html',
+  styleUrls: ['./add-member.component.scss']
 })
-export class EditMemberComponent implements OnInit, OnDestroy {
+export class AddMemberComponent implements OnInit, OnDestroy {
 
-  editMember: Member | undefined;
+  newMember: Member | undefined;
   routerSub: Subscription | undefined;
   serviceSub: Subscription | undefined;
 
@@ -22,13 +22,7 @@ export class EditMemberComponent implements OnInit, OnDestroy {
               private snackBar : MatSnackBar) { }
 
   ngOnInit() {
-    this.routerSub = this.activatedRoute.paramMap.subscribe((params) => {
-      var id : number = parseInt(<string>params.get('id'))
-      console.log(id);
-      this.serviceSub = this.memberService.getMember(id).subscribe(
-          (member) => {this.editMember = member;}
-      )
-    });
+    this.newMember = {firstname: "", lastname: "", email: ""}
   }
 
   ngOnDestroy() {
@@ -42,12 +36,15 @@ export class EditMemberComponent implements OnInit, OnDestroy {
 
 
   save() {
-    if(this.editMember == undefined || this.editMember.id == undefined) {
-      this.openSnackBar("Something went wrong. No actual member selected!", "ERROR");
+    if(this.newMember && this.newMember.firstname && this.newMember.lastname && this.newMember.email) {
+      this.memberService.createMember(this.newMember.firstname, this.newMember.lastname, this.newMember.email).subscribe(
+          newMem => {
+            this.openSnackBar("New member "+newMem.firstname+" saved!", "SUCCESS");
+            this.router.navigate(['/members']);
+          }
+      );
     } else {
-      this.memberService.updateMember(<Member>this.editMember);
-      this.openSnackBar("Member saved!", "SUCCESS");
-      this.router.navigate(['/members']);
+      this.openSnackBar("Something went wrong. Please fill in all fields.", "ERROR");
     }
   }
 

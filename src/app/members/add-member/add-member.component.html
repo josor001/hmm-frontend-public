@@ -1,0 +1,37 @@
+<mat-card class="member-edit" *ngIf="newMember">
+    <mat-card-header>
+        <mat-card-title>New Member</mat-card-title>
+        <mat-card-subtitle>Please fill in all fields!</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="member-edit-form">
+            <table class="full-width">
+                <tr>
+                    <td>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Firstname</mat-label>
+                            <input matInput name="firstname" placeholder="John" [(ngModel)]="newMember.firstname" required>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Lastname</mat-label>
+                            <input matInput  name="lastname" placeholder="Doe" [(ngModel)]="newMember.lastname" required>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+            <p>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Email</mat-label>
+                    <input type="email" name="email" matInput placeholder="john@doe.com" [(ngModel)]="newMember.email" required>
+                </mat-form-field>
+            </p>
+        </form>
+
+    </mat-card-content>
+    <mat-card-actions>
+        <a mat-button class="member-button" (click)="save()">Save</a>
+        <a mat-button class="member-button" color="warn" (click)="abort()">Abort</a>
+    </mat-card-actions>
+</mat-card>

@@ -1,8 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {Member} from "../shared/models/member.model";
-import {MEMBERS} from "../../assets/mock-data/mock-members";
-import {MatTable} from "@angular/material/table";
+import {MatTable, MatTableDataSource} from "@angular/material/table";
+import {MemberService} from "../shared/services/member.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-members',
@@ -16,9 +17,8 @@ import {MatTable} from "@angular/material/table";
     ]),
   ],
 })
-export class MembersComponent implements OnInit {
-  dataSource = MEMBERS;
-  showEditComponent: boolean = false;
+export class MembersComponent implements OnInit, OnDestroy {
+  dataSource = new MatTableDataSource<Member>();
   columnsToDisplay = ['firstname', 'lastname', 'email'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedMember: Member | null | undefined;
@@ -26,24 +26,34 @@ export class MembersComponent implements OnInit {
   @ViewChild(MatTable)
   table!: MatTable<Member>;
 
-  addData() {
-    //const randomElementIndex = Math.floor(Math.random() * ELEMENT_DATA.length);
-    //this.dataSource.push(ELEMENT_DATA[randomElementIndex]);
-    //this.table.renderRows();
+  subGet: any;
+
+  constructor(private memberService: MemberService, private snackBar: MatSnackBar) {
   }
 
-  removeData() {
-    this.dataSource.pop();
-    this.table.renderRows();
+  ngOnDestroy(): void {
+    this.subGet.unsubscribe();
   }
-
-  constructor() { }
 
   ngOnInit(): void {
-    this.showEditComponent = false;
+    this.subGet = this.memberService.getMembers().subscribe(
+        members => {
+          this.dataSource.data = members;
+        }
+    );
   }
 
-  toggleMe() {
-    this.showEditComponent = !this.showEditComponent;
+  deleteMember(id: number) {
+    this.memberService.deleteMember(id).subscribe(
+        value => {
+          this.openSnackBar("Member deleted.", "SUCCESS");
+        }
+    )
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }

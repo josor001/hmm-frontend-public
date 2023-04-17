@@ -1,8 +1,48 @@
-<mat-card>
+<mat-card class="member-edit" *ngIf="editMember">
     <mat-card-header>
-        <mat-card-title>This is the Edit Window!</mat-card-title>
+        <mat-card-title>Edit Member Profile</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <p>and this is its content!</p>
+        <form class="member-edit-form">
+            <table class="full-width">
+                <tr>
+                    <td>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Firstname</mat-label>
+                            <input matInput name="firstname" placeholder="John" [(ngModel)]="editMember.firstname" required>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Lastname</mat-label>
+                            <input matInput  name="lastname" placeholder="Doe" [(ngModel)]="editMember.lastname" required>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+            <p>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Email</mat-label>
+                    <input type="email" name="email" matInput placeholder="john@doe.com" [(ngModel)]="editMember.email" required>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Profile Link</mat-label>
+                    <input type="url" name="profile" matInput placeholder="Git Profile" [(ngModel)]="editMember.profileLink">
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Expertise</mat-label>
+                    <input type="text" name="expertise" matInput placeholder="A very important skill" [(ngModel)]="editMember.expertise">
+                </mat-form-field>
+            </p>
+        </form>
+
     </mat-card-content>
+    <mat-card-actions>
+        <a mat-button class="member-button" (click)="save()">Save</a>
+        <a mat-button class="member-button" color="warn" (click)="abort()">Abort</a>
+    </mat-card-actions>
 </mat-card>

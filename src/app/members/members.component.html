@@ -3,16 +3,13 @@
         <span>People</span>
         <span class="toolbar-spacer"></span>
         <div class="example-button-row">
-            <button mat-flat-button color="primary" (click)="addData()">
+            <button mat-flat-button color="primary" routerLink="/members/new">
                 <mat-icon>person_add</mat-icon>
                 <span class="menu_item_text">Add</span>
             </button>
         </div>
     </mat-toolbar-row>
 </mat-toolbar>
-
-<button (click)="toggleMe()">CLICK ME</button>
-<app-edit-member  *ngIf="showEditComponent"></app-edit-member>
 
 <div class="table-container">
     <table mat-table
@@ -44,8 +41,9 @@
                         </mat-card-header>
                         <mat-card-content>
                             <mat-list class="detail-list">
-                                <a mat-button class="expanded-button">Edit</a>
-                                <a mat-button class="expanded-button" color="warn">Delete</a>
+                                <!-- <a mat-button class="expanded-button" (click)="selectMember(member)">Edit</a> -->
+                                <a mat-button class="expanded-button" [routerLink]="['/members/edit/', member.id]">Edit</a>
+                                <a mat-button class="expanded-button" color="warn" (click)="deleteMember(member.id)">Delete</a>
                             </mat-list>
                         </mat-card-content>
                     </mat-card>
@@ -53,10 +51,8 @@
                         <mat-card-header>
                             <mat-card-subtitle>Expertise</mat-card-subtitle>
                         </mat-card-header>
-                        <mat-card-content>
-                            <mat-list class="detail-list">
-                                <button mat-button disabled class="expanded-button" *ngFor="let expertise of member.expertise">{{expertise}}</button>
-                            </mat-list>
+                        <mat-card-content class="expanded-content-span">
+                            <span>{{member.expertise}}</span>
                         </mat-card-content>
                     </mat-card>
                     <mat-card class="expanded-content">
@@ -65,7 +61,7 @@
                         </mat-card-header>
                         <mat-card-content>
                             <mat-list class="detail-list">
-                                <a mat-button href="{{member.profileLink}}" target="_blank" class="expanded-button">Profile</a>
+                                <a mat-button href="{{member.profileLink}}" target="_blank" class="expanded-button">Click Me</a>
                             </mat-list>
                         </mat-card-content>
                     </mat-card>
