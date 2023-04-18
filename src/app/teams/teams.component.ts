@@ -26,12 +26,12 @@ export class TeamsComponent implements OnInit, OnDestroy {
 
     // set number of columns based on screen size
     cols$: Observable<number> = this.breakpointObserver
-        .observe([Breakpoints.Small, Breakpoints.XSmall])
+        .observe([Breakpoints.Small, Breakpoints.XSmall, Breakpoints.Medium])
         .pipe(
             map((result) => {
-                if (result.breakpoints[Breakpoints.XSmall]) {
+                if (result.breakpoints[Breakpoints.XSmall] || result.breakpoints[Breakpoints.Small]) {
                     return 1;
-                } else if (result.breakpoints[Breakpoints.Small]) {
+                } else if (result.breakpoints[Breakpoints.Medium]) {
                     return 2;
                 } else {
                     return 3;

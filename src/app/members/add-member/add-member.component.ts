@@ -13,8 +13,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class AddMemberComponent implements OnInit, OnDestroy {
 
   newMember: Member | undefined;
-  routerSub: Subscription | undefined;
-  serviceSub: Subscription | undefined;
+  sub: Subscription | undefined;
 
   constructor(private memberService : MemberService,
               private activatedRoute:ActivatedRoute,
@@ -26,8 +25,7 @@ export class AddMemberComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.routerSub) this.routerSub.unsubscribe();
-    if (this.serviceSub) this.serviceSub.unsubscribe();
+    if (this.sub) this.sub.unsubscribe();
   }
 
   abort(): void {
@@ -37,7 +35,7 @@ export class AddMemberComponent implements OnInit, OnDestroy {
 
   save() {
     if(this.newMember && this.newMember.firstname && this.newMember.lastname && this.newMember.email) {
-      this.memberService.createMember(this.newMember.firstname, this.newMember.lastname, this.newMember.email).subscribe(
+      this.sub = this.memberService.createMember(this.newMember.firstname, this.newMember.lastname, this.newMember.email).subscribe(
           newMem => {
             this.openSnackBar("New member "+newMem.firstname+" saved!", "SUCCESS");
             this.router.navigate(['/members']);

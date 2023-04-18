@@ -33,6 +33,12 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { EditTeamComponent } from './teams/edit-team/edit-team.component';
 import { EditServiceComponent } from './microservices/edit-service/edit-service.component';
 import {MatChipsModule} from "@angular/material/chips";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import { ServiceStoryComponent } from './service-story/service-story.component';
+import { SelectMemberDialogComponent } from './teams/edit-team/select-member-dialog/select-member-dialog.component';
+import { SelectMicroserviceDialogComponent } from './teams/edit-team/select-microservice-dialog/select-microservice-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import { AddMicroserviceComponent } from './microservices/add-microservice/add-microservice.component';
 
 
 @NgModule({
@@ -47,7 +53,11 @@ import {MatChipsModule} from "@angular/material/chips";
     EditMemberComponent,
     AddMemberComponent,
     EditTeamComponent,
-    EditServiceComponent
+    EditServiceComponent,
+    ServiceStoryComponent,
+    SelectMemberDialogComponent,
+    SelectMicroserviceDialogComponent,
+    AddMicroserviceComponent
   ],
     imports: [
         BrowserModule,
@@ -73,7 +83,8 @@ import {MatChipsModule} from "@angular/material/chips";
         MatInputModule,
         MatSnackBarModule,
         MatChipsModule,
-
+        MatTooltipModule,
+        MatDialogModule,
     ],
   providers: [],
   bootstrap: [AppComponent]

@@ -67,13 +67,16 @@ export class TeamService {
             return this.http.post<Team>(this.entityUrl, name, httpOptions)
                 .pipe(catchError(Utils.handleError));
         }
-
     }
 
     /** PUT a Team to be updated */
     updateTeam(team: Team): Observable<Team> {
-        return this.http.put<Team>(this.entityUrl, team, httpOptions)
-            .pipe(catchError(Utils.handleError));
+        if (environment.useMockData) {
+            return of(team);
+        } else {
+            return this.http.put<Team>(this.entityUrl, team, httpOptions)
+                .pipe(catchError(Utils.handleError));
+        }
     }
 
 

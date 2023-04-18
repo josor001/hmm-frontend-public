@@ -14,9 +14,6 @@
 .toolbar-spacer {
   flex: 1 1 auto;
 }
-.mat-flat-button:hover {
-  background-color: #4527A0;
-}
 
 .full-width {
   width: 100%;
@@ -34,16 +31,29 @@
 
 .mat-card-actions {
   position: absolute;
+  left: 8px;
   bottom: 15px;
-  margin-left: 16px;
+  text-align: center;
 }
+
 .card-headline {
   margin-top: 1em;
   color : darkgray;
 }
 
+.invisLink {
+  color:black;
+  margin:0;
+  padding:0;
+}
+
+a.invisLink:link { text-decoration: none; }
+a.invisLink:visited { text-decoration: none; }
+a.invisLink:hover { text-decoration: none; }
+a.invisLink:active { text-decoration: none; }
+
 .microservice-card-content {
-  margin-left: 16px;
+  padding-left: 16px;
 }
 
 .table-member-expertise {

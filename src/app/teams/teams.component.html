@@ -30,15 +30,17 @@
 
                     <p></p>
                     <h2 class="card-headline">Owned Services</h2>
-                    <table>
-                        <tr *ngFor="let service of team.ownedMicroservices">
-                            <td>{{service.name}}</td><td><button mat-button  [routerLink]="['/teams/edit/', service.id]"><mat-icon>edit</mat-icon>Edit</button></td>
-                        </tr>
-                    </table>
+                    <mat-chip-list>
+                        <mat-chip *ngFor="let service of team.ownedMicroservices">{{service.name}}</mat-chip>
+                    </mat-chip-list>
                 </mat-card-content>
                 <mat-card-actions class="full-width">
-                    <button mat-button  [routerLink]="['/teams/edit/', team.id]">Edit</button>
-                    <button mat-button color="warn" (click)="deleteTeam(team.id)">Delete</button>
+                    <table class="full-width">
+                        <tr>
+                            <td><button mat-flat-button color="primary" [routerLink]="['/teams/edit/', team.id]">Edit</button></td>
+                            <td><button mat-flat-button color="warn" (click)="deleteTeam(team.id)">Delete</button></td>
+                        </tr>
+                    </table>
                 </mat-card-actions>
             </mat-card>
         </mat-grid-tile>

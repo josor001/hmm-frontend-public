@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Member Selection</h1>
+<div mat-dialog-content>
+    <mat-selection-list [(ngModel)]="selectedMembers">
+        <mat-list-option *ngFor="let member of members" [value]="member">
+            {{member.firstname}} {{member.lastname}}
+        </mat-list-option>
+    </mat-selection-list>
+</div>
+<div mat-dialog-actions>
+    <button mat-flat-button color="primary" [mat-dialog-close]="selectedMembers" autofocus>Ok</button>
+    <button mat-flat-button color="warn" (click)="close()">Cancel</button>
+</div>

@@ -9,19 +9,27 @@
                 <mat-icon>dashboard</mat-icon><span class="menu_item_text">Dashboard</span>
             </a>
             <div mat-subheader>Technical</div>
-            <a mat-list-item routerLink="/system" routerLinkActive="active-link">
+            <div matTooltip="Disabled during beta test" matTooltipPosition="right">
+            <a mat-list-item routerLink="/system" routerLinkActive="active-link" disabled>
                 <mat-icon>webhook</mat-icon>
                 <span class="menu_item_text">System</span>
             </a>
+            </div>
             <a mat-list-item routerLink="/microservices" routerLinkActive="active-link">
                 <mat-icon>code</mat-icon>
                 <span class="menu_item_text">Microservices</span>
             </a>
+            <a mat-list-item routerLink="/stories" routerLinkActive="active-link">
+                <mat-icon>book</mat-icon>
+                <span class="menu_item_text">Stories</span>
+            </a>
             <div mat-subheader>Organizational</div>
-            <a mat-list-item routerLink="/organization" routerLinkActive="active-link">
+            <div matTooltip="Disabled during beta test" matTooltipPosition="right">
+            <a mat-list-item routerLink="/organization" routerLinkActive="active-link" disabled>
                 <mat-icon>domain</mat-icon>
                 <span class="menu_item_text">Organization</span>
             </a>
+            </div>
             <a mat-list-item routerLink="/members" routerLinkActive="active-link">
                 <mat-icon>person</mat-icon>
                 <span class="menu_item_text">People</span>
@@ -44,10 +52,12 @@
             </button>
             <span>{{title}}</span>
             <span class="toolbar-spacer"></span>
-            <button mat-flat-button color="primary" disabled matTooltip="Not Yet Implemented">
+            <div matTooltip="Disabled during beta test" matTooltipPosition="left">
+                <button mat-flat-button color="primary" disabled >
                 <mat-icon>person</mat-icon>
                 <span class="menu_item_text">Profile</span>
-            </button>
+                </button>
+            </div>
         </mat-toolbar>
         <router-outlet></router-outlet>
     </mat-sidenav-content>

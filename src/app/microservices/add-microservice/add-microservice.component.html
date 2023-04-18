@@ -1,0 +1,20 @@
+<mat-card class="microservice-add" *ngIf="newMicroservice">
+    <mat-card-header>
+        <mat-card-title>New Microservice</mat-card-title>
+        <mat-card-subtitle>Please fill in all fields!</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="microservice-add-form">
+            <p>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Name</mat-label>
+                    <input name="name" matInput placeholder="Another Awesome Service" [(ngModel)]="newMicroservice.name" required>
+                </mat-form-field>
+            </p>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <a mat-flat-button class="microservice-button" color="primary" (click)="save()">Save</a>
+        <a mat-flat-button class="microservice-button" color="warn" (click)="abort()">Abort</a>
+    </mat-card-actions>
+</mat-card>

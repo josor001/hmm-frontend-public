@@ -62,7 +62,6 @@ export class MemberService {
             return this.http.post<Member>(this.entityUrl, memberDto, httpOptions)
                 .pipe(catchError(this.handleError));
         }
-
     }
 
     /** PUT a member to be updated */

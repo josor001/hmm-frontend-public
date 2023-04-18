@@ -5,6 +5,7 @@ import {environment} from 'src/environments/environment';
 import {Microservice} from '../models/microservice.model';
 import {MICROSERVICES} from "../../../assets/mock-data/mock-microservices";
 import Utils from "./Utils";
+import {Member} from "../models/member.model";
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -49,8 +50,16 @@ export class MicroserviceService {
 
     /** POST a new microservice */
     createMicroservice(name: string): Observable<Microservice> {
-        return this.http.post<Microservice>(this.entityUrl, name, httpOptions)
-            .pipe(catchError(Utils.handleError));
+        if (environment.useMockData) {
+            return of(<Microservice>{name: name, id: 1001});
+        } else {
+            return this.http.post<Microservice>(this.entityUrl, name, httpOptions)
+                .pipe(catchError(Utils.handleError));
+        }
+
+
+
+
     }
 
     /** PUT a microservice to be updated */

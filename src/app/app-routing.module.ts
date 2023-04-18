@@ -10,6 +10,8 @@ import {EditMemberComponent} from "./members/edit-member/edit-member.component";
 import {AddMemberComponent} from "./members/add-member/add-member.component";
 import {EditTeamComponent} from "./teams/edit-team/edit-team.component";
 import {EditServiceComponent} from "./microservices/edit-service/edit-service.component";
+import {ServiceStoryComponent} from "./service-story/service-story.component";
+import {AddMicroserviceComponent} from "./microservices/add-microservice/add-microservice.component";
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -22,6 +24,8 @@ const routes: Routes = [
   { path: 'members/new', component: AddMemberComponent },
   { path: 'microservices', component: MicroservicesComponent },
   { path: 'microservices/edit/:id', component: EditServiceComponent },
+  { path: 'microservices/new', component: AddMicroserviceComponent },
+  { path: 'stories', component: ServiceStoryComponent },
 ];
 
 @NgModule({

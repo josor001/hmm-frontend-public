@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Microservice Ownership</h1>
+<div mat-dialog-content>
+    <mat-selection-list [(ngModel)]="selectedMicroservices">
+        <mat-list-option *ngFor="let microservice of microservices" [value]="microservice">
+            {{microservice.name}}
+        </mat-list-option>
+    </mat-selection-list>
+</div>
+<div mat-dialog-actions>
+    <button mat-flat-button color="primary" [mat-dialog-close]="selectedMicroservices" autofocus>Ok</button>
+    <button mat-flat-button color="warn" (click)="close()">Cancel</button>
+</div>

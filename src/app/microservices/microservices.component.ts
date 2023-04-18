@@ -7,6 +7,8 @@ import {Observable} from "rxjs";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {map, shareReplay} from "rxjs/operators";
 import {TeamService} from "../shared/services/team.service";
+import {Member} from "../shared/models/member.model";
+import {Team} from "../shared/models/team.model";
 
 @Component({
   selector: 'app-microservices',
@@ -16,18 +18,18 @@ import {TeamService} from "../shared/services/team.service";
 export class MicroservicesComponent implements OnInit, OnDestroy {
   subGet: any;
   microservices: Microservice[] = [];
-  microserviceTeams = new Map<number, string>();
-  microserviceSpocs = new Map<number, string>();
+  microserviceTeams = new Map<number, Team>();
+  microserviceSpocs = new Map<number, Member>();
 
   // set number of columns based on screen size
   cols$: Observable<number> = this.breakpointObserver
-      .observe([Breakpoints.Small, Breakpoints.XSmall])
+      .observe([Breakpoints.Small, Breakpoints.XSmall, Breakpoints.Medium])
       .pipe(
           map((result) => {
-            if (result.breakpoints[Breakpoints.XSmall]) {
-              return 1;
-            } else if (result.breakpoints[Breakpoints.Small]) {
-              return 2;
+              if (result.breakpoints[Breakpoints.XSmall] || result.breakpoints[Breakpoints.Small]) {
+                  return 1;
+              } else if (result.breakpoints[Breakpoints.Medium]) {
+                  return 2;
             } else {
               return 3;
             }
@@ -52,7 +54,7 @@ export class MicroservicesComponent implements OnInit, OnDestroy {
           service => {
               if(service.id) {
                   this.teamService.getTeamByMicroserviceId(service.id).subscribe(
-                      team => this.microserviceTeams.set(service.id!, `${team.name}`))
+                      team => this.microserviceTeams.set(service.id!, team))
               }
           }
       )
@@ -63,7 +65,7 @@ export class MicroservicesComponent implements OnInit, OnDestroy {
           service => {
               if(service.id && service.contactPersonId) {
                   this.memberService.getMember(service.contactPersonId).subscribe(
-                      spoc => this.microserviceSpocs.set(service.id!, `${spoc.firstname} ${spoc.lastname}`))
+                      spoc => this.microserviceSpocs.set(service.id!, spoc))
               }
           }
       )
