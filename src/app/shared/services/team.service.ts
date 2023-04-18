@@ -33,7 +33,20 @@ export class TeamService {
         } else {
             return this.http.get<Team>(this.entityUrl + '/' + id);
         }
+    }
 
+    /** GET a specific Team by the Id of the owned microservice. */
+    getTeamByMicroserviceId(serviceId: number): Observable<Team> {
+        if (environment.useMockData) {
+            let found = of(TEAMS.find(team => team.ownedMicroserviceIds?.includes(serviceId)))
+            if (found !== undefined) {
+                return <Observable<Team>>found;
+            } else {
+                return of({})
+            }
+        } else {
+            return this.http.get<Team>(this.entityUrl + '/microservice/' + serviceId);
+        }
     }
 
     /** GET all Teams */

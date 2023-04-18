@@ -1,1 +1,29 @@
-<p>edit-service works!</p>
+<mat-card class="microservice-edit" *ngIf="editService">
+    <mat-card-header>
+        <mat-card-title>Edit Microservice {{editService.name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="microservice-edit-form">
+            <table class="full-width">
+                <tr>
+                    <td>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Microservice Name</mat-label>
+                            <input matInput name="firstname" placeholder="John" [(ngModel)]="editService.name" required>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+            <p>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Email</mat-label>
+                    <input type="email" name="email" matInput placeholder="john@doe.com" required>
+                </mat-form-field>
+            </p>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <a mat-button class="microservice-button" (click)="save()">Save</a>
+        <a mat-button class="microservice-button" color="warn" (click)="abort()">Abort</a>
+    </mat-card-actions>
+</mat-card>

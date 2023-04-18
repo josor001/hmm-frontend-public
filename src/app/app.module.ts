@@ -32,6 +32,7 @@ import { AddMemberComponent } from './members/add-member/add-member.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { EditTeamComponent } from './teams/edit-team/edit-team.component';
 import { EditServiceComponent } from './microservices/edit-service/edit-service.component';
+import {MatChipsModule} from "@angular/material/chips";
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import { EditServiceComponent } from './microservices/edit-service/edit-service.
         MatTableModule,
         MatInputModule,
         MatSnackBarModule,
+        MatChipsModule,
 
     ],
   providers: [],

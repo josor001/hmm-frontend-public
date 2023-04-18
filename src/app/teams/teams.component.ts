@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {map, shareReplay} from 'rxjs/operators';
 import {Team} from "../shared/models/team.model";
 import {TeamService} from "../shared/services/team.service";
@@ -9,7 +9,6 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {CompleteTeam} from "../shared/models/completeTeam.model";
 import {Microservice} from "../shared/models/microservice.model";
 import {Member} from "../shared/models/member.model";
-import {newArray} from "@angular/compiler/src/util";
 import {MicroserviceService} from "../shared/services/microservice.service";
 
 @Component({
@@ -17,7 +16,7 @@ import {MicroserviceService} from "../shared/services/microservice.service";
   templateUrl: './teams.component.html',
   styleUrls: ['./teams.component.scss']
 })
-export class TeamsComponent implements OnInit {
+export class TeamsComponent implements OnInit, OnDestroy {
 
     subGet: any;
     subCompGet: any;

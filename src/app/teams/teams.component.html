@@ -1,6 +1,6 @@
 <mat-toolbar>
     <mat-toolbar-row>
-            <span>Team Management</span>
+            <span>Teams</span>
             <span class="toolbar-spacer"></span>
             <div class="example-button-row">
                 <button mat-flat-button color="primary">
@@ -19,18 +19,20 @@
                     <mat-card-subtitle>Team</mat-card-subtitle>
                     <mat-card-title>{{team.name}}</mat-card-title>
                 </mat-card-header>
+                <mat-divider   class="mat-elevation-z5"></mat-divider>
                 <mat-card-content class="team-card-content">
+                    <p></p>
                     <table>
                         <tr *ngFor="let member of team.members">
                             <td>{{member.firstname}} {{member.lastname}}</td><td><mat-icon>school</mat-icon></td><td class="table-member-expertise">{{member.expertise}}</td>
                         </tr>
                     </table>
-                    <mat-divider></mat-divider>
+
                     <p></p>
-                    <h3>Owned Services</h3>
+                    <h2 class="card-headline">Owned Services</h2>
                     <table>
                         <tr *ngFor="let service of team.ownedMicroservices">
-                            <td>{{service.name}}</td><td><button mat-button  [routerLink]="['/microservices/edit/', service.id]"><mat-icon>edit</mat-icon>Edit</button></td>
+                            <td>{{service.name}}</td><td><button mat-button  [routerLink]="['/teams/edit/', service.id]"><mat-icon>edit</mat-icon>Edit</button></td>
                         </tr>
                     </table>
                 </mat-card-content>

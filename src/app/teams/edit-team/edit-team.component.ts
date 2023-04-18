@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Subscription} from "rxjs";
@@ -11,7 +11,7 @@ import {Team} from "../../shared/models/team.model";
   templateUrl: './edit-team.component.html',
   styleUrls: ['./edit-team.component.scss']
 })
-export class EditTeamComponent implements OnInit {
+export class EditTeamComponent implements OnInit, OnDestroy {
   editTeam: Team | undefined;
   routerSub: Subscription | undefined;
   serviceSub: Subscription | undefined;
@@ -28,7 +28,9 @@ export class EditTeamComponent implements OnInit {
       )
     });
   }
-
+  ngOnDestroy(): void {
+    this.routerSub?.unsubscribe();
+  }
   save() {
 
   }
@@ -36,4 +38,6 @@ export class EditTeamComponent implements OnInit {
   abort() {
 
   }
+
+
 }

@@ -9,6 +9,7 @@ import {MembersComponent} from "./members/members.component";
 import {EditMemberComponent} from "./members/edit-member/edit-member.component";
 import {AddMemberComponent} from "./members/add-member/add-member.component";
 import {EditTeamComponent} from "./teams/edit-team/edit-team.component";
+import {EditServiceComponent} from "./microservices/edit-service/edit-service.component";
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'members', component: MembersComponent },
   { path: 'members/edit/:id', component: EditMemberComponent },
   { path: 'members/new', component: AddMemberComponent },
-  { path: 'microservices', component: MicroservicesComponent }
+  { path: 'microservices', component: MicroservicesComponent },
+  { path: 'microservices/edit/:id', component: EditServiceComponent },
 ];
 
 @NgModule({
