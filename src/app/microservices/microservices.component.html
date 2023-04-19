@@ -39,18 +39,15 @@
                     <h2 class="card-headline">Availability</h2>
                     <p><a mat-flat-button color="primary" href="{{microservice.repositoryLink}}" target="_blank" class="expanded-button">Repository</a></p>
                     <h2 class="card-headline">Associated Models</h2>
-                    <mat-list role="list">
-                        <mat-list-item role="listitem">
-                            <mat-icon>sentiment_very_dissatisfied</mat-icon><span> Not Implemented Yet.</span>
-                        </mat-list-item>
-                    </mat-list>
+                    <mat-chip-list><mat-chip><mat-icon>sentiment_very_dissatisfied</mat-icon>Not Implemented Yet.</mat-chip></mat-chip-list>
                     <p></p>
                     <h2 class="card-headline">Planned Features</h2>
-                    <mat-list role="list">
-                        <mat-list-item role="listitem" *ngFor="let feature of microservice.plannedFeatures">
+                    <mat-chip-list role="list">
+                        <mat-chip *ngFor="let feature of microservice.plannedFeatures">
                             <mat-icon>settings</mat-icon><span> {{feature}}</span>
-                        </mat-list-item>
-                    </mat-list>
+                        </mat-chip>
+                    </mat-chip-list>
+
                 </mat-card-content>
                 <mat-card-actions class="full-width" *ngIf="microservice.id">
                         <table class="full-width">

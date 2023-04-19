@@ -42,8 +42,8 @@
                         <mat-card-content>
                             <mat-list class="detail-list">
                                 <!-- <a mat-button class="expanded-button" (click)="selectMember(member)">Edit</a> -->
-                                <a mat-button class="expanded-button" [routerLink]="['/members/edit/', member.id]">Edit</a>
-                                <a mat-button class="expanded-button" color="warn" (click)="deleteMember(member.id)">Delete</a>
+                                <a mat-flat-button class="expanded-button" color="primary" [routerLink]="['/members/edit/', member.id]">Edit</a>
+                                <a mat-flat-button class="expanded-button" color="warn" (click)="deleteMember(member.id)">Delete</a>
                             </mat-list>
                         </mat-card-content>
                     </mat-card>
@@ -61,7 +61,7 @@
                         </mat-card-header>
                         <mat-card-content>
                             <mat-list class="detail-list">
-                                <a mat-button href="{{member.profileLink}}" target="_blank" class="expanded-button">Click Me</a>
+                                <a mat-flat-button href="{{member.profileLink}}" target="_blank" color="primary " class="expanded-button">Click Me</a>
                             </mat-list>
                         </mat-card-content>
                     </mat-card>

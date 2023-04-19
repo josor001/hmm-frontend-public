@@ -4,26 +4,57 @@
     </mat-card-header>
     <mat-card-content>
         <form class="microservice-edit-form">
-            <table class="full-width">
-                <tr>
-                    <td>
-                        <mat-form-field appearance="outline">
+            <h2 class="card-headline">Name</h2>
+
+                        <mat-form-field appearance="outline" class="full-width">
                             <mat-label>Microservice Name</mat-label>
-                            <input matInput name="firstname" placeholder="John" [(ngModel)]="editService.name" required>
+                            <input matInput name="name" placeholder="John" [(ngModel)]="editService.name" required>
                         </mat-form-field>
-                    </td>
-                </tr>
-            </table>
-            <p>
-                <mat-form-field appearance="outline" class="full-width">
-                    <mat-label>Email</mat-label>
-                    <input type="email" name="email" matInput placeholder="john@doe.com" required>
-                </mat-form-field>
-            </p>
+
+            <h2 class="card-headline">Repository Link</h2>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Repository Link</mat-label>
+                <input matInput type="url" name="repository" placeholder="https://github.com/user/repo" [(ngModel)]="editService.repositoryLink" required>
+            </mat-form-field>
+
+            <h2 class="card-headline">Single Point of Contact</h2>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Select a team member</mat-label>
+                <mat-select [(value)]="editService.contactPersonId" *ngFor="let member of editServiceTeamMember">
+                    <mat-option value="{{member.id}}">{{member.firstname}} {{member.lastname}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <p>You selected: {{editService.contactPersonId}}</p>
+
+            <h2 class="card-headline">Related Modeling Artifacts</h2>
+
+            <mat-chip-list class="full-width"><mat-chip><mat-icon>sentiment_very_dissatisfied</mat-icon>Not Implemented Yet.</mat-chip></mat-chip-list>
+
+            <h2 class="card-headline">Planned Features</h2>
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Planned Features</mat-label>
+                <mat-chip-list #chipList>
+                    <mat-chip *ngFor="let feature of editService.plannedFeatures" (removed)="removeFeature(feature)">
+                        {{feature}}
+                        <button matChipRemove>
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip>
+                    <input placeholder="New Feature..."
+                           [matChipInputFor]="chipList"
+                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                           [matChipInputAddOnBlur]="addOnBlur"
+                           (matChipInputTokenEnd)="addFeature($event)">
+                </mat-chip-list>
+            </mat-form-field>
+
         </form>
     </mat-card-content>
     <mat-card-actions>
-        <a mat-button class="microservice-button" (click)="save()">Save</a>
-        <a mat-button class="microservice-button" color="warn" (click)="abort()">Abort</a>
+        <a mat-flat-button class="microservice-button" color="primary" (click)="save()">Save</a>
+        <a mat-flat-button class="microservice-button" color="warn" (click)="abort()">Abort</a>
     </mat-card-actions>
 </mat-card>

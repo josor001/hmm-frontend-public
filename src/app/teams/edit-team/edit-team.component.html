@@ -5,18 +5,14 @@
     <mat-card-content>
         <form class="team-edit-form">
             <h2 class="card-headline">Name</h2>
-            <table class="full-width">
-                <tr>
-                    <td>
-                        <mat-form-field appearance="outline">
-                            <mat-label>Name</mat-label>
-                            <input matInput name="firstname" placeholder="John" [(ngModel)]="editTeam.name" required>
-                        </mat-form-field>
-                    </td>
-                </tr>
-            </table>
+                <mat-form-field appearance="outline"  class="full-width">
+                    <mat-label>Name</mat-label>
+                    <input matInput name="name" placeholder="Best Team Ever" [(ngModel)]="editTeam.name" required>
+                </mat-form-field>
+
+
             <h2 class="card-headline">Members</h2>
-            <mat-chip-list>
+            <mat-chip-list class="full-width">
                 <mat-chip *ngFor="let member of editTeamMembers | keyvalue" matChipRemove (removed)="removeMember(member.key)">
                     {{member.value.firstname}} {{member.value.lastname}}
                     <button matChipRemove>
@@ -26,7 +22,7 @@
                 <button mat-icon-button color="primary" matTooltip="add a member" (click)="openMemberDialog()"><mat-icon>add</mat-icon></button>
             </mat-chip-list>
             <h2 class="card-headline">Owned Services</h2>
-            <mat-chip-list>
+            <mat-chip-list class="full-width">
                 <mat-chip *ngFor="let service of editTeamServices | keyvalue" matChipRemove (removed)="removeService(service.key)">
                     {{service.value.name}}
                     <button matChipRemove>
