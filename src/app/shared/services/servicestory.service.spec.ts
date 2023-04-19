@@ -35,7 +35,7 @@ describe('ServiceStoryService', () => {
         description: 'This is a mock story'
       };
 
-      service.getOrganization(id).subscribe((story: ServiceStory) => {
+      service.getServiceStory(id).subscribe((story: ServiceStory) => {
         expect(story).toEqual(mockStory);
       });
 

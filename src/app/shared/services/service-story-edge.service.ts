@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core';
 import Utils from "./Utils";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {catchError, Observable} from "rxjs";
+import {catchError, Observable, of} from "rxjs";
 import {ServiceStoryEdge} from "../models/servicestoryedge.model";
+import {STORIES} from "../../../assets/mock-data/mock-stories";
+import {ServiceStory} from "../models/servicestory.model";
+import {STORIES_EDGES} from "../../../assets/mock-data/mock-stories-edges";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,7 +17,7 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class ServicestoryedgeService {
+export class ServiceStoryEdgeService {
   // URL to web api
   private entityUrl = environment.serverUrl+"/stories/edges";
 
@@ -26,8 +29,13 @@ export class ServicestoryedgeService {
 
   /** GET all ServiceStoryEdges */
   getServiceStoryEdges(): Observable<ServiceStoryEdge[]> {
-    return this.http.get<ServiceStoryEdge[]>(this.entityUrl)
-        .pipe(catchError(Utils.handleError));
+    if (environment.useMockData) {
+      return of(STORIES_EDGES);
+    } else {
+      return this.http.get<ServiceStoryEdge[]>(this.entityUrl)
+          .pipe(catchError(Utils.handleError));
+    }
+
   }
 
   /** POST a new ServiceStoryEdge */

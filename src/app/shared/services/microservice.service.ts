@@ -36,7 +36,8 @@ export class MicroserviceService {
                 return of({})
             }
         } else {
-            return this.http.get<Microservice>(this.entityUrl + '/' + id);
+            return this.http.get<Microservice>(this.entityUrl + '/' + id)
+                .pipe(catchError(Utils.handleError));;
         }
 
     }
@@ -46,7 +47,8 @@ export class MicroserviceService {
         if (environment.useMockData) {
             return of(MICROSERVICES);
         } else {
-            return this.http.get<Microservice[]>(this.entityUrl);
+            return this.http.get<Microservice[]>(this.entityUrl)
+                .pipe(catchError(Utils.handleError));;
         }
     }
 

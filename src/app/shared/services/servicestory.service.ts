@@ -1,9 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable } from 'rxjs';
+import {catchError, Observable, of} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ServiceStory } from '../models/servicestory.model';
 import Utils from "./Utils";
+import {MICROSERVICES} from "../../../assets/mock-data/mock-microservices";
+import {Microservice} from "../models/microservice.model";
+import {STORIES} from "../../../assets/mock-data/mock-stories";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -22,15 +25,19 @@ export class ServiceStoryService {
   constructor(private http: HttpClient) { }
 
   /** GET a specific ServiceStory by its ID */
-  getOrganization(id: number): Observable<ServiceStory> {
+  getServiceStory(id: number): Observable<ServiceStory> {
     return this.http.get<ServiceStory>(this.entityUrl+'/'+id)
         .pipe(catchError(Utils.handleError));
   }
 
   /** GET all ServiceStorys */
   getServiceStories(): Observable<ServiceStory[]> {
-    return this.http.get<ServiceStory[]>(this.entityUrl)
-        .pipe(catchError(Utils.handleError));
+    if (environment.useMockData) {
+      return of(STORIES);
+    } else {
+      return this.http.get<ServiceStory[]>(this.entityUrl)
+          .pipe(catchError(Utils.handleError));
+    }
   }
 
   /** POST a new ServiceStory */  

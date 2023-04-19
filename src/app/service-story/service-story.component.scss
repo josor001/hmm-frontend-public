@@ -1,0 +1,51 @@
+.full-width {
+  width: 100%;
+}
+
+.grid-container {
+  margin: 20px;
+}
+
+/* Classes for 2nd menu bar */
+.mat-toolbar {
+  background: inherit;
+}
+
+.toolbar-icon {
+  padding: 0 14px;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.menu-section {
+  display: table;
+}
+.mat-button {
+  margin-right: 10px;
+}
+
+.menu_item_text {
+  padding-left: 1em;
+}
+.menu_button {
+  margin-left: 10px;
+}
+
+.menu-button-row {
+  display: table-cell;
+}
+/** Styles for accordion */
+.example-action-buttons {
+  padding-bottom: 20px;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+}

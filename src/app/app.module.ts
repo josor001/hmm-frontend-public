@@ -39,7 +39,8 @@ import { SelectMemberDialogComponent } from './teams/edit-team/select-member-dia
 import { SelectMicroserviceDialogComponent } from './teams/edit-team/select-microservice-dialog/select-microservice-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { AddMicroserviceComponent } from './microservices/add-microservice/add-microservice.component';
-
+import {MatExpansionModule} from "@angular/material/expansion";
+import {NgxGraphModule} from '@swimlane/ngx-graph';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,8 @@ import { AddMicroserviceComponent } from './microservices/add-microservice/add-m
         MatChipsModule,
         MatTooltipModule,
         MatDialogModule,
+        MatExpansionModule,
+        NgxGraphModule
     ],
   providers: [],
   bootstrap: [AppComponent]
