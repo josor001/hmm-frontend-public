@@ -6,6 +6,8 @@ import {Microservice} from '../models/microservice.model';
 import {MICROSERVICES} from "../../../assets/mock-data/mock-microservices";
 import Utils from "./Utils";
 import {Member} from "../models/member.model";
+import {TEAMS} from "../../../assets/mock-data/mock-teams";
+import {Team} from "../models/team.model";
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -56,16 +58,21 @@ export class MicroserviceService {
             return this.http.post<Microservice>(this.entityUrl, name, httpOptions)
                 .pipe(catchError(Utils.handleError));
         }
-
-
-
-
     }
 
     /** PUT a microservice to be updated */
     updateMicroservice(microservice: Microservice): Observable<Microservice> {
-        return this.http.put<Microservice>(this.entityUrl, microservice, httpOptions)
-            .pipe(catchError(Utils.handleError));
+        if (environment.useMockData) {
+            let found = of(MICROSERVICES.find(oldService => oldService.id == microservice.id))
+            if (found !== undefined) {
+                return <Observable<Microservice>>found;
+            } else {
+                return of({})
+            }
+        } else {
+            return this.http.put<Microservice>(this.entityUrl, microservice, httpOptions)
+                .pipe(catchError(Utils.handleError));
+        }
     }
 
     /** PUT a new artifact into a microservice */

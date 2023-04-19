@@ -12,9 +12,7 @@
 </mat-toolbar>
 
 <div class="table-container">
-    <table mat-table
-           [dataSource]="dataSource" multiTemplateDataRows
-           class="mat-elevation-z1">
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z1">
         <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
             <th mat-header-cell *matHeaderCellDef> {{column}} </th>
             <td mat-cell *matCellDef="let member"> {{member[column]}} </td>
@@ -61,7 +59,7 @@
                         </mat-card-header>
                         <mat-card-content>
                             <mat-list class="detail-list">
-                                <a mat-flat-button href="{{member.profileLink}}" target="_blank" color="primary " class="expanded-button">Click Me</a>
+                                <a mat-flat-button href="{{member.profileLink}}" target="_blank" color="primary" class="expanded-button">Click Me</a>
                             </mat-list>
                         </mat-card-content>
                     </mat-card>

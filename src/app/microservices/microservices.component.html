@@ -19,43 +19,74 @@
                     <mat-card-subtitle>Microservice</mat-card-subtitle>
                     <mat-card-title>{{microservice.name}}</mat-card-title>
                 </mat-card-header>
-                <mat-divider  class="mat-elevation-z5"></mat-divider>
+                <mat-divider class="mat-elevation-z5"></mat-divider>
                 <mat-card-content class="microservice-card-content">
                     <p></p>
                     <h2 class="card-headline">Owned By</h2>
-                    <table *ngIf="microservice.id"> <mat-chip-list>
-                        <tr>
-                            <td>
-                                <mat-chip class="team-chip" *ngIf="microserviceTeams.get(microservice.id)?.name"><mat-icon>group</mat-icon>{{microserviceTeams.get(microservice.id)?.name}}</mat-chip>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <mat-chip *ngIf="microserviceSpocs.get(microservice.id)?.profileLink"><a href="{{microserviceSpocs.get(microservice.id)?.profileLink}}" target="_blank" class="mat-standard-chip invisLink"><mat-icon matChipAvatar>contact_support</mat-icon>{{microserviceSpocs.get(microservice.id)?.firstname}} {{microserviceSpocs.get(microservice.id)?.lastname}}</a></mat-chip>
-                            </td>
-                        </tr>
-                    </mat-chip-list>
+                    <table *ngIf="microservice.id">
+                        <mat-chip-list>
+                            <tr>
+                                <td>
+                                    <mat-chip class="team-chip" *ngIf="microserviceTeams.get(microservice.id)?.name">
+                                        <mat-icon>group</mat-icon>
+                                        {{microserviceTeams.get(microservice.id)?.name}}</mat-chip>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <mat-chip *ngIf="microserviceSpocs.get(microservice.id)?.profileLink"><a
+                                            href="{{microserviceSpocs.get(microservice.id)?.profileLink}}"
+                                            target="_blank" class="mat-standard-chip invisLink">
+                                        <mat-icon matChipAvatar>contact_support</mat-icon>
+                                        {{microserviceSpocs.get(microservice.id)?.firstname}} {{microserviceSpocs.get(microservice.id)?.lastname}}
+                                    </a></mat-chip>
+                                </td>
+                            </tr>
+                        </mat-chip-list>
                     </table>
                     <h2 class="card-headline">Availability</h2>
-                    <p><a mat-flat-button color="primary" href="{{microservice.repositoryLink}}" target="_blank" class="expanded-button">Repository</a></p>
+                    <p>
+                        <a mat-flat-button color="primary" href="{{microservice.repositoryLink}}" target="_blank"
+                           class="expanded-button" *ngIf="microservice.repositoryLink">Repository</a>
+                        <mat-chip-list *ngIf="!microservice.repositoryLink">
+                            <mat-chip>
+                                <mat-icon>sentiment_very_dissatisfied</mat-icon>
+                                no repository set.
+                            </mat-chip>
+                        </mat-chip-list>
+                    </p>
                     <h2 class="card-headline">Associated Models</h2>
-                    <mat-chip-list><mat-chip><mat-icon>sentiment_very_dissatisfied</mat-icon>Not Implemented Yet.</mat-chip></mat-chip-list>
+                    <mat-chip-list>
+                        <mat-chip>
+                            <mat-icon>sentiment_very_dissatisfied</mat-icon>
+                            not implemented yet.
+                        </mat-chip>
+                    </mat-chip-list>
                     <p></p>
                     <h2 class="card-headline">Planned Features</h2>
                     <mat-chip-list role="list">
                         <mat-chip *ngFor="let feature of microservice.plannedFeatures">
-                            <mat-icon>settings</mat-icon><span> {{feature}}</span>
+                            <mat-icon>settings</mat-icon>
+                            <span> {{feature}}</span>
                         </mat-chip>
                     </mat-chip-list>
 
                 </mat-card-content>
                 <mat-card-actions class="full-width" *ngIf="microservice.id">
-                        <table class="full-width">
-                            <tr>
-                                <td><button mat-flat-button  color="primary" [routerLink]="['/microservices/edit/', microservice.id]">Edit</button></td>
-                                <td><button mat-flat-button color="warn" (click)="deleteMicroservice(microservice.id!)">Delete</button></td>
-                            </tr>
-                        </table>
+                    <table class="full-width">
+                        <tr>
+                            <td>
+                                <button mat-flat-button color="primary"
+                                        [routerLink]="['/microservices/edit/', microservice.id]">Edit
+                                </button>
+                            </td>
+                            <td>
+                                <button mat-flat-button color="warn" (click)="deleteMicroservice(microservice.id!)">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
                 </mat-card-actions>
             </mat-card>
         </mat-grid-tile>

@@ -77,7 +77,6 @@ export class MemberService {
             return this.http.put<Member>(this.entityUrl, member, httpOptions)
                 .pipe(catchError(this.handleError));
         }
-
     }
 
     /** DELETE a member */

@@ -15,23 +15,23 @@
 
             <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Repository Link</mat-label>
-                <input matInput type="url" name="repository" placeholder="https://github.com/user/repo" [(ngModel)]="editService.repositoryLink" required>
+                <input matInput type="url"
+                       name="repository"
+                       placeholder="https://github.com/user/repo" [(ngModel)]="editService.repositoryLink">
             </mat-form-field>
 
-            <h2 class="card-headline">Single Point of Contact</h2>
+            <h2 class="card-headline">Contact Person</h2>
 
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="outline">
                 <mat-label>Select a team member</mat-label>
-                <mat-select [(value)]="editService.contactPersonId" *ngFor="let member of editServiceTeamMember">
-                    <mat-option value="{{member.id}}">{{member.firstname}} {{member.lastname}}</mat-option>
+                <mat-select [(value)]="editService.contactPersonId">
+                    <mat-option *ngFor="let member of editServiceTeamMember" value="{{member.id}}">{{member.firstname}} {{member.lastname}}</mat-option>
                 </mat-select>
             </mat-form-field>
 
-            <p>You selected: {{editService.contactPersonId}}</p>
-
             <h2 class="card-headline">Related Modeling Artifacts</h2>
 
-            <mat-chip-list class="full-width"><mat-chip><mat-icon>sentiment_very_dissatisfied</mat-icon>Not Implemented Yet.</mat-chip></mat-chip-list>
+            <mat-chip-list class="full-width"><mat-chip><mat-icon>sentiment_very_dissatisfied</mat-icon>not implemented yet.</mat-chip></mat-chip-list>
 
             <h2 class="card-headline">Planned Features</h2>
             <mat-form-field appearance="outline" class="full-width">

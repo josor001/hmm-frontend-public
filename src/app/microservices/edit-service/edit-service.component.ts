@@ -22,6 +22,7 @@ export class EditServiceComponent implements OnInit, OnDestroy {
     routerSub: Subscription | undefined;
     serviceSub: Subscription | undefined;
     teamSub: Subscription | undefined;
+  updateSub: Subscription | undefined;
     //variables for feature chip input
     addOnBlur = true;
     readonly separatorKeysCodes = [ENTER, COMMA] as const;
@@ -37,7 +38,6 @@ export class EditServiceComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.routerSub = this.activatedRoute.paramMap.subscribe((params) => {
             var id: number = parseInt(<string>params.get('id'))
-            console.log(id);
             this.serviceSub = this.microserviceService.getMicroservice(id).subscribe(
                 (microservice) => {
                     this.editService = microservice;
@@ -49,15 +49,23 @@ export class EditServiceComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.routerSub?.unsubscribe();
+        this.updateSub?.unsubscribe();
         this.teamSub?.unsubscribe();
     }
 
-    save() {
-
+    save() :void {
+      if(this.editService && this.editService.name)  {
+        this.updateSub = this.microserviceService.updateMicroservice(this.editService).subscribe(service => {
+          this.openSnackBar(`${service.name} updated!`,"SUCCESS")
+          this.router.navigate(['/microservices']);
+        })
+      } else {
+        this.openSnackBar("Something went wrong. Please fill all required fields.", "ERROR")
+      }
     }
 
     abort() {
-
+      this.router.navigate(['/microservices']);
     }
 
     addFeature(event: MatChipInputEvent): void {
@@ -94,4 +102,10 @@ export class EditServiceComponent implements OnInit, OnDestroy {
             });
         }
     }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
 }

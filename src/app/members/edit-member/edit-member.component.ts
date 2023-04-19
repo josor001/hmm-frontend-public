@@ -15,6 +15,7 @@ export class EditMemberComponent implements OnInit, OnDestroy {
   editMember: Member | undefined;
   routerSub: Subscription | undefined;
   serviceSub: Subscription | undefined;
+  updateSub: Subscription | undefined;
 
   constructor(private memberService : MemberService,
               private activatedRoute:ActivatedRoute,
@@ -34,20 +35,21 @@ export class EditMemberComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.routerSub) this.routerSub.unsubscribe();
     if (this.serviceSub) this.serviceSub.unsubscribe();
+    if (this.updateSub) this.updateSub.unsubscribe();
   }
 
   abort(): void {
     this.router.navigate(['/members']);
   }
 
-
   save() {
-    if(this.editMember == undefined || this.editMember.id == undefined) {
-      this.openSnackBar("Something went wrong. No actual member selected!", "ERROR");
+    if(this.editMember && this.editMember.id && this.editMember.firstname && this.editMember.lastname && this.editMember.email) {
+      this.updateSub = this.memberService.updateMember(<Member>this.editMember).subscribe(m => {
+        this.openSnackBar(`Member ${m.firstname} ${m.lastname} updated!`, "SUCCESS");
+        this.router.navigate(['/members']);
+      });
     } else {
-      this.memberService.updateMember(<Member>this.editMember);
-      this.openSnackBar("Member saved!", "SUCCESS");
-      this.router.navigate(['/members']);
+      this.openSnackBar("Something went wrong. No actual member selected!", "ERROR");
     }
   }
 

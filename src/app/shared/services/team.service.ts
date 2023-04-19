@@ -6,6 +6,8 @@ import {TEAMS} from "../../../assets/mock-data/mock-teams";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Microservice} from "../models/microservice.model";
 import Utils from "./Utils";
+import {MEMBERS} from "../../../assets/mock-data/mock-members";
+import {Member} from "../models/member.model";
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -72,7 +74,12 @@ export class TeamService {
     /** PUT a Team to be updated */
     updateTeam(team: Team): Observable<Team> {
         if (environment.useMockData) {
-            return of(team);
+            let found = of(TEAMS.find(oldTeam => oldTeam.id == team.id))
+            if (found !== undefined) {
+                return <Observable<Team>>found;
+            } else {
+                return of({})
+            }
         } else {
             return this.http.put<Team>(this.entityUrl, team, httpOptions)
                 .pipe(catchError(Utils.handleError));
