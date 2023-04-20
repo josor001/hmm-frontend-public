@@ -1,0 +1,70 @@
+<mat-card class="story-edit" *ngIf="editStory">
+    <mat-card-header>
+        <mat-card-title>Edit Story {{editStory.name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="story-edit-form">
+            <h2 class="card-headline">Name</h2>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Story Name</mat-label>
+                <input matInput name="name" placeholder="A New Story" [(ngModel)]="editStory.name" required>
+            </mat-form-field>
+
+            <h2 class="card-headline">Description</h2>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Story Description</mat-label>
+                <textarea matInput name="desc" placeholder="Once upon a time, there was a microservice..."
+                          [(ngModel)]="editStory.description" required></textarea>
+            </mat-form-field>
+
+            <h2 class="card-headline">Involved Microservices</h2>
+
+            <mat-selection-list #list name="services" [(ngModel)]="selectedMicroservices">
+                <mat-list-option *ngFor="let service of allMicroservices" [value]="service">
+                    {{service.name}}
+                </mat-list-option>
+            </mat-selection-list>
+
+
+            <h2 class="card-headline">Edges</h2>
+
+            <table>
+                <tr>
+                    <td><button mat-icon-button color="primary" (click)="addEdge()"><mat-icon>add</mat-icon></button></td>
+                </tr>
+                <tr *ngFor="let edge of editEdges">
+                    <td>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Source</mat-label>
+                            <mat-select [(value)]="edge.sourceId">
+                                <mat-option *ngFor="let service of selectedMicroservices" [value]="service.id">{{service.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+
+                    <td>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Target</mat-label>
+                            <mat-select [(value)]="edge.targetId">
+                                <mat-option *ngFor="let service of selectedMicroservices" [value]="service.id">{{service.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Description</mat-label>
+                            <input matInput placeholder="Label for the edge" [(ngModel)]="edge.description">
+                        </mat-form-field>
+                    </td>
+                    <td><button mat-icon-button color="warn" (click)="removeEdge(edge)"><mat-icon>delete</mat-icon></button></td>
+                </tr>
+            </table>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <a mat-flat-button class="story-button" color="primary" (click)="save()">Save</a>
+        <a mat-flat-button class="story-button" color="warn" (click)="abort()">Abort</a>
+    </mat-card-actions>
+</mat-card>

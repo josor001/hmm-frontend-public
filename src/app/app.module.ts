@@ -34,13 +34,16 @@ import { EditTeamComponent } from './teams/edit-team/edit-team.component';
 import { EditServiceComponent } from './microservices/edit-service/edit-service.component';
 import {MatChipsModule} from "@angular/material/chips";
 import {MatTooltipModule} from "@angular/material/tooltip";
-import { ServiceStoryComponent } from './service-story/service-story.component';
+import { ServiceStoriesComponent } from './service-stories/service-stories.component';
 import { SelectMemberDialogComponent } from './teams/edit-team/select-member-dialog/select-member-dialog.component';
 import { SelectMicroserviceDialogComponent } from './teams/edit-team/select-microservice-dialog/select-microservice-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { AddMicroserviceComponent } from './microservices/add-microservice/add-microservice.component';
 import {MatExpansionModule} from "@angular/material/expansion";
 import {NgxGraphModule} from '@swimlane/ngx-graph';
+import { AddTeamComponent } from './teams/add-team/add-team.component';
+import { AddStoryComponent } from './service-stories/add-story/add-story.component';
+import { EditStoryComponent } from './service-stories/edit-story/edit-story.component';
 
 @NgModule({
   declarations: [
@@ -55,10 +58,13 @@ import {NgxGraphModule} from '@swimlane/ngx-graph';
     AddMemberComponent,
     EditTeamComponent,
     EditServiceComponent,
-    ServiceStoryComponent,
+    ServiceStoriesComponent,
     SelectMemberDialogComponent,
     SelectMicroserviceDialogComponent,
-    AddMicroserviceComponent
+    AddMicroserviceComponent,
+    AddTeamComponent,
+    AddStoryComponent,
+    EditStoryComponent
   ],
     imports: [
         BrowserModule,

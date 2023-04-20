@@ -1,0 +1,20 @@
+<mat-card class="microservice-add" *ngIf="newTeam">
+    <mat-card-header>
+        <mat-card-title>New Team</mat-card-title>
+        <mat-card-subtitle>Please fill in all fields!</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="team-add-form">
+            <p>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Name</mat-label>
+                    <input name="name" matInput placeholder="Another Awesome Team" [(ngModel)]="newTeam.name" required>
+                </mat-form-field>
+            </p>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <a mat-flat-button class="team-button" color="primary" (click)="save()">Save</a>
+        <a mat-flat-button class="team-button" color="warn" (click)="abort()">Abort</a>
+    </mat-card-actions>
+</mat-card>

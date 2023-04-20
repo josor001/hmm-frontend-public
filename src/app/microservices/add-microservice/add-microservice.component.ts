@@ -15,7 +15,6 @@ export class AddMicroserviceComponent implements OnInit, OnDestroy {
   sub: Subscription | undefined;
 
   constructor(private microserviceService: MicroserviceService,
-              private activatedRoute: ActivatedRoute,
               private router: Router,
               private snackBar: MatSnackBar) {
   }

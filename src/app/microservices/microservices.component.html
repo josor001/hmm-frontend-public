@@ -27,15 +27,16 @@
                         <mat-chip-list>
                             <tr>
                                 <td>
-                                    <mat-chip class="team-chip" *ngIf="microserviceTeams.get(microservice.id)?.name">
-                                        <mat-icon>group</mat-icon>
-                                        {{microserviceTeams.get(microservice.id)?.name}}</mat-chip>
+                                    <mat-chip matTooltip="click to edit team" class="team-chip" *ngIf="microserviceTeams.get(microservice.id)?.name" routerLink="/teams/edit/{{microserviceTeams.get(microservice.id)?.id}}">
+                                            <mat-icon>group</mat-icon>
+                                            {{microserviceTeams.get(microservice.id)?.name}}
+                                    </mat-chip>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <mat-chip *ngIf="microserviceSpocs.get(microservice.id)?.profileLink"><a
-                                            href="{{microserviceSpocs.get(microservice.id)?.profileLink}}"
+                                    <mat-chip matTooltip="click to visit profile team" *ngIf="microserviceSpocs.get(microservice.id)?.profileLink">
+                                        <a href="{{microserviceSpocs.get(microservice.id)?.profileLink}}"
                                             target="_blank" class="mat-standard-chip invisLink">
                                         <mat-icon matChipAvatar>contact_support</mat-icon>
                                         {{microserviceSpocs.get(microservice.id)?.firstname}} {{microserviceSpocs.get(microservice.id)?.lastname}}
@@ -46,14 +47,16 @@
                     </table>
                     <h2 class="card-headline">Availability</h2>
                     <p>
+                        <a mat-flat-button matTooltip="click to visit profile" color="primary" href="{{microservice.repositoryLink}}" target="_blank"
+                           class="mat-button" *ngIf="microservice.repositoryLink">Repository</a>
                         <a mat-flat-button color="primary" href="{{microservice.repositoryLink}}" target="_blank"
-                           class="expanded-button" *ngIf="microservice.repositoryLink">Repository</a>
-                        <mat-chip-list *ngIf="!microservice.repositoryLink">
-                            <mat-chip>
-                                <mat-icon>sentiment_very_dissatisfied</mat-icon>
-                                no repository set.
-                            </mat-chip>
-                        </mat-chip-list>
+                           class="mat-button" *ngIf="!microservice.repositoryLink" disabled matTooltip="no repository set.">Repository</a>
+
+                        <a mat-flat-button color="primary" href="" target="_blank"
+                           class="mat-button" *ngIf="true" disabled matTooltip="not implemented yet.">Documentation</a>
+
+                        <a mat-flat-button color="primary" href="" target="_blank"
+                           class="mat-button" *ngIf="true" disabled matTooltip="not implemented yet.">Known Bugs</a>
                     </p>
                     <h2 class="card-headline">Associated Models</h2>
                     <mat-chip-list>
@@ -76,12 +79,12 @@
                     <table class="full-width">
                         <tr>
                             <td>
-                                <button mat-flat-button color="primary"
+                                <button mat-flat-button color="primary" matTooltip="click to edit service"
                                         [routerLink]="['/microservices/edit/', microservice.id]">Edit
                                 </button>
                             </td>
                             <td>
-                                <button mat-flat-button color="warn" (click)="deleteMicroservice(microservice.id!)">
+                                <button matTooltip="click to delete service" mat-flat-button color="warn" (click)="deleteMicroservice(microservice.id!)">
                                     Delete
                                 </button>
                             </td>

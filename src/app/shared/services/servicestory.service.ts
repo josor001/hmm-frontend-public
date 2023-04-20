@@ -4,8 +4,6 @@ import {catchError, Observable, of} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ServiceStory } from '../models/servicestory.model';
 import Utils from "./Utils";
-import {MICROSERVICES} from "../../../assets/mock-data/mock-microservices";
-import {Microservice} from "../models/microservice.model";
 import {STORIES} from "../../../assets/mock-data/mock-stories";
 
 const httpOptions = {
@@ -26,8 +24,17 @@ export class ServiceStoryService {
 
   /** GET a specific ServiceStory by its ID */
   getServiceStory(id: number): Observable<ServiceStory> {
-    return this.http.get<ServiceStory>(this.entityUrl+'/'+id)
-        .pipe(catchError(Utils.handleError));
+    if (environment.useMockData) {
+      let found = of(STORIES.find(story => story.id == id))
+      if (found !== undefined) {
+        return <Observable<ServiceStory>>found;
+      } else {
+        return of({})
+      }
+    } else {
+      return this.http.get<ServiceStory>(this.entityUrl+'/'+id)
+          .pipe(catchError(Utils.handleError));
+    }
   }
 
   /** GET all ServiceStorys */
@@ -42,14 +49,32 @@ export class ServiceStoryService {
 
   /** POST a new ServiceStory */  
   createServiceStory(name: string): Observable<ServiceStory> {
-    return this.http.post<ServiceStory>(this.entityUrl, name, httpOptions)
-     .pipe(catchError(Utils.handleError));
+    if (environment.useMockData) {
+      return of(<ServiceStory>{
+        name: name,
+        id: 2002,
+      });
+    } else {
+      return this.http.post<ServiceStory>(this.entityUrl, name, httpOptions)
+          .pipe(catchError(Utils.handleError));
+    }
+
+
   }
 
   /** PUT a ServiceStory to be updated */  
   updateServiceStory(story: ServiceStory): Observable<ServiceStory> {
-    return this.http.put<ServiceStory>(this.entityUrl, story, httpOptions)
-     .pipe(catchError(Utils.handleError));
+    if (environment.useMockData) {
+      let found = of(STORIES.find(oldStory => oldStory.id == story.id))
+      if (found !== undefined) {
+        return <Observable<ServiceStory>>found;
+      } else {
+        return of({})
+      }
+    } else {
+      return this.http.put<ServiceStory>(this.entityUrl, story, httpOptions)
+          .pipe(catchError(Utils.handleError));
+    }
   }
 
   /** PUT a new Vertex in a ServiceStory */  

@@ -36,7 +36,6 @@ export class EditTeamComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.routerSub = this.activatedRoute.paramMap.subscribe((params) => {
       var id : number = parseInt(<string>params.get('id'))
-      console.log(id);
       this.serviceSub = this.teamService.getTeam(id).subscribe(
           (team) => {this.editTeam = team;}
       )

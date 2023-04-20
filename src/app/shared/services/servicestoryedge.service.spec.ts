@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { ServiceStoryEdgeService } from './service-story-edge.service';
 
-describe('ServicestoryedgeService', () => {
+describe('ServiceStoryEdgeService', () => {
   let service: ServiceStoryEdgeService;
 
   beforeEach(() => {

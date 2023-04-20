@@ -4,9 +4,6 @@ import {Edge, Node} from "@swimlane/ngx-graph";
 import {ServiceStory} from "../shared/models/servicestory.model";
 import {Subscription} from "rxjs";
 import {ServiceStoryEdge} from "../shared/models/servicestoryedge.model";
-import {BreakpointObserver} from "@angular/cdk/layout";
-import {TeamService} from "../shared/services/team.service";
-import {MemberService} from "../shared/services/member.service";
 import {MicroserviceService} from "../shared/services/microservice.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ServiceStoryService} from "../shared/services/servicestory.service";
@@ -14,11 +11,11 @@ import {ServiceStoryEdgeService} from "../shared/services/service-story-edge.ser
 import {Microservice} from "../shared/models/microservice.model";
 
 @Component({
-  selector: 'app-service-story',
-  templateUrl: './service-story.component.html',
-  styleUrls: ['./service-story.component.scss']
+  selector: 'app-service-stories',
+  templateUrl: './service-stories.component.html',
+  styleUrls: ['./service-stories.component.scss']
 })
-export class ServiceStoryComponent implements OnInit, OnDestroy {
+export class ServiceStoriesComponent implements OnInit, OnDestroy {
   @ViewChild(MatAccordion) accordion: MatAccordion | undefined;
   storyNodes = new Map<number, Node[]>();
   storyEdges = new Map<number, Edge[]>();

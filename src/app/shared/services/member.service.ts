@@ -5,6 +5,7 @@ import {environment} from 'src/environments/environment';
 import {Member} from '../models/member.model';
 import {TEAMS} from "../../../assets/mock-data/mock-teams";
 import {MEMBERS} from "../../../assets/mock-data/mock-members";
+import Utils from "./Utils";
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -33,7 +34,7 @@ export class MemberService {
                 return of({})
             }
         } else {
-            return this.http.get<Member>(this.entityUrl + '/' + id);
+            return this.http.get<Member>(this.entityUrl + '/' + id).pipe(catchError(Utils.handleError));
         }
     }
 
@@ -42,7 +43,7 @@ export class MemberService {
         if (environment.useMockData) {
             return of(MEMBERS);
         } else {
-            return this.http.get<Member[]>(this.entityUrl);
+            return this.http.get<Member[]>(this.entityUrl).pipe(catchError(Utils.handleError));
         }
     }
 
@@ -60,7 +61,7 @@ export class MemberService {
             });
         } else {
             return this.http.post<Member>(this.entityUrl, memberDto, httpOptions)
-                .pipe(catchError(this.handleError));
+                .pipe(catchError(Utils.handleError));
         }
     }
 
@@ -75,7 +76,7 @@ export class MemberService {
             }
         } else {
             return this.http.put<Member>(this.entityUrl, member, httpOptions)
-                .pipe(catchError(this.handleError));
+                .pipe(catchError(Utils.handleError));
         }
     }
 
@@ -88,23 +89,7 @@ export class MemberService {
             return of(true);
         } else {
             return this.http.delete(url, httpOptions)
-                .pipe(catchError(this.handleError));
+                .pipe(catchError(Utils.handleError));
         }
-    }
-
-
-    /** ERROR HANDLER */
-    private handleError(error: HttpErrorResponse) {
-        if (error.status === 0) {
-            // A client-side or network error occurred. Handle it accordingly.
-            console.error('An error occurred:', error.error);
-        } else {
-            // The backend returned an unsuccessful response code.
-            // The response body may contain clues as to what went wrong.
-            console.error(
-                `Backend returned code ${error.status}, body was: `, error.error);
-        }
-        // Return an observable with a user-facing error message.
-        return throwError(() => new Error('Something bad happened; please try again later.'));
     }
 }

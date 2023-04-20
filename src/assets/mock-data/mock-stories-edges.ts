@@ -4,19 +4,19 @@ export const STORIES_EDGES: ServiceStoryEdge[] = [
     {
         sourceId: 1,
         targetId: 2,
-        description: "This is the first edge",
+        description: "This is the first edge1",
         id: 4,
     },
     {
         sourceId: 1,
         targetId: 3,
-        description: "This is the first edge",
+        description: "This is the first edge2",
         id: 5,
     },
     {
         sourceId: 3,
         targetId: 2,
-        description: "This is the first edge",
+        description: "This is the first edge3",
         id: 6,
     },
     {
