@@ -1,3 +1,5 @@
+@import '../../colors.scss';
+
 .full-width {
   width: 100%;
 }
@@ -39,6 +41,40 @@
 
 .expand-data {
   vertical-align: top;
+}
+
+/** graph styles */
+.node {
+  background-color: $my-primary;
+
+}
+.nodeBox {
+  border: 3px solid $my-primary;
+  border-radius: 5%;
+  background-color: transparent;
+  width: 170px;
+  height: 145px;
+}
+.nodeBox-headline {
+  background-color: $my-primary;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  width:100%;
+}
+.nodeBox-row {
+  color: black;
+  width:100%;
+  height: 1.5em;
+  vertical-align: middle;
+}
+.nodeBox-data {
+  justify-content: left;
+}
+.nodeBox-data-headline {
+  justify-content: left;
+  font-weight: bold;
+  color:dimgray;
 }
 
 /** Styles for accordion */

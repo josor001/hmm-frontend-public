@@ -46,32 +46,42 @@
                                            [links]="storyEdges.get(story.id)!//links"
                                            [nodes]="storyNodes.get(story.id)!//nodes"
                                            [layoutSettings]="layoutSettings"
+                                           [autoZoom]="true"
                                 >
                                     <!-- defining the arrow head as end of edge -->
                                     <ng-template #defsTemplate>
-                                        <svg:marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="4"
-                                                    markerHeight="4" orient="auto">
+                                        <svg:marker id="arrow{{story.id}}" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="4" markerHeight="4" orient="auto">
                                             <svg:path d="M0,-5L10,0L0,5" class="arrow-head"/>
                                         </svg:marker>
                                     </ng-template>
-                                    <!-- defining the style of nodes-->
+
                                     <ng-template #nodeTemplate let-node>
-                                        <svg:g class="node">
-                                            <svg:rect [attr.width]="node.dimension.width"
-                                                      [attr.height]="node.dimension.height"
-                                                      [attr.fill]="node.data.color"/>
-                                            <svg:text alignment-baseline="central" [attr.x]="10"
-                                                      [attr.y]="node.dimension.height / 2">{{node.label}}</svg:text>
+                                        <svg xmlns:svg="http://www.w3.org/2000/svg">
+                                        <svg:g class="node" width="180" height="150">
+                                            <svg:foreignObject width="180" height="150" xmlns:svg="http://www.w3.org/2000/svg"
+                                                               xmlns:xhtml="http://www.w3.org/1999/xhtml">
+                                                <xhtml:div class="nodeBox">
+                                                    <table class="full-width">
+                                                        <tr class="nodeBox-headline"><td>{{ node.label }}</td></tr>
+                                                        <tr class="nodeBox-row"><td class="nodeBox-data-headline">Owned By</td></tr>
+                                                        <tr class="nodeBox-row"><td class="nodeBox-data"><mat-icon>group</mat-icon>{{ node.data.ownedBy }}</td></tr>
+                                                        <tr><td></td></tr>
+                                                        <tr class="nodeBox-row"><td class="nodeBox-data-headline">Contact</td></tr>
+                                                        <tr class="nodeBox-row"><td class="nodeBox-data"><mat-icon>contact_support</mat-icon> {{ node.data.spoc }}</td></tr>
+                                                    </table>
+                                                </xhtml:div>
+                                            </svg:foreignObject>
                                         </svg:g>
+                                        </svg>
                                     </ng-template>
 
                                     <!-- defining the style of edges -->
                                     <ng-template #linkTemplate let-link>
                                         <svg:g class="edge">
-                                            <svg:path class="line" stroke-width="2" marker-end="url(#arrow)"></svg:path>
+                                            <svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" stroke-width="3"
+                                                      [attr.marker-end]="'url(#arrow'+story.id+')'"></svg:path>
                                             <svg:text class="edge-label" text-anchor="middle">
                                                 <textPath class="text-path" [attr.href]="'#' + link.id"
-                                                          [style.dominant-baseline]="link.dominantBaseline"
                                                           startOffset="50%">
                                                     {{link.label}}
                                                 </textPath>
