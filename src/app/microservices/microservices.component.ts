@@ -3,12 +3,13 @@ import {MemberService} from "../shared/services/member.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MicroserviceService} from "../shared/services/microservice.service";
 import {Microservice} from "../shared/models/microservice.model";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {map, shareReplay} from "rxjs/operators";
 import {TeamService} from "../shared/services/team.service";
 import {Member} from "../shared/models/member.model";
 import {Team} from "../shared/models/team.model";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-microservices',
@@ -16,7 +17,11 @@ import {Team} from "../shared/models/team.model";
   styleUrls: ['./microservices.component.scss']
 })
 export class MicroservicesComponent implements OnInit, OnDestroy {
-  subGet: any;
+  sysId: number = 0;
+
+  subGet: Subscription | undefined;
+  routerSub: Subscription | undefined;
+
   microservices: Microservice[] = [];
   microserviceTeams = new Map<number, Team>();
   microserviceSpocs = new Map<number, Member>();
@@ -41,6 +46,7 @@ export class MicroservicesComponent implements OnInit, OnDestroy {
               private teamService:TeamService,
               private memberService:MemberService,
               private breakpointObserver: BreakpointObserver,
+              private activatedRoute: ActivatedRoute,
               private snackBar: MatSnackBar) { }
 
 
@@ -86,13 +92,17 @@ export class MicroservicesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+      this.routerSub = this.activatedRoute.paramMap.subscribe((params) => {
+          this.sysId = parseInt(<string>params.get('sysId'));
+      });
     this.getMicroservices();
     this.prepareTeamNamesForServices();
     this.prepareSpocsForServices();
   }
 
   ngOnDestroy(): void {
-    this.subGet.unsubscribe();
+    this.subGet?.unsubscribe();
+    this.routerSub?.unsubscribe();
   }
 
 }

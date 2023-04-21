@@ -11,6 +11,7 @@ import {ServiceStoryEdgeService} from "../shared/services/service-story-edge.ser
 import {Microservice} from "../shared/models/microservice.model";
 import {MemberService} from "../shared/services/member.service";
 import {TeamService} from "../shared/services/team.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-service-stories',
@@ -18,6 +19,8 @@ import {TeamService} from "../shared/services/team.service";
     styleUrls: ['./service-stories.component.scss']
 })
 export class ServiceStoriesComponent implements OnInit, OnDestroy {
+    sysId: number = 0;
+
     @ViewChild(MatAccordion) accordion: MatAccordion | undefined;
     storyNodes = new Map<number, Node[]>();
     storyEdges = new Map<number, Edge[]>();
@@ -33,6 +36,7 @@ export class ServiceStoriesComponent implements OnInit, OnDestroy {
     allStoriesSub: Subscription | undefined;
     allEdgesSub: Subscription | undefined;
     allServicesSub: Subscription | undefined;
+    routerSysSub: Subscription | undefined;
 
     constructor(
         private storyService: ServiceStoryService,
@@ -40,16 +44,21 @@ export class ServiceStoriesComponent implements OnInit, OnDestroy {
         private microserviceService: MicroserviceService,
         private memberService: MemberService,
         private teamService: TeamService,
-        private snackBar: MatSnackBar) {
+        private activatedRoute: ActivatedRoute) {
     }
 
     ngOnDestroy(): void {
         this.allStoriesSub?.unsubscribe()
         this.allEdgesSub?.unsubscribe()
         this.allServicesSub?.unsubscribe()
+        this.routerSysSub?.unsubscribe()
     }
 
     ngOnInit(): void {
+        this.routerSysSub = this.activatedRoute.paramMap.subscribe((params) => {
+            this.sysId = parseInt(<string>params.get('sysId'));
+        });
+
         //get all stories
         this.allStoriesSub = this.storyService.getServiceStories().subscribe(stories => {
             this.stories = stories;

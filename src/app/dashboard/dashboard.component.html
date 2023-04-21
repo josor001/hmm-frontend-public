@@ -1,5 +1,5 @@
 <div class="grid-container">
-  <h1 class="mat-h1">Dashboard</h1>
+  <h1 class="mat-h1">Dashboard for System {{sysId}}</h1>
   <mat-card>
     <mat-card-header>
       <mat-card-title>Welcome!</mat-card-title>
@@ -24,10 +24,10 @@
   </mat-card>
   <table class="widget-table">
     <tr>
-      <td><app-widget-stories></app-widget-stories></td>
-      <td><app-widget-microservices></app-widget-microservices></td>
-      <td><app-widget-teams></app-widget-teams></td>
-      <td><app-widget-members></app-widget-members></td>
+      <td (click)="forward('stories')"><app-widget-stories></app-widget-stories></td>
+      <td (click)="forward('microservices')"><app-widget-microservices></app-widget-microservices></td>
+      <td (click)="forward('teams')"><app-widget-teams></app-widget-teams></td>
+      <td (click)="forward('members')"><app-widget-members></app-widget-members></td>
     </tr>
   </table>
 </div>

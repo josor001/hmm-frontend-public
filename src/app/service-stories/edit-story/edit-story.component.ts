@@ -23,6 +23,7 @@ export interface SimpleEdge {
   styleUrls: ['./edit-story.component.scss']
 })
 export class EditStoryComponent implements OnInit, OnDestroy {
+  sysId: number = 0;
 
   editStory: ServiceStory | undefined;
   editEdges: ServiceStoryEdge[] = [];
@@ -34,6 +35,7 @@ export class EditStoryComponent implements OnInit, OnDestroy {
   storySub: Subscription | undefined;
   allServiceSub: Subscription | undefined;
   updateSub: Subscription | undefined;
+  routerSysSub: Subscription | undefined;
 
 
   constructor(private microserviceService: MicroserviceService,
@@ -46,6 +48,10 @@ export class EditStoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.routerSysSub = this.activatedRoute.paramMap.subscribe((params) => {
+      this.sysId = parseInt(<string>params.get('sysId'));
+    });
+
     this.routerSub = this.activatedRoute.paramMap.subscribe((params) => {
       var id: number = parseInt(<string>params.get('id'))
       this.storySub = this.storyService.getServiceStory(id).subscribe(
@@ -82,6 +88,7 @@ export class EditStoryComponent implements OnInit, OnDestroy {
     this.allServiceSub?.unsubscribe();
     this.updateSub?.unsubscribe();
     this.storySub?.unsubscribe();
+    this.routerSysSub?.unsubscribe();
   }
 
   save() :void {
@@ -106,7 +113,7 @@ export class EditStoryComponent implements OnInit, OnDestroy {
       this.updateSub = this.storyService.updateServiceStory(this.editStory).subscribe(story => {
         console.log(story)
         this.openSnackBar(`${story.name} updated!`,"SUCCESS")
-        this.router.navigate(['/stories']);
+        this.router.navigate([`/system/${this.sysId}/stories`]);
       })
     } else {
       this.openSnackBar("Something went wrong. Please fill all required fields.", "ERROR")
@@ -114,7 +121,7 @@ export class EditStoryComponent implements OnInit, OnDestroy {
   }
 
   abort() {
-    this.router.navigate(['/stories']);
+    this.router.navigate([`/system/${this.sysId}/stories`]);
   }
 
   openSnackBar(message: string, action: string) {

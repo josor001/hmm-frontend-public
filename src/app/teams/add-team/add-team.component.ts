@@ -12,24 +12,32 @@ import {TeamService} from "../../shared/services/team.service";
   styleUrls: ['./add-team.component.scss']
 })
 export class AddTeamComponent implements OnInit, OnDestroy {
+  sysId: number = 0;
+
   newTeam: Team | undefined;
   sub: Subscription | undefined;
-
+  routerSysSub: Subscription | undefined;
   constructor(private teamService: TeamService,
               private router: Router,
+              private activatedRoute: ActivatedRoute,
               private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
+    this.routerSysSub = this.activatedRoute.paramMap.subscribe((params) => {
+      this.sysId = parseInt(<string>params.get('sysId'));
+    });
+
     this.newTeam = {name: ""}
   }
 
   ngOnDestroy() {
     if (this.sub) this.sub.unsubscribe();
+    if (this.routerSysSub) this.routerSysSub.unsubscribe();
   }
 
   abort(): void {
-    this.router.navigate(['/teams']);
+    this.router.navigate([`/system/${(this.sysId)}/teams`]);
   }
 
   save() {
@@ -37,7 +45,7 @@ export class AddTeamComponent implements OnInit, OnDestroy {
       this.sub = this.teamService.createTeam(this.newTeam.name).subscribe(
           newTeam => {
             this.openSnackBar("New team " + newTeam.name + " saved!", "SUCCESS");
-            this.router.navigate(['/teams']);
+            this.router.navigate([`/system/${this.sysId}/teams`]);
           }
       );
     } else {

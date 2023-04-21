@@ -11,9 +11,11 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./add-member.component.scss']
 })
 export class AddMemberComponent implements OnInit, OnDestroy {
+  sysId: number = 0;
 
   newMember: Member | undefined;
   sub: Subscription | undefined;
+  routerSub: Subscription | undefined;
 
   constructor(private memberService : MemberService,
               private activatedRoute:ActivatedRoute,
@@ -22,14 +24,18 @@ export class AddMemberComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.newMember = {firstname: "", lastname: "", email: ""}
+    this.routerSub = this.activatedRoute.paramMap.subscribe((params) => {
+      this.sysId = parseInt(<string>params.get('sysId'));
+    });
   }
 
   ngOnDestroy() {
     if (this.sub) this.sub.unsubscribe();
+    this.routerSub?.unsubscribe();
   }
 
   abort(): void {
-    this.router.navigate(['/members']);
+    this.router.navigate([`/system/${this.sysId}/members`]);
   }
 
 
@@ -38,7 +44,7 @@ export class AddMemberComponent implements OnInit, OnDestroy {
       this.sub = this.memberService.createMember(this.newMember.firstname, this.newMember.lastname, this.newMember.email).subscribe(
           newMem => {
             this.openSnackBar("New member "+newMem.firstname+" saved!", "SUCCESS");
-            this.router.navigate(['/members']);
+            this.router.navigate([`/system/${this.sysId}/members`]);
           }
       );
     } else {

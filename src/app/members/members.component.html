@@ -3,7 +3,7 @@
         <span>People</span>
         <span class="toolbar-spacer"></span>
         <div class="example-button-row">
-            <button mat-flat-button color="primary" routerLink="/members/new">
+            <button mat-flat-button color="primary" routerLink="/system/{{sysId}}/members/new">
                 <mat-icon>person_add</mat-icon>
                 <span class="menu_item_text">Add</span>
             </button>
@@ -40,7 +40,7 @@
                         <mat-card-content>
                             <mat-list class="detail-list">
                                 <!-- <a mat-button class="expanded-button" (click)="selectMember(member)">Edit</a> -->
-                                <a mat-flat-button class="expanded-button" color="primary" [routerLink]="['/members/edit/', member.id]">Edit</a>
+                                <a mat-flat-button class="expanded-button" color="primary" [routerLink]="['/system',sysId,'members','edit', member.id]">Edit</a>
                                 <a mat-flat-button class="expanded-button" color="warn" (click)="deleteMember(member.id)">Delete</a>
                             </mat-list>
                         </mat-card-content>

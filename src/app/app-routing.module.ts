@@ -15,23 +15,25 @@ import {AddMicroserviceComponent} from "./microservices/add-microservice/add-mic
 import {AddTeamComponent} from "./teams/add-team/add-team.component";
 import {AddStoryComponent} from "./service-stories/add-story/add-story.component";
 import {EditStoryComponent} from "./service-stories/edit-story/edit-story.component";
+import {AppComponent} from "./app.component";
 
-const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent },
+const routes: Routes = [//
+  { path: '', component: AppComponent },
+  { path: 'system/:sysId/dashboard', component: DashboardComponent },
   { path: 'system', component: SystemComponent },
-  { path: 'teams', component: TeamsComponent },
-  { path: 'teams/edit/:id', component: EditTeamComponent },
-  { path: 'teams/new', component: AddTeamComponent },
+  { path: 'system/:sysId/teams', component: TeamsComponent },
+  { path: 'system/:sysId/teams/edit/:id', component: EditTeamComponent },
+  { path: 'system/:sysId/teams/new', component: AddTeamComponent },
   { path: 'organization', component: OrganizationComponent },
-  { path: 'members', component: MembersComponent },
-  { path: 'members/edit/:id', component: EditMemberComponent },
-  { path: 'members/new', component: AddMemberComponent },
-  { path: 'microservices', component: MicroservicesComponent },
-  { path: 'microservices/edit/:id', component: EditServiceComponent },
-  { path: 'microservices/new', component: AddMicroserviceComponent },
-  { path: 'stories', component: ServiceStoriesComponent },
-  { path: 'stories/edit/:id', component: EditStoryComponent },
-  { path: 'stories/new', component: AddStoryComponent },
+  { path: 'system/:sysId/members', component: MembersComponent },
+  { path: 'system/:sysId/members/edit/:id', component: EditMemberComponent },
+  { path: 'system/:sysId/members/new', component: AddMemberComponent },
+  { path: 'system/:sysId/microservices', component: MicroservicesComponent },
+  { path: 'system/:sysId/microservices/edit/:id', component: EditServiceComponent },
+  { path: 'system/:sysId/microservices/new', component: AddMicroserviceComponent },
+  { path: 'system/:sysId/stories', component: ServiceStoriesComponent },
+  { path: 'system/:sysId/stories/edit/:id', component: EditStoryComponent },
+  { path: 'system/:sysId/stories/new', component: AddStoryComponent },
 ];
 
 @NgModule({

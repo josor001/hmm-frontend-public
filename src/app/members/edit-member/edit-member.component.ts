@@ -11,9 +11,11 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./edit-member.component.scss']
 })
 export class EditMemberComponent implements OnInit, OnDestroy {
+  sysId: number = 0;
 
   editMember: Member | undefined;
   routerSub: Subscription | undefined;
+  sysSub: Subscription | undefined;
   serviceSub: Subscription | undefined;
   updateSub: Subscription | undefined;
 
@@ -23,6 +25,10 @@ export class EditMemberComponent implements OnInit, OnDestroy {
               private snackBar : MatSnackBar) { }
 
   ngOnInit() {
+    this.sysSub = this.activatedRoute.paramMap.subscribe((params) => {
+      this.sysId = parseInt(<string>params.get('sysId'));
+    });
+
     this.routerSub = this.activatedRoute.paramMap.subscribe((params) => {
       var id : number = parseInt(<string>params.get('id'))
       console.log(id);
@@ -30,23 +36,25 @@ export class EditMemberComponent implements OnInit, OnDestroy {
           (member) => {this.editMember = member;}
       )
     });
+
   }
 
   ngOnDestroy() {
+    if (this.sysSub) this.sysSub.unsubscribe();
     if (this.routerSub) this.routerSub.unsubscribe();
     if (this.serviceSub) this.serviceSub.unsubscribe();
     if (this.updateSub) this.updateSub.unsubscribe();
   }
 
   abort(): void {
-    this.router.navigate(['/members']);
+    this.router.navigate([`/system/${(this.sysId)}/members`]);
   }
 
   save() {
     if(this.editMember && this.editMember.id && this.editMember.firstname && this.editMember.lastname && this.editMember.email) {
       this.updateSub = this.memberService.updateMember(<Member>this.editMember).subscribe(m => {
         this.openSnackBar(`Member ${m.firstname} ${m.lastname} updated!`, "SUCCESS");
-        this.router.navigate(['/members']);
+        this.router.navigate([`/system/${(this.sysId)}/members`]);
       });
     } else {
       this.openSnackBar("Something went wrong. No actual member selected!", "ERROR");

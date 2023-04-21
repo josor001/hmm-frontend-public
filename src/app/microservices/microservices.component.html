@@ -3,7 +3,7 @@
         <span>Microservices</span>
         <span class="toolbar-spacer"></span>
         <div class="example-button-row">
-            <button mat-flat-button color="primary" routerLink="/microservices/new">
+            <button mat-flat-button color="primary" routerLink="system/{{sysId}}/microservices/new">
                 <mat-icon>add</mat-icon>
                 <span class="menu_item_text">New</span>
             </button>
@@ -27,7 +27,7 @@
                         <mat-chip-list>
                             <tr>
                                 <td>
-                                    <mat-chip matTooltip="click to edit team" class="team-chip" *ngIf="microserviceTeams.get(microservice.id)?.name" routerLink="/teams/edit/{{microserviceTeams.get(microservice.id)?.id}}">
+                                    <mat-chip matTooltip="click to edit team" class="team-chip" *ngIf="microserviceTeams.get(microservice.id)?.name" routerLink="/system/{{sysId}}/teams/edit/{{microserviceTeams.get(microservice.id)?.id}}">
                                             <mat-icon>group</mat-icon>
                                             {{microserviceTeams.get(microservice.id)?.name}}
                                     </mat-chip>
@@ -80,7 +80,7 @@
                         <tr>
                             <td>
                                 <button mat-flat-button color="primary" matTooltip="click to edit service"
-                                        [routerLink]="['/microservices/edit/', microservice.id]">Edit
+                                        [routerLink]="['/system',sysId,'microservices','edit', microservice.id]">Edit
                                 </button>
                             </td>
                             <td>

@@ -11,16 +11,23 @@ import {MicroserviceService} from "../../shared/services/microservice.service";
   styleUrls: ['./add-microservice.component.scss']
 })
 export class AddMicroserviceComponent implements OnInit, OnDestroy {
+  sysId: number = 0;
   newMicroservice: Microservice | undefined;
   sub: Subscription | undefined;
+  routerSub: Subscription | undefined;
 
   constructor(private microserviceService: MicroserviceService,
               private router: Router,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.newMicroservice = {name: ""}
+
+    this.routerSub = this.activatedRoute.paramMap.subscribe((params) => {
+      this.sysId = parseInt(<string>params.get('sysId'));
+    });
   }
 
   ngOnDestroy() {
@@ -28,7 +35,7 @@ export class AddMicroserviceComponent implements OnInit, OnDestroy {
   }
 
   abort(): void {
-    this.router.navigate(['/microservices']);
+    this.router.navigate([`/system/${(this.sysId)}/microservices`]);
   }
 
 
@@ -37,7 +44,7 @@ export class AddMicroserviceComponent implements OnInit, OnDestroy {
       this.sub = this.microserviceService.createMicroservice(this.newMicroservice.name).subscribe(
           newServ => {
             this.openSnackBar("New microservice " + newServ.name + " saved!", "SUCCESS");
-            this.router.navigate(['/microservices']);
+            this.router.navigate([`/system/${this.sysId}/microservices`]);
           }
       );
     } else {

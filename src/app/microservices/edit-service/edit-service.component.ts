@@ -17,14 +17,18 @@ import {Member} from "../../shared/models/member.model";
     styleUrls: ['./edit-service.component.scss']
 })
 export class EditServiceComponent implements OnInit, OnDestroy {
+    sysId: number = 0;
+
     editService: Microservice | undefined;
     editServiceTeamMember: Member[] = [];
     routerSub: Subscription | undefined;
     serviceSub: Subscription | undefined;
+    routerSysSub: Subscription | undefined;
     teamSub: Subscription | undefined;
-  updateSub: Subscription | undefined;
+    updateSub: Subscription | undefined;
     //variables for feature chip input
     addOnBlur = true;
+
     readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
     constructor(private microserviceService: MicroserviceService,
@@ -36,6 +40,10 @@ export class EditServiceComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        this.routerSysSub = this.activatedRoute.paramMap.subscribe((params) => {
+            this.sysId = parseInt(<string>params.get('sysId'));
+        });
+
         this.routerSub = this.activatedRoute.paramMap.subscribe((params) => {
             var id: number = parseInt(<string>params.get('id'))
             this.serviceSub = this.microserviceService.getMicroservice(id).subscribe(
@@ -48,6 +56,7 @@ export class EditServiceComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.routerSysSub?.unsubscribe();
         this.routerSub?.unsubscribe();
         this.updateSub?.unsubscribe();
         this.teamSub?.unsubscribe();
@@ -57,7 +66,7 @@ export class EditServiceComponent implements OnInit, OnDestroy {
       if(this.editService && this.editService.name)  {
         this.updateSub = this.microserviceService.updateMicroservice(this.editService).subscribe(service => {
           this.openSnackBar(`${service.name} updated!`,"SUCCESS")
-          this.router.navigate(['/microservices']);
+          this.router.navigate([`/system/${this.sysId}/microservices`]);
         })
       } else {
         this.openSnackBar("Something went wrong. Please fill all required fields.", "ERROR")
@@ -65,7 +74,7 @@ export class EditServiceComponent implements OnInit, OnDestroy {
     }
 
     abort() {
-      this.router.navigate(['/microservices']);
+      this.router.navigate([`/system/${this.sysId}/microservices`]);
     }
 
     addFeature(event: MatChipInputEvent): void {

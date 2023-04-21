@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import {SoftwaresystemService} from "./shared/services/softwaresystem.service";
 import {Softwaresystem} from "./shared/models/softwaresystem.model";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,8 @@ import {Softwaresystem} from "./shared/models/softwaresystem.model";
 })
 export class AppComponent implements OnInit {
   title = 'Holistic Microservice Management Platform';
-  systems: Softwaresystem[] = []
-  selectedSystem: Softwaresystem = {};
+  routerSub: Subscription | undefined;
+  sysId: number = 0;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
@@ -21,15 +22,18 @@ export class AppComponent implements OnInit {
           shareReplay()
       );
 
-  constructor(private breakpointObserver: BreakpointObserver, private systemService: SoftwaresystemService) {}
-
-  getSoftwaresystems(): void {
-    this.systemService.getSoftwaresystems().subscribe(systems => this.systems = systems);
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router) {
   }
 
-  onSelect(system: Softwaresystem): void {
-    this.selectedSystem = system;
+  ngOnDestroy(): void {
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
+
+  protected readonly NaN = NaN;
+
+  forwardToDashboard() {
+    this.router.navigate([`/system/${this.sysId}/dashboard`]);
+  }
 }

@@ -3,7 +3,7 @@
             <span>Teams</span>
             <span class="toolbar-spacer"></span>
             <div class="menu-button-row">
-                <button mat-flat-button color="primary" routerLink="/teams/new">
+                <button mat-flat-button color="primary" routerLink="/system/{{sysId}}/teams/new">
                     <mat-icon>group_add</mat-icon>
                     <span class="menu_item_text">New</span>
                 </button>
@@ -37,7 +37,7 @@
                 <mat-card-actions class="full-width">
                     <table class="full-width">
                         <tr>
-                            <td><button matTooltip="click to edit team" mat-flat-button color="primary" [routerLink]="['/teams/edit/', team.id]">Edit</button></td>
+                            <td><button matTooltip="click to edit team" mat-flat-button color="primary" [routerLink]="['/system',sysId,'teams','edit', team.id]">Edit</button></td>
                             <td><button matTooltip="click to delete team" mat-flat-button color="warn" (click)="deleteTeam(team.id)">Delete</button></td>
                         </tr>
                     </table>

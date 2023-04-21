@@ -72,7 +72,7 @@ import { WidgetMembersComponent } from './dashboard/widget-members/widget-member
     WidgetMicroservicesComponent,
     WidgetTeamsComponent,
     WidgetStoriesComponent,
-    WidgetMembersComponent
+    WidgetMembersComponent,
   ],
     imports: [
         BrowserModule,

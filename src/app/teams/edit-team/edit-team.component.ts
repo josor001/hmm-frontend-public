@@ -18,10 +18,13 @@ import {SelectMicroserviceDialogComponent} from "./select-microservice-dialog/se
   styleUrls: ['./edit-team.component.scss']
 })
 export class EditTeamComponent implements OnInit, OnDestroy {
+  sysId: number = 0;
+
   editTeam: Team | undefined;
   editTeamServices = new Map<number, Microservice>();
   editTeamMembers = new Map<number, Member>();
   routerSub: Subscription | undefined;
+  routerSysSub: Subscription | undefined;
   updateSub: Subscription | undefined;
   serviceSub: Subscription | undefined;
 
@@ -34,6 +37,10 @@ export class EditTeamComponent implements OnInit, OnDestroy {
               private snackBar : MatSnackBar) { }
 
   ngOnInit(): void {
+    this.routerSysSub = this.activatedRoute.paramMap.subscribe((params) => {
+      this.sysId = parseInt(<string>params.get('sysId'));
+    });
+
     this.routerSub = this.activatedRoute.paramMap.subscribe((params) => {
       var id : number = parseInt(<string>params.get('id'))
       this.serviceSub = this.teamService.getTeam(id).subscribe(
@@ -46,6 +53,7 @@ export class EditTeamComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.routerSub?.unsubscribe();
+    this.routerSysSub?.unsubscribe();
     this.updateSub?.unsubscribe();
   }
 
@@ -76,11 +84,11 @@ export class EditTeamComponent implements OnInit, OnDestroy {
     this.updateSub = this.teamService.updateTeam(this.editTeam!).subscribe(value => {
       this.openSnackBar(`${value.name} Team Updated!`, "SUCCESS");
     })
-    this.router.navigate(['/teams']);
+    this.router.navigate([`/system/${this.sysId}/teams`]);
   }
 
   abort() {
-    this.router.navigate(['/teams']);
+    this.router.navigate([`/system/${this.sysId}/teams`]);
   }
 
   removeService(id:number) {

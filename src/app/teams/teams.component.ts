@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {map, shareReplay} from 'rxjs/operators';
 import {Team} from "../shared/models/team.model";
 import {TeamService} from "../shared/services/team.service";
@@ -10,6 +10,7 @@ import {CompleteTeam} from "../shared/models/completeTeam.model";
 import {Microservice} from "../shared/models/microservice.model";
 import {Member} from "../shared/models/member.model";
 import {MicroserviceService} from "../shared/services/microservice.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-teams',
@@ -17,9 +18,10 @@ import {MicroserviceService} from "../shared/services/microservice.service";
   styleUrls: ['./teams.component.scss']
 })
 export class TeamsComponent implements OnInit, OnDestroy {
+    sysId: number = 0;
 
-    subGet: any;
-    subCompGet: any;
+    subGet: Subscription | undefined;
+    routerSub: Subscription | undefined;
     // Declaration of teams Array
     teams: Team[] = [];
     completeTeams: CompleteTeam[] = [];
@@ -44,6 +46,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
                 private teamService: TeamService,
                 private memberService: MemberService,
                 private microserviceService: MicroserviceService,
+                private activatedRoute:ActivatedRoute,
                 private snackBar: MatSnackBar) {
     }
 
@@ -52,9 +55,14 @@ export class TeamsComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.subGet.unsubscribe();
+        this.subGet?.unsubscribe();
+        this.routerSub?.unsubscribe();
     }
     ngOnInit(): void {
+        this.routerSub = this.activatedRoute.paramMap.subscribe((params) => {
+            this.sysId = parseInt(<string>params.get('sysId'));
+        });
+
         this.getTeams();
         this.buildCompleteTeams();
     }

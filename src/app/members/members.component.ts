@@ -4,6 +4,8 @@ import {Member} from "../shared/models/member.model";
 import {MatTable, MatTableDataSource} from "@angular/material/table";
 import {MemberService} from "../shared/services/member.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {ActivatedRoute} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-members',
@@ -18,6 +20,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   ],
 })
 export class MembersComponent implements OnInit, OnDestroy {
+  sysId: number = 0;
   dataSource = new MatTableDataSource<Member>();
   columnsToDisplay = ['firstname', 'lastname', 'email'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
@@ -26,21 +29,28 @@ export class MembersComponent implements OnInit, OnDestroy {
   @ViewChild(MatTable)
   table!: MatTable<Member>;
 
-  subGet: any;
+  routerSub: Subscription | undefined;
+  subGet: Subscription | undefined;
 
-  constructor(private memberService: MemberService, private snackBar: MatSnackBar) {
+  constructor(private memberService: MemberService, private snackBar: MatSnackBar, private activatedRoute: ActivatedRoute) {
   }
 
   ngOnDestroy(): void {
-    this.subGet.unsubscribe();
+    this.subGet?.unsubscribe();
+    this.routerSub?.unsubscribe();
   }
 
   ngOnInit(): void {
+    this.routerSub = this.activatedRoute.paramMap.subscribe((params) => {
+      this.sysId = parseInt(<string>params.get('sysId'));
+    });
+
     this.subGet = this.memberService.getMembers().subscribe(
         members => {
           this.dataSource.data = members;
         }
     );
+
   }
 
   deleteMember(id: number) {
