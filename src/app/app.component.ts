@@ -31,8 +31,5 @@ export class AppComponent implements OnInit {
     this.selectedSystem = system;
   }
 
-  ngOnInit(): void {
-    this.getSoftwaresystems();
-    this.selectedSystem = this.systems.values().next().value
-  }
+  ngOnInit(): void {}
 }

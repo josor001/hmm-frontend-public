@@ -1,24 +1,33 @@
 <div class="grid-container">
   <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="2" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            {{card.title}}
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>Card Content Here</div>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Welcome!</mat-card-title>
+      <mat-card-subtitle>HMM - A Microservice Information Platform</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Hello all,
+
+        welcome to the Holistic Microservice Management Platform or <strong>HMM</strong> for short. The goal of HMM is to provide companies and organizations developing microservices systems with a simple and clear collection point for all information pertaining to development.
+        HMM is primarily developed by the University of Applied Sciences Dortmund and is currently still in an early alpha phase. I.e. not all features are implemented yet and it is likely that you will find one or the other bug while using it. Your feedback is all the more important to us.
+        Do you think such a platform is useful? What information and/or features are you definitely missing? How can we further increase the usefulness?
+        Please note that we do NOT try to build the next GitHub Issue Tracker or a Confluence-like wiki system. Instead we plan to link/integrate all those (probably) existing information sources into one single space.
+        Features we have planned for the future include the following.</p>
+      <ul>
+        <li>Connection of services to model artifact (e.g. UML diagrams)</li>
+        <li>Integration of documentation artifacts (e.g. Requirements Documentation or Git Issues)</li>
+        <li>Automated visualization of the overall system</li>
+        <li>Add known misbehaviour/errors to microservices</li>
+      </ul>
+      <p>But for now, have fun exploring. We are eager for your feedback!</p>
+    </mat-card-content>
+  </mat-card>
+  <table class="widget-table">
+    <tr>
+      <td><app-widget-stories></app-widget-stories></td>
+      <td><app-widget-microservices></app-widget-microservices></td>
+      <td><app-widget-teams></app-widget-teams></td>
+      <td><app-widget-members></app-widget-members></td>
+    </tr>
+  </table>
 </div>

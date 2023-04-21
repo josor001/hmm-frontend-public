@@ -44,6 +44,10 @@ import {NgxGraphModule} from '@swimlane/ngx-graph';
 import { AddTeamComponent } from './teams/add-team/add-team.component';
 import { AddStoryComponent } from './service-stories/add-story/add-story.component';
 import { EditStoryComponent } from './service-stories/edit-story/edit-story.component';
+import { WidgetMicroservicesComponent } from './dashboard/widget-microservices/widget-microservices.component';
+import { WidgetTeamsComponent } from './dashboard/widget-teams/widget-teams.component';
+import { WidgetStoriesComponent } from './dashboard/widget-stories/widget-stories.component';
+import { WidgetMembersComponent } from './dashboard/widget-members/widget-members.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +68,11 @@ import { EditStoryComponent } from './service-stories/edit-story/edit-story.comp
     AddMicroserviceComponent,
     AddTeamComponent,
     AddStoryComponent,
-    EditStoryComponent
+    EditStoryComponent,
+    WidgetMicroservicesComponent,
+    WidgetTeamsComponent,
+    WidgetStoriesComponent,
+    WidgetMembersComponent
   ],
     imports: [
         BrowserModule,
