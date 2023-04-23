@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {MemberService} from "../../shared/services/member.service";
 
@@ -10,12 +10,12 @@ import {MemberService} from "../../shared/services/member.service";
 export class WidgetMembersComponent implements OnInit, OnDestroy {
   numberOfMembers: number = 0;
   sub: Subscription | undefined;
-
+  @Input() sysId: number = 0;
   constructor(private memberService: MemberService) {
   }
 
   ngOnInit(): void {
-    this.sub = this.memberService.getMembers().subscribe(members => {
+    this.sub = this.memberService.getMembers(this.sysId).subscribe(members => {
       this.numberOfMembers = members.length
     })
   }

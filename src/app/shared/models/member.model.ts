@@ -4,5 +4,6 @@ export interface Member {
     email?: string;
     profileLink?: string;
     expertise?: string;
+    sysId?: number;
     id?: number;
 }

@@ -60,7 +60,7 @@ export class ServiceStoriesComponent implements OnInit, OnDestroy {
         });
 
         //get all stories
-        this.allStoriesSub = this.storyService.getServiceStories().subscribe(stories => {
+        this.allStoriesSub = this.storyService.getServiceStories(this.sysId).subscribe(stories => {
             this.stories = stories;
         })
         //get all edges
@@ -68,7 +68,7 @@ export class ServiceStoriesComponent implements OnInit, OnDestroy {
             this.edges = edges;
         })
         //get all services
-        this.allServicesSub = this.microserviceService.getMicroservices().subscribe(services => {
+        this.allServicesSub = this.microserviceService.getMicroservices(this.sysId).subscribe(services => {
             this.services = services;
         })
         this.buildNodes();

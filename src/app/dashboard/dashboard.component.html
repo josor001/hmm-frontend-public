@@ -24,10 +24,10 @@
   </mat-card>
   <table class="widget-table">
     <tr>
-      <td (click)="forward('stories')"><app-widget-stories></app-widget-stories></td>
-      <td (click)="forward('microservices')"><app-widget-microservices></app-widget-microservices></td>
-      <td (click)="forward('teams')"><app-widget-teams></app-widget-teams></td>
-      <td (click)="forward('members')"><app-widget-members></app-widget-members></td>
+      <td (click)="forward('stories')"><app-widget-stories [sysId]="sysId"></app-widget-stories></td>
+      <td (click)="forward('microservices')"><app-widget-microservices [sysId]="sysId"></app-widget-microservices></td>
+      <td (click)="forward('teams')"><app-widget-teams [sysId]="sysId"></app-widget-teams></td>
+      <td (click)="forward('members')"><app-widget-members [sysId]="sysId"></app-widget-members></td>
     </tr>
   </table>
 </div>

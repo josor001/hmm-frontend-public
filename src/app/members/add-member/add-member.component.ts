@@ -40,8 +40,8 @@ export class AddMemberComponent implements OnInit, OnDestroy {
 
 
   save() {
-    if(this.newMember && this.newMember.firstname && this.newMember.lastname && this.newMember.email) {
-      this.sub = this.memberService.createMember(this.newMember.firstname, this.newMember.lastname, this.newMember.email).subscribe(
+    if(this.newMember && this.newMember.firstname && this.newMember.lastname && this.newMember.email && (this.sysId != 0)) {
+      this.sub = this.memberService.createMember(this.newMember.firstname, this.newMember.lastname, this.newMember.email, this.sysId).subscribe(
           newMem => {
             this.openSnackBar("New member "+newMem.firstname+" saved!", "SUCCESS");
             this.router.navigate([`/system/${this.sysId}/members`]);

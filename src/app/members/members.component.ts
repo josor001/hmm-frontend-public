@@ -45,7 +45,7 @@ export class MembersComponent implements OnInit, OnDestroy {
       this.sysId = parseInt(<string>params.get('sysId'));
     });
 
-    this.subGet = this.memberService.getMembers().subscribe(
+    this.subGet = this.memberService.getMembers(this.sysId).subscribe(
         members => {
           this.dataSource.data = members;
         }
@@ -57,6 +57,11 @@ export class MembersComponent implements OnInit, OnDestroy {
     this.memberService.deleteMember(id).subscribe(
         value => {
           this.openSnackBar("Member deleted.", "SUCCESS");
+          this.subGet = this.memberService.getMembers(this.sysId).subscribe(
+              members => {
+                this.dataSource.data = members;
+              }
+          );
         }
     )
   }

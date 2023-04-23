@@ -13,11 +13,21 @@ export class SelectMicroserviceDialogComponent implements OnInit, OnDestroy {
   subGet: any;
   microservices: Microservice[] = [];
   selectedMicroservices: Microservice[] = [];
+  sysId : number = 0;
 
   constructor(public dialogRef: MatDialogRef<SelectMicroserviceDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Microservice[],
+              @Inject(MAT_DIALOG_DATA) public data: any,
               private microserviceService: MicroserviceService) {
-    this.alreadyIncluded = data;
+    console.log(data)
+    if(Array.isArray(data)) {
+      this.alreadyIncluded = data;
+      if(this.alreadyIncluded[0].sysId) {
+        this.sysId = this.alreadyIncluded[0].sysId
+      }
+    } else {
+      //if no array of Members is set, data contains the sysId as value of the field sysId (see edit-team component)
+      this.sysId = data.sysId;
+    }
   }
 
   close() {
@@ -29,10 +39,15 @@ export class SelectMicroserviceDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subGet = this.microserviceService.getMicroservices().subscribe(
-        microservices => {this.microservices = microservices;}
+    this.subGet = this.microserviceService.getMicroservices(this.sysId).subscribe(
+        microservices => {
+          this.microservices = microservices;
+          //reduces dialog by microservices already owned by team.
+          this.microservices = this.microservices.filter(microservice => {
+            return this.alreadyIncluded.map(value => value.id).indexOf(microservice.id) < 0;
+          })
+        }
     );
-    //reduce microservices regarding microservices already owned by team.
-    this.microservices = this.microservices.filter(microservice => this.alreadyIncluded.indexOf(microservice) < 0);
+
   }
 }

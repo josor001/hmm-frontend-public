@@ -10,21 +10,10 @@ import { MicroserviceService } from '../shared/services/microservice.service';
 })
 export class SystemComponent implements OnInit {
 
-  constructor(private microserviceService: MicroserviceService, private memberService: MemberService) { }
+  constructor() { }
 
   ngOnInit(): void {
         throw new Error('Method not implemented.');
     }
 
-  selectedMicroservice?: Microservice;
-  microservices?: Microservice[];
-  serviceId?: number;
-
-  getMicroservices(): void {
-    this.microserviceService.getMicroservices().subscribe(microservices => this.microservices = microservices)
-  }
-
-  getMicroservice(id: number): void {
-    this.microserviceService.getMicroservice(id).subscribe(microservice => this.selectedMicroservice = microservice)
-  }
 }

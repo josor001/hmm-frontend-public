@@ -41,7 +41,7 @@ export class AddMicroserviceComponent implements OnInit, OnDestroy {
 
   save() {
     if (this.newMicroservice && this.newMicroservice.name) {
-      this.sub = this.microserviceService.createMicroservice(this.newMicroservice.name).subscribe(
+      this.sub = this.microserviceService.createMicroservice(this.newMicroservice.name, this.sysId).subscribe(
           newServ => {
             this.openSnackBar("New microservice " + newServ.name + " saved!", "SUCCESS");
             this.router.navigate([`/system/${this.sysId}/microservices`]);

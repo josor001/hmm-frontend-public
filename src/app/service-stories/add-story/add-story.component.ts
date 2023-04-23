@@ -41,7 +41,7 @@ export class AddStoryComponent {
 
     save() {
         if (this.newStory && this.newStory.name) {
-            this.sub = this.storyService.createServiceStory(this.newStory.name).subscribe(
+            this.sub = this.storyService.createServiceStory(this.newStory.name, this.sysId).subscribe(
                 newStory => {
                     this.openSnackBar("New story " + newStory.name + " saved!", "SUCCESS");
                     this.router.navigate([`/system/${this.sysId}/stories`]);

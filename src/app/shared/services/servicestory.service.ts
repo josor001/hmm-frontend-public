@@ -37,25 +37,27 @@ export class ServiceStoryService {
     }
   }
 
-  /** GET all ServiceStorys */
-  getServiceStories(): Observable<ServiceStory[]> {
+  /** GET all ServiceStories */
+  getServiceStories(sysId : number): Observable<ServiceStory[]> {
     if (environment.useMockData) {
       return of(STORIES);
     } else {
-      return this.http.get<ServiceStory[]>(this.entityUrl)
+      return this.http.get<ServiceStory[]>(this.entityUrl, {params:{sysId:sysId}})
           .pipe(catchError(Utils.handleError));
     }
   }
 
   /** POST a new ServiceStory */  
-  createServiceStory(name: string): Observable<ServiceStory> {
+  createServiceStory(name: string, sysId: number): Observable<ServiceStory> {
+    var storyDto = {name, sysId}
     if (environment.useMockData) {
       return of(<ServiceStory>{
         name: name,
         id: 2002,
+        sysId: 1,
       });
     } else {
-      return this.http.post<ServiceStory>(this.entityUrl, name, httpOptions)
+      return this.http.post<ServiceStory>(this.entityUrl, storyDto, httpOptions)
           .pipe(catchError(Utils.handleError));
     }
 

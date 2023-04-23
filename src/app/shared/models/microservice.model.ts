@@ -4,5 +4,6 @@ export interface Microservice {
     contactPersonId?: number;
     plannedFeatures?: Array<string>;
     modelIds?: Array<number>;
+    sysId?: number;
     id?: number;
 }

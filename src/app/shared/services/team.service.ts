@@ -47,26 +47,28 @@ export class TeamService {
                 return of({})
             }
         } else {
-            return this.http.get<Team>(this.entityUrl + '/microservice/' + serviceId);
+            return this.http.get<Team>(this.entityUrl + '/microservice/' + serviceId)
+                .pipe(catchError(Utils.handleError));
         }
     }
 
     /** GET all Teams */
-    getTeams(): Observable<Team[]> {
+    getTeams(sysId : number): Observable<Team[]> {
         if (environment.useMockData) {
             return of(TEAMS);
         } else {
-            return this.http.get<Team[]>(this.entityUrl)
+            return this.http.get<Team[]>(this.entityUrl, {params:{sysId:sysId}})
                 .pipe(catchError(Utils.handleError));
         }
     }
 
     /** POST a new Team */
-    createTeam(name: string): Observable<Team> {
+    createTeam(name: string, sysId: number): Observable<Team> {
+        var teamDto = {name, sysId}
         if (environment.useMockData) {
-            return of(<Team>{name: "TestTeam"});
+            return of(<Team>{name: "TestTeam", sysId: 1});
         } else {
-            return this.http.post<Team>(this.entityUrl, name, httpOptions)
+            return this.http.post<Team>(this.entityUrl, teamDto, httpOptions)
                 .pipe(catchError(Utils.handleError));
         }
     }

@@ -44,11 +44,13 @@ export class EditTeamComponent implements OnInit, OnDestroy {
     this.routerSub = this.activatedRoute.paramMap.subscribe((params) => {
       var id : number = parseInt(<string>params.get('id'))
       this.serviceSub = this.teamService.getTeam(id).subscribe(
-          (team) => {this.editTeam = team;}
+          (team) => {
+            this.editTeam = team;
+            this.prepareServices();
+            this.prepareMembers();
+          }
       )
     });
-    this.prepareServices();
-    this.prepareMembers();
   }
 
   ngOnDestroy(): void {
@@ -81,10 +83,11 @@ export class EditTeamComponent implements OnInit, OnDestroy {
     if(this.editTeam) {
       this.editTeam!.ownedMicroserviceIds = Array.from(this.editTeamServices.keys())
     }
+    console.log("team to be updated: "+JSON.stringify(this.editTeam))
     this.updateSub = this.teamService.updateTeam(this.editTeam!).subscribe(value => {
       this.openSnackBar(`${value.name} Team Updated!`, "SUCCESS");
+      this.router.navigate([`/system/${this.sysId}/teams`]);
     })
-    this.router.navigate([`/system/${this.sysId}/teams`]);
   }
 
   abort() {
@@ -107,7 +110,11 @@ export class EditTeamComponent implements OnInit, OnDestroy {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = Array.from(this.editTeamMembers.values());
+    if(this.editTeamMembers.size>0) {
+      dialogConfig.data = Array.from(this.editTeamMembers.values());
+    } else {
+      dialogConfig.data = {sysId: this.sysId}
+    }
 
     const dialogRef = this.dialog.open(SelectMemberDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
@@ -125,7 +132,11 @@ export class EditTeamComponent implements OnInit, OnDestroy {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = Array.from(this.editTeamServices.values());
+    if(this.editTeamServices.size>0) {
+      dialogConfig.data = Array.from(this.editTeamServices.values());
+    } else {
+      dialogConfig.data = {sysId: this.sysId}
+    }
 
     const dialogRef = this.dialog.open(SelectMicroserviceDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {

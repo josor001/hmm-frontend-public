@@ -21,6 +21,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
     sysId: number = 0;
 
     subGet: Subscription | undefined;
+    activeRouterSub: Subscription | undefined;
     routerSub: Subscription | undefined;
     // Declaration of teams Array
     teams: Team[] = [];
@@ -42,6 +43,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
             shareReplay()
         );
 
+
     constructor(private breakpointObserver: BreakpointObserver,
                 private teamService: TeamService,
                 private memberService: MemberService,
@@ -51,26 +53,30 @@ export class TeamsComponent implements OnInit, OnDestroy {
     }
 
     getTeams(): void {
-        this.subGet = this.teamService.getTeams().subscribe(teams => this.teams = teams);
+        this.subGet = this.teamService.getTeams(this.sysId).subscribe(teams => {
+            console.log(teams)
+            this.teams = teams
+            this.buildCompleteTeams();
+        });
     }
 
     ngOnDestroy(): void {
         this.subGet?.unsubscribe();
-        this.routerSub?.unsubscribe();
+        this.activeRouterSub?.unsubscribe();
     }
     ngOnInit(): void {
-        this.routerSub = this.activatedRoute.paramMap.subscribe((params) => {
+        this.activeRouterSub = this.activatedRoute.paramMap.subscribe((params) => {
             this.sysId = parseInt(<string>params.get('sysId'));
         });
 
         this.getTeams();
-        this.buildCompleteTeams();
     }
 
     private buildCompleteTeams() {
+        this.completeTeams = [];
         this.teams.forEach(team => {
-            if(team.name && team.id) {
-                let compTeam = new CompleteTeam(team.name, team.id);
+            if(team.name && team.id && team.sysId) {
+                let compTeam = new CompleteTeam(team.name, team.id, team.sysId);
                 compTeam.ownedMicroservices = this.getMicroservices(team);
                 compTeam.members = (this.getMembers(team));
                 this.completeTeams.push(compTeam);
@@ -109,6 +115,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
         this.teamService.deleteTeam(id).subscribe(
             value => {
                 this.openSnackBar("Team deleted.", "SUCCESS");
+                this.getTeams();
             }
         )
     }

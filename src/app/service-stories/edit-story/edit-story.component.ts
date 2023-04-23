@@ -61,7 +61,7 @@ export class EditStoryComponent implements OnInit, OnDestroy {
       )
     });
 
-    this.allServiceSub = this.microserviceService.getMicroservices().subscribe(services => {
+    this.allServiceSub = this.microserviceService.getMicroservices(this.sysId).subscribe(services => {
       this.allMicroservices = services;
     })
 

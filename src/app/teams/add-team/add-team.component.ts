@@ -42,7 +42,7 @@ export class AddTeamComponent implements OnInit, OnDestroy {
 
   save() {
     if (this.newTeam && this.newTeam.name) {
-      this.sub = this.teamService.createTeam(this.newTeam.name).subscribe(
+      this.sub = this.teamService.createTeam(this.newTeam.name, this.sysId).subscribe(
           newTeam => {
             this.openSnackBar("New team " + newTeam.name + " saved!", "SUCCESS");
             this.router.navigate([`/system/${this.sysId}/teams`]);

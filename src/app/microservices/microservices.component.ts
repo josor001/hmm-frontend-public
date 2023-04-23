@@ -52,7 +52,11 @@ export class MicroservicesComponent implements OnInit, OnDestroy {
 
 
   getMicroservices(): void {
-    this.subGet = this.microserviceService.getMicroservices().subscribe(services => this.microservices = services);
+    this.subGet = this.microserviceService.getMicroservices(this.sysId).subscribe(services => {
+        this.microservices = services
+        this.prepareTeamNamesForServices();
+        this.prepareSpocsForServices();
+    });
   }
 
   prepareTeamNamesForServices(): void {
@@ -87,6 +91,7 @@ export class MicroservicesComponent implements OnInit, OnDestroy {
     this.microserviceService.deleteMicroservice(id).subscribe(
         value => {
           this.openSnackBar("Microservice deleted.", "SUCCESS");
+            this.getMicroservices();
         }
     )
   }
@@ -96,8 +101,6 @@ export class MicroservicesComponent implements OnInit, OnDestroy {
           this.sysId = parseInt(<string>params.get('sysId'));
       });
     this.getMicroservices();
-    this.prepareTeamNamesForServices();
-    this.prepareSpocsForServices();
   }
 
   ngOnDestroy(): void {

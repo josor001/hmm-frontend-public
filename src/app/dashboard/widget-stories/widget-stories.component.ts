@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {ServiceStoryService} from "../../shared/services/servicestory.service";
 
@@ -10,12 +10,12 @@ import {ServiceStoryService} from "../../shared/services/servicestory.service";
 export class WidgetStoriesComponent implements OnInit, OnDestroy {
   numberOfStories: number = 0;
   sub: Subscription | undefined;
-
+  @Input() sysId: number = 0;
   constructor(private storyService: ServiceStoryService) {
   }
 
   ngOnInit(): void {
-    this.sub = this.storyService.getServiceStories().subscribe(stories => {
+    this.sub = this.storyService.getServiceStories(this.sysId).subscribe(stories => {
       this.numberOfStories = stories.length
     })
   }

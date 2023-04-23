@@ -59,7 +59,8 @@
                         </mat-card-header>
                         <mat-card-content>
                             <mat-list class="detail-list">
-                                <a mat-flat-button href="{{member.profileLink}}" target="_blank" color="primary" class="expanded-button">Click Me</a>
+                                <a [disabled]="member.expertise == undefined" mat-flat-button href="{{member.profileLink}}" target="_blank" color="primary" class="expanded-button">Click Me</a>
+                                <!--<a *ngIf="!member.expertise" mat-flat-button color="primary" class="expanded-button" disabled>Click Me</a>-->
                             </mat-list>
                         </mat-card-content>
                     </mat-card>

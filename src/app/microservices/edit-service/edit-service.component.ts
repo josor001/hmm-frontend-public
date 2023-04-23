@@ -49,10 +49,11 @@ export class EditServiceComponent implements OnInit, OnDestroy {
             this.serviceSub = this.microserviceService.getMicroservice(id).subscribe(
                 (microservice) => {
                     this.editService = microservice;
+                    this.populateServiceTeam();
                 }
             )
         });
-        this.populateServiceTeam();
+
     }
 
     ngOnDestroy(): void {
@@ -103,11 +104,13 @@ export class EditServiceComponent implements OnInit, OnDestroy {
             //First, get the Team by the ownedId.
             //Then get the actual Members based on the memberIds array from Team.
             this.teamSub = this.teamService.getTeamByMicroserviceId(this.editService.id).subscribe(team => {
-              team.memberIds?.forEach(memberId => {
-                this.memberService.getMember(memberId).subscribe(member => {
-                  this.editServiceTeamMember.push(member)
-                })
-              })
+                if(team.memberIds) {
+                    team.memberIds?.forEach(memberId => {
+                        this.memberService.getMember(memberId).subscribe(member => {
+                            this.editServiceTeamMember.push(member)
+                        })
+                    })
+                }
             });
         }
     }

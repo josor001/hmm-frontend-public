@@ -3,5 +3,6 @@ export interface ServiceStory {
     description?: string;
     vertexIds?: Array<number>;
     directedEdgeIds?: Array<number>;
+    sysId?: number;
     id?: number;
 }

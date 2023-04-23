@@ -13,11 +13,21 @@ export class SelectMemberDialogComponent implements OnInit, OnDestroy {
   subGet: any;
   members: Member[] = [];
   selectedMembers: Member[] = [];
+  sysId: number = 0;
 
   constructor(public dialogRef: MatDialogRef<SelectMemberDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Member[],
+              @Inject(MAT_DIALOG_DATA) public data: any,
               private memberService: MemberService) {
-    this.alreadyIncluded = data;
+    if(Array.isArray(data)) {
+      this.alreadyIncluded = data;
+      if(this.alreadyIncluded[0].sysId) {
+        this.sysId = this.alreadyIncluded[0].sysId
+      }
+    } else {
+      //if no array of Members is set, data contains the sysId as value of the field sysId (see edit-team component)
+      this.sysId = data.sysId;
+    }
+
   }
 
   close() {
@@ -29,10 +39,14 @@ export class SelectMemberDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subGet = this.memberService.getMembers().subscribe(
-        members => {this.members = members;}
+    this.subGet = this.memberService.getMembers(this.sysId).subscribe(
+        members => {
+          this.members = members;
+          //reduce members regarding members already included with team.
+          this.members = this.members.filter(member => {
+            return this.alreadyIncluded.map(m => m.id).indexOf(member.id) < 0;
+          });
+        }
     );
-    //reduce members regarding members already included with team.
-    this.members = this.members.filter(member => this.alreadyIncluded.indexOf(member) < 0);
   }
 }

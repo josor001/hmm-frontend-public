@@ -43,21 +43,22 @@ export class MicroserviceService {
     }
 
     /** GET all microservices */
-    getMicroservices(): Observable<Microservice[]> {
+    getMicroservices(sysId : number): Observable<Microservice[]> {
         if (environment.useMockData) {
             return of(MICROSERVICES);
         } else {
-            return this.http.get<Microservice[]>(this.entityUrl)
-                .pipe(catchError(Utils.handleError));;
+            return this.http.get<Microservice[]>(this.entityUrl, {params:{sysId:sysId}})
+                .pipe(catchError(Utils.handleError));
         }
     }
 
     /** POST a new microservice */
-    createMicroservice(name: string): Observable<Microservice> {
+    createMicroservice(name: string, sysId: number): Observable<Microservice> {
+        var msDto = {name, sysId}
         if (environment.useMockData) {
-            return of(<Microservice>{name: name, id: 1001});
+            return of(<Microservice>{name: name, id: 1001, sysId: 1});
         } else {
-            return this.http.post<Microservice>(this.entityUrl, name, httpOptions)
+            return this.http.post<Microservice>(this.entityUrl, msDto, httpOptions)
                 .pipe(catchError(Utils.handleError));
         }
     }
