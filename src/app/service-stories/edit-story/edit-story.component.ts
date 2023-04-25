@@ -101,7 +101,6 @@ export class EditStoryComponent implements OnInit, OnDestroy {
         if (this.editStory && this.editStory.name && this.checkIfEdgesFilled()) {
             const promises: any[] = [];
             this.editEdges.forEach(oldEdge => {
-                console.log("any editedEdges?" + JSON.stringify(this.editEdges))
                 if (oldEdge.id) {
                     promises.push(lastValueFrom(this.edgeService.updateServiceStoryEdge(oldEdge)))
                 } else {
@@ -149,14 +148,4 @@ export class EditStoryComponent implements OnInit, OnDestroy {
     private checkIfEdgesFilled(): boolean {
         return this.editEdges.every((e) => e.targetId !== undefined && e.sourceId !== undefined)
     }
-
-    isSelected(service: Microservice) {
-        return this.allMicroservices.includes(service);
-    }
-
-    onListSelectionChange($event: MatSelectionListChange) {
-        console.log($event.options)
-    }
-
-
 }

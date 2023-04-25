@@ -61,75 +61,39 @@ export class ServiceStoriesComponent implements OnInit, OnDestroy {
             this.sysId = parseInt(<string>params.get('sysId'));
         });
         const initialQueries = [];
-        //get all stories
+        //get all necessary data objects as parallel executed promises
         initialQueries.push(lastValueFrom(this.storyService.getServiceStories(this.sysId)));
-        // this.allStoriesSub = this.storyService.getServiceStories(this.sysId).subscribe(stories => {
-        //     this.stories = stories;
-        // })
-        //get all edges
         initialQueries.push(lastValueFrom(this.edgeService.getServiceStoryEdges(this.sysId)));
-        // this.allEdgesSub = this.edgeService.getServiceStoryEdges(this.sysId).subscribe(edges => {
-        //     this.edges = edges;
-        // })
-        //get all services
         initialQueries.push(lastValueFrom(this.microserviceService.getMicroservices(this.sysId)));
-        // this.allServicesSub = this.microserviceService.getMicroservices(this.sysId).subscribe(services => {
-        //     this.services = services;
-        // })
-        // Promise.all(initialQueries).then(results => {
-        //     this.stories = <ServiceStory[]>results[0];
-        //     this.edges = <ServiceStoryEdge[]>results[1];
-        //     this.services = <Microservice[]>results[2];
-        //     this.buildNodes();
-        //     this.buildLinks();
-        // })
         const results = await Promise.all(initialQueries)
         this.stories = <ServiceStory[]>results[0];
         this.edges = <ServiceStoryEdge[]>results[1];
         this.services = <Microservice[]>results[2];
-        console.log("TEST LOG", this.stories, this.edges, this.services)
         this.buildNodes();
-        this.buildLinks(); //already sync method
-        console.log("Story Edges", this.storyEdges)
+        this.buildLinks();
+        this.nodesReady = true;
     }
 
     private buildNodes(): void {
         this.stories.forEach(story => {
             if (story.id != null) {
-                let nodes: Node[] = [];
+                const nodePromises: Promise<Node>[] = [];
                 if (story.vertexIds) {
-                    story.vertexIds.forEach(value => {
-                        const vertexQueries = [];
-                        let service = this.services.find(ms => ms.id === value)
-                        if (service) {
-                            var spocName = ""
-                            if (service.contactPersonId) {
-                                vertexQueries.push(lastValueFrom(this.memberService.getMember(service.id!)))
-                            }
-                            var owningTeamName = ""
-                            vertexQueries.push(lastValueFrom(this.teamService.getTeamByMicroserviceId(service.id!)))
-                            Promise.all(vertexQueries).then(queryResults => {
-                                queryResults.forEach(result => {
-                                    if((<Team>result).name) owningTeamName = (<Team>result).name!
-                                    if((<Member>result).firstname) spocName = `${(<Member>result).firstname} ${(<Member>result).lastname}`
-                                    console.log("vertexQuery results:", result, owningTeamName, spocName)
-                                })
-                                nodes.push({
-                                    id: "ms" + service!!.id, label: service!!.name, data: {
-                                        ownedBy: owningTeamName,
-                                        spoc: spocName
-                                    }
-                                })
-                            })
+                    story.vertexIds.forEach(vertexId => {
+                        const searchService = this.services.find(ms => ms.id === vertexId)
+                        if (searchService) {
+                            nodePromises.push(this.buildNodeById(vertexId))
                         }
                     })
                 }
-                this.storyNodes.set(story.id, nodes)
+                Promise.all(nodePromises).then(nodes => {
+                    this.storyNodes.set(story.id!, nodes)
+                })
             }
         })
     }
 
-    buildLinks() : void {
+    buildLinks(): void {
         this.stories.forEach(story => {
             if (story.id != null) {
                 let edges: Edge[] = [];
@@ -151,16 +115,29 @@ export class ServiceStoriesComponent implements OnInit, OnDestroy {
         })
     }
 
-
-    getLinks(edges: Edge[] | undefined) {
-        console.log("getLinks triggered", edges)
-        if (edges) return edges;
-        else return [];
-    }
-
-    getNodes(nodes: Node[] | undefined) {
-        console.log("getNodes triggered", nodes)
-        if (nodes) return nodes;
-        else return [];
+    private async buildNodeById(vertexId: number): Promise<Node> {
+        //select microservice to build node from
+        let service = this.services.find(ms => ms.id === vertexId)
+        if (service) {
+            //get the name of a possible contact person
+            var spocName = ""
+            if (service.contactPersonId) {
+                const member = await lastValueFrom(this.memberService.getMember(service.id!))
+                spocName = `${member.firstname} ${member.lastname}`
+            }
+            //get the name of a possible team which owns the service
+            var owningTeamName = ""
+            const team = await lastValueFrom(this.teamService.getTeamByMicroserviceId(service.id!))
+            if (team) {
+                owningTeamName = team.name!!
+            }
+            //build the node to return
+            return <Node>{
+                id: "ms" + service!!.id,
+                label: service!!.name,
+                data: {ownedBy: owningTeamName, spoc: spocName}
+            }
+        }
+        return <Node>{};
     }
 }
