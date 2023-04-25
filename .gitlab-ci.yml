@@ -10,7 +10,7 @@ build:
     - npm run buildprod
   only:
     - merge_requests
-    - master
+    - main
     - dev
     - ci
   artifacts:
@@ -24,13 +24,13 @@ publish:
   services:
     - docker:dind
   script:
-    - if [ "$CI_COMMIT_BRANCH" == "master" ]; then TAG="latest"; else TAG="$CI_COMMIT_BRANCH"; fi
+    - if [ "$CI_COMMIT_BRANCH" == "main" ]; then TAG="latest"; else TAG="$CI_COMMIT_BRANCH"; fi
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:${TAG} .
     - docker push $CI_REGISTRY/$CI_PROJECT_PATH:${TAG}
   only:
     - dev
-    - master
+    - main
     - ci
   dependencies:
     - build
