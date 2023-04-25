@@ -2,6 +2,7 @@ import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {MemberService} from "../../../shared/services/member.service";
 import {Member} from "../../../shared/models/member.model";
+import {TeamService} from "../../../shared/services/team.service";
 
 @Component({
   selector: 'app-select-member-dialog',
@@ -9,7 +10,6 @@ import {Member} from "../../../shared/models/member.model";
   styleUrls: ['./select-member-dialog.component.scss']
 })
 export class SelectMemberDialogComponent implements OnInit, OnDestroy {
-  alreadyIncluded: Member[] = [];
   subGet: any;
   members: Member[] = [];
   selectedMembers: Member[] = [];
@@ -17,17 +17,9 @@ export class SelectMemberDialogComponent implements OnInit, OnDestroy {
 
   constructor(public dialogRef: MatDialogRef<SelectMemberDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private memberService: MemberService) {
-    if(Array.isArray(data)) {
-      this.alreadyIncluded = data;
-      if(this.alreadyIncluded[0].sysId) {
-        this.sysId = this.alreadyIncluded[0].sysId
-      }
-    } else {
-      //if no array of Members is set, data contains the sysId as value of the field sysId (see edit-team component)
-      this.sysId = data.sysId;
-    }
-
+              private memberService: MemberService,
+              private teamService: TeamService) {
+    this.sysId = data.sysId;
   }
 
   close() {
@@ -42,10 +34,26 @@ export class SelectMemberDialogComponent implements OnInit, OnDestroy {
     this.subGet = this.memberService.getMembers(this.sysId).subscribe(
         members => {
           this.members = members;
-          //reduce members regarding members already included with team.
-          this.members = this.members.filter(member => {
+          //OLD reduce members regarding members already included with the team.
+          /* this.members = this.members.filter(member => {
             return this.alreadyIncluded.map(m => m.id).indexOf(member.id) < 0;
-          });
+          });*/
+
+          //NEW reduce this.members regarding members, that are already owned by ANY other team
+          this.members.forEach(member => {
+            this.teamService.getTeamByMemberId(member.id!).subscribe(team => {
+              if(team) {
+                this.members = this.members.filter(value => {
+                  if(team.memberIds) {
+                    return !team.memberIds.includes(value.id!);
+                  } else
+                    return true
+                })
+              }
+            })
+          })
+
+
         }
     );
   }

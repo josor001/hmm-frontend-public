@@ -31,7 +31,6 @@ export class EditMemberComponent implements OnInit, OnDestroy {
 
     this.routerSub = this.activatedRoute.paramMap.subscribe((params) => {
       var id : number = parseInt(<string>params.get('id'))
-      console.log(id);
       this.serviceSub = this.memberService.getMember(id).subscribe(
           (member) => {this.editMember = member;}
       )

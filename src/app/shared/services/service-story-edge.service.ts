@@ -5,6 +5,8 @@ import {environment} from "../../../environments/environment";
 import {catchError, Observable, of} from "rxjs";
 import {ServiceStoryEdge} from "../models/servicestoryedge.model";
 import {STORIES_EDGES} from "../../../assets/mock-data/mock-stories-edges";
+import {ServiceStory} from "../models/servicestory.model";
+import {STORIES} from "../../../assets/mock-data/mock-stories";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -36,24 +38,25 @@ export class ServiceStoryEdgeService {
   }
 
   /** GET all ServiceStoryEdges */
-  getServiceStoryEdges(): Observable<ServiceStoryEdge[]> {
+  getServiceStoryEdges(sysId : number): Observable<ServiceStoryEdge[]> {
     if (environment.useMockData) {
       return of(STORIES_EDGES);
     } else {
-      return this.http.get<ServiceStoryEdge[]>(this.entityUrl)
+      return this.http.get<ServiceStoryEdge[]>(this.entityUrl, {params:{sysId:sysId}})
           .pipe(catchError(Utils.handleError));
     }
-
   }
 
+
   /** POST a new ServiceStoryEdge */
-  createServiceStoryEdge(sourceId: number, targetId: number, description: string): Observable<ServiceStoryEdge> {
-    var edgeDto = {sourceId, targetId, description}
+  createServiceStoryEdge(sourceId: number, targetId: number, description: string, sysId: number): Observable<ServiceStoryEdge> {
+    var edgeDto = {sourceId, targetId, description, sysId}
     if (environment.useMockData) {
       return of(<ServiceStoryEdge>{
         sourceId: sourceId,
         targetId: targetId,
         desc: description,
+        sysId: sysId,
         id: this.mockIdCounter++,
       });
     } else {

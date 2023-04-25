@@ -24,8 +24,8 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Select a team member</mat-label>
-                <mat-select [(value)]="editService.contactPersonId" [disabled]="editService.contactPersonId == undefined" matTooltip="Selection is disabled if the team has no member.">
-                    <mat-option *ngFor="let member of editServiceTeamMember" value="{{member.id}}">{{member.firstname}} {{member.lastname}}</mat-option>
+                <mat-select [(value)]="editService.contactPersonId" matTooltip="Selection is disabled if the team has no member.">
+                    <mat-option *ngFor="let member of editServiceTeamMember" [value]="member.id">{{member.firstname}} {{member.lastname}}</mat-option>
                 </mat-select>
             </mat-form-field>
 

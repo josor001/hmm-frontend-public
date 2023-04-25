@@ -43,7 +43,6 @@ export class TeamsComponent implements OnInit, OnDestroy {
             shareReplay()
         );
 
-
     constructor(private breakpointObserver: BreakpointObserver,
                 private teamService: TeamService,
                 private memberService: MemberService,
@@ -54,7 +53,6 @@ export class TeamsComponent implements OnInit, OnDestroy {
 
     getTeams(): void {
         this.subGet = this.teamService.getTeams(this.sysId).subscribe(teams => {
-            console.log(teams)
             this.teams = teams
             this.buildCompleteTeams();
         });

@@ -24,8 +24,8 @@
         <mat-expansion-panel *ngFor="let story of stories">
             <mat-expansion-panel-header>
                 <mat-panel-title>{{story.name}}</mat-panel-title>
-                <mat-panel-description>
-                    {{ (story.description!.length > 30) ? (story.description!.trim() | slice:0:30) + '...' : (story.description!.trim()) }}
+                <mat-panel-description *ngIf="story.description">
+                    {{ (story.description.length > 30) ? (story.description!.trim() | slice:0:30) + '...' : (story.description!.trim()) }}
                     <mat-icon>book</mat-icon>
                 </mat-panel-description>
             </mat-expansion-panel-header>
@@ -39,12 +39,13 @@
                                 <mat-card-subtitle>Story Graph</mat-card-subtitle>
                             </mat-card-header>
                             <mat-card-content>
-                                <ngx-graph *ngIf="story.id"
+                                <p *ngIf="!nodesReady">No nodes and links to display.</p>
+                                <ngx-graph *ngIf="story.id && nodesReady"
                                            class="chart-container"
                                            [view]="[800, 200]"
                                            [showMiniMap]="true"
-                                           [links]="storyEdges.get(story.id)!//links"
-                                           [nodes]="storyNodes.get(story.id)!//nodes"
+                                           [links]="getLinks(storyEdges.get(story.id!))"
+                                           [nodes]="getNodes(storyNodes.get(story.id!))"
                                            [layoutSettings]="layoutSettings"
                                            [autoZoom]="true"
                                 >

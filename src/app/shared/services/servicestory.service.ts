@@ -50,6 +50,7 @@ export class ServiceStoryService {
   /** POST a new ServiceStory */  
   createServiceStory(name: string, sysId: number): Observable<ServiceStory> {
     var storyDto = {name, sysId}
+    console.log(storyDto)
     if (environment.useMockData) {
       return of(<ServiceStory>{
         name: name,
@@ -60,8 +61,6 @@ export class ServiceStoryService {
       return this.http.post<ServiceStory>(this.entityUrl, storyDto, httpOptions)
           .pipe(catchError(Utils.handleError));
     }
-
-
   }
 
   /** PUT a ServiceStory to be updated */  

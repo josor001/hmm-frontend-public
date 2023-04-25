@@ -64,7 +64,7 @@ export class EditServiceComponent implements OnInit, OnDestroy {
     }
 
     save() :void {
-      if(this.editService && this.editService.name)  {
+       if(this.editService && this.editService.name)  {
         this.updateSub = this.microserviceService.updateMicroservice(this.editService).subscribe(service => {
           this.openSnackBar(`${service.name} updated!`,"SUCCESS")
           this.router.navigate([`/system/${this.sysId}/microservices`]);
@@ -104,7 +104,7 @@ export class EditServiceComponent implements OnInit, OnDestroy {
             //First, get the Team by the ownedId.
             //Then get the actual Members based on the memberIds array from Team.
             this.teamSub = this.teamService.getTeamByMicroserviceId(this.editService.id).subscribe(team => {
-                if(team.memberIds) {
+                if(team && team.memberIds) {
                     team.memberIds?.forEach(memberId => {
                         this.memberService.getMember(memberId).subscribe(member => {
                             this.editServiceTeamMember.push(member)

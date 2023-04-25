@@ -75,7 +75,9 @@ export class MicroservicesComponent implements OnInit, OnDestroy {
           service => {
               if(service.id && service.contactPersonId) {
                   this.memberService.getMember(service.contactPersonId).subscribe(
-                      spoc => this.microserviceSpocs.set(service.id!, spoc))
+                      spoc => {
+                          this.microserviceSpocs.set(service.id!, spoc)
+                      })
               }
           }
       )

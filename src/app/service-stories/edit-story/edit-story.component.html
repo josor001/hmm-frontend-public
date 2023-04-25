@@ -21,7 +21,8 @@
 
             <h2 class="card-headline">Involved Microservices</h2>
 
-            <mat-selection-list #list name="services" [(ngModel)]="selectedMicroservices">
+            <!-- check this https://stackoverflow.com/questions/47349528/binding-an-angular-material-selection-list -->
+            <mat-selection-list [(ngModel)]="selectedMicroservices" [compareWith]="compareFunction">
                 <mat-list-option *ngFor="let service of allMicroservices" [value]="service">
                     {{service.name}}
                 </mat-list-option>

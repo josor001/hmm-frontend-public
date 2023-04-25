@@ -2,16 +2,17 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatAccordion} from "@angular/material/expansion";
 import {Edge, Node} from "@swimlane/ngx-graph";
 import {ServiceStory} from "../shared/models/servicestory.model";
-import {Subscription} from "rxjs";
+import {lastValueFrom, Subscription} from "rxjs";
 import {ServiceStoryEdge} from "../shared/models/servicestoryedge.model";
 import {MicroserviceService} from "../shared/services/microservice.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {ServiceStoryService} from "../shared/services/servicestory.service";
 import {ServiceStoryEdgeService} from "../shared/services/service-story-edge.service";
 import {Microservice} from "../shared/models/microservice.model";
 import {MemberService} from "../shared/services/member.service";
 import {TeamService} from "../shared/services/team.service";
 import {ActivatedRoute} from "@angular/router";
+import {Member} from "../shared/models/member.model";
+import {Team} from "../shared/models/team.model";
 
 @Component({
     selector: 'app-service-stories',
@@ -37,6 +38,7 @@ export class ServiceStoriesComponent implements OnInit, OnDestroy {
     allEdgesSub: Subscription | undefined;
     allServicesSub: Subscription | undefined;
     routerSysSub: Subscription | undefined;
+    nodesReady: boolean = false;
 
     constructor(
         private storyService: ServiceStoryService,
@@ -54,52 +56,70 @@ export class ServiceStoriesComponent implements OnInit, OnDestroy {
         this.routerSysSub?.unsubscribe()
     }
 
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
         this.routerSysSub = this.activatedRoute.paramMap.subscribe((params) => {
             this.sysId = parseInt(<string>params.get('sysId'));
         });
-
+        const initialQueries = [];
         //get all stories
-        this.allStoriesSub = this.storyService.getServiceStories(this.sysId).subscribe(stories => {
-            this.stories = stories;
-        })
+        initialQueries.push(lastValueFrom(this.storyService.getServiceStories(this.sysId)));
+        // this.allStoriesSub = this.storyService.getServiceStories(this.sysId).subscribe(stories => {
+        //     this.stories = stories;
+        // })
         //get all edges
-        this.allEdgesSub = this.edgeService.getServiceStoryEdges().subscribe(edges => {
-            this.edges = edges;
-        })
+        initialQueries.push(lastValueFrom(this.edgeService.getServiceStoryEdges(this.sysId)));
+        // this.allEdgesSub = this.edgeService.getServiceStoryEdges(this.sysId).subscribe(edges => {
+        //     this.edges = edges;
+        // })
         //get all services
-        this.allServicesSub = this.microserviceService.getMicroservices(this.sysId).subscribe(services => {
-            this.services = services;
-        })
+        initialQueries.push(lastValueFrom(this.microserviceService.getMicroservices(this.sysId)));
+        // this.allServicesSub = this.microserviceService.getMicroservices(this.sysId).subscribe(services => {
+        //     this.services = services;
+        // })
+        // Promise.all(initialQueries).then(results => {
+        //     this.stories = <ServiceStory[]>results[0];
+        //     this.edges = <ServiceStoryEdge[]>results[1];
+        //     this.services = <Microservice[]>results[2];
+        //     this.buildNodes();
+        //     this.buildLinks();
+        // })
+        const results = await Promise.all(initialQueries)
+        this.stories = <ServiceStory[]>results[0];
+        this.edges = <ServiceStoryEdge[]>results[1];
+        this.services = <Microservice[]>results[2];
+        console.log("TEST LOG", this.stories, this.edges, this.services)
         this.buildNodes();
-        this.buildLinks();
+        this.buildLinks(); //already sync method
+        console.log("Story Edges", this.storyEdges)
     }
 
     private buildNodes(): void {
         this.stories.forEach(story => {
             if (story.id != null) {
                 let nodes: Node[] = [];
-
                 if (story.vertexIds) {
                     story.vertexIds.forEach(value => {
+                        const vertexQueries = [];
                         let service = this.services.find(ms => ms.id === value)
                         if (service) {
                             var spocName = ""
                             if (service.contactPersonId) {
-                                this.memberService.getMember(service.id!).subscribe(spoc => {
-                                    spocName = `${spoc.firstname} ${spoc.lastname}`
-                                })
+                                vertexQueries.push(lastValueFrom(this.memberService.getMember(service.id!)))
                             }
                             var owningTeamName = ""
-                            this.teamService.getTeamByMicroserviceId(service.id!).subscribe(team => {
-                                owningTeamName = team.name!
-                            })
-                            // create the corresponding node for ngx-graph and fill the nodes array with it
-                            nodes.push({
-                                id: "ms" + service.id, label: service.name, data: {
-                                    ownedBy: owningTeamName,
-                                    spoc: spocName
-                                }
+                            vertexQueries.push(lastValueFrom(this.teamService.getTeamByMicroserviceId(service.id!)))
+                            Promise.all(vertexQueries).then(queryResults => {
+                                queryResults.forEach(result => {
+                                    if((<Team>result).name) owningTeamName = (<Team>result).name!
+                                    if((<Member>result).firstname) spocName = `${(<Member>result).firstname} ${(<Member>result).lastname}`
+                                    console.log("vertexQuery results:", result, owningTeamName, spocName)
+                                })
+                                nodes.push({
+                                    id: "ms" + service!!.id, label: service!!.name, data: {
+                                        ownedBy: owningTeamName,
+                                        spoc: spocName
+                                    }
+                                })
                             })
                         }
                     })
@@ -109,7 +129,7 @@ export class ServiceStoriesComponent implements OnInit, OnDestroy {
         })
     }
 
-    private buildLinks() {
+    buildLinks() : void {
         this.stories.forEach(story => {
             if (story.id != null) {
                 let edges: Edge[] = [];
@@ -132,4 +152,15 @@ export class ServiceStoriesComponent implements OnInit, OnDestroy {
     }
 
 
+    getLinks(edges: Edge[] | undefined) {
+        console.log("getLinks triggered", edges)
+        if (edges) return edges;
+        else return [];
+    }
+
+    getNodes(nodes: Node[] | undefined) {
+        console.log("getNodes triggered", nodes)
+        if (nodes) return nodes;
+        else return [];
+    }
 }

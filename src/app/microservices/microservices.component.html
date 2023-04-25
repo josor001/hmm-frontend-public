@@ -35,19 +35,22 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <mat-chip matTooltip="click to visit profile team" *ngIf="microserviceSpocs.get(microservice.id)?.profileLink">
-                                        <a href="{{microserviceSpocs.get(microservice.id)?.profileLink}}"
+                                    <mat-chip *ngIf="microserviceSpocs.get(microservice.id)">
+                                        <a *ngIf="microserviceSpocs.get(microservice.id)?.profileLink" matTooltip="click to visit linked profile"  href="{{microserviceSpocs.get(microservice.id)?.profileLink}}"
                                             target="_blank" class="mat-standard-chip invisLink">
                                         <mat-icon matChipAvatar>contact_support</mat-icon>
                                         {{microserviceSpocs.get(microservice.id)?.firstname}} {{microserviceSpocs.get(microservice.id)?.lastname}}
-                                    </a></mat-chip>
+                                        </a>
+                                        <div *ngIf="!microserviceSpocs.get(microservice.id)?.profileLink" class="mat-standard-chip invisLink"><mat-icon matChipAvatar>contact_support</mat-icon>
+                                        {{microserviceSpocs.get(microservice.id)?.firstname}} {{microserviceSpocs.get(microservice.id)?.lastname}}</div>
+                                    </mat-chip>
                                 </td>
                             </tr>
                         </mat-chip-list>
                     </table>
                     <h2 class="card-headline">Availability</h2>
                     <p>
-                        <a mat-flat-button matTooltip="click to visit profile" color="primary" href="{{microservice.repositoryLink}}" target="_blank"
+                        <a mat-flat-button matTooltip="click to visit team repository" color="primary" href="{{microservice.repositoryLink}}" target="_blank"
                            class="mat-button" *ngIf="microservice.repositoryLink">Repository</a>
                         <a mat-flat-button color="primary" href="{{microservice.repositoryLink}}" target="_blank"
                            class="mat-button" *ngIf="!microservice.repositoryLink" disabled matTooltip="no repository set.">Repository</a>

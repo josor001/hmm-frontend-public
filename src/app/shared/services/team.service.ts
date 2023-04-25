@@ -52,6 +52,23 @@ export class TeamService {
         }
     }
 
+    /** GET a specific Team by the Id of one of its Members. */
+    getTeamByMemberId(serviceId: number): Observable<Team> {
+        if (environment.useMockData) {
+            let found = of(TEAMS.find(team => team.memberIds?.includes(serviceId)))
+            if (found !== undefined) {
+                return <Observable<Team>>found;
+            } else {
+                return of({})
+            }
+        } else {
+            return this.http.get<Team>(this.entityUrl + '/member/' + serviceId)
+                .pipe(catchError(Utils.handleError));
+        }
+    }
+
+
+
     /** GET all Teams */
     getTeams(sysId : number): Observable<Team[]> {
         if (environment.useMockData) {
@@ -84,7 +101,7 @@ export class TeamService {
             }
         } else {
             return this.http.put<Team>(this.entityUrl, team, httpOptions)
-                .pipe(catchError(Utils.handleError));
+                .pipe(catchError(Utils.handleErrorTeamUpdate));
         }
     }
 
