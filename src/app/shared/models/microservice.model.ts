@@ -1,5 +1,6 @@
 export interface Microservice { 
     name?: string;
+    purpose?: string;
     repositoryLink?: string;
     contactPersonId?: number;
     plannedFeatures?: Array<string>;

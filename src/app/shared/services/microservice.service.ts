@@ -1,13 +1,10 @@
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {catchError, Observable, of, throwError} from 'rxjs';
+import {catchError, Observable, of} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {Microservice} from '../models/microservice.model';
 import {MICROSERVICES} from "../../../assets/mock-data/mock-microservices";
 import Utils from "./Utils";
-import {Member} from "../models/member.model";
-import {TEAMS} from "../../../assets/mock-data/mock-teams";
-import {Team} from "../models/team.model";
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -37,7 +34,7 @@ export class MicroserviceService {
             }
         } else {
             return this.http.get<Microservice>(this.entityUrl + '/' + id)
-                .pipe(catchError(Utils.handleError));;
+                .pipe(catchError(Utils.handleError));
         }
 
     }

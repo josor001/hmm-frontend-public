@@ -8,7 +8,6 @@ import {MicroserviceService} from "../../shared/services/microservice.service";
 import {MemberService} from "../../shared/services/member.service";
 import {MatChipInputEvent} from "@angular/material/chips";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
-import {Team} from "../../shared/models/team.model";
 import {Member} from "../../shared/models/member.model";
 
 @Component({

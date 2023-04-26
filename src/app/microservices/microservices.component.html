@@ -12,7 +12,7 @@
 </mat-toolbar>
 
 <div class="grid-container">
-    <mat-grid-list [cols]="cols$ | async" rowHeight="700px">
+    <mat-grid-list [cols]="cols$ | async" rowHeight="800px">
         <mat-grid-tile *ngFor="let microservice of microservices">
             <mat-card class="card">
                 <mat-card-header>
@@ -21,7 +21,9 @@
                 </mat-card-header>
                 <mat-divider class="mat-elevation-z5"></mat-divider>
                 <mat-card-content class="microservice-card-content">
-                    <p></p>
+                    <h2 class="card-headline">Purpose</h2>
+                    <p *ngIf="microservice.purpose">{{microservice.purpose | slice:0:100}}</p>
+
                     <h2 class="card-headline">Owned By</h2>
                     <table *ngIf="microservice.id">
                         <mat-chip-list>

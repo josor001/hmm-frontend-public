@@ -11,6 +11,14 @@
                             <input matInput name="name" placeholder="John" [(ngModel)]="editService.name" required>
                         </mat-form-field>
 
+            <h2 class="card-headline">Purpose</h2>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Purpose of the Service</mat-label>
+                <input matInput name="purpose" #purpose maxlength="100" placeholder="Managing important things..." [(ngModel)]="editService.purpose">
+                <mat-hint align="end">{{purpose.value.length || 0}}/100</mat-hint>
+            </mat-form-field>
+
             <h2 class="card-headline">Repository Link</h2>
 
             <mat-form-field appearance="outline" class="full-width">
@@ -49,6 +57,7 @@
                            [matChipInputAddOnBlur]="addOnBlur"
                            (matChipInputTokenEnd)="addFeature($event)">
                 </mat-chip-list>
+                <mat-hint align="end">Press Enter after writing the feature.</mat-hint>
             </mat-form-field>
 
         </form>
