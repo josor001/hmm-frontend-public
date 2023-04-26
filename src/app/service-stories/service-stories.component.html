@@ -25,8 +25,8 @@
             <mat-expansion-panel-header>
                 <mat-panel-title>{{story.name}}</mat-panel-title>
                 <mat-panel-description *ngIf="story.description">
-                    {{ (story.description.length > 30) ? (story.description!.trim() | slice:0:30) + '...' : (story.description!.trim()) }}
-                    <mat-icon>book</mat-icon>
+                    <span><mat-icon>book</mat-icon>
+                    {{ (story.description.length > 30) ? (story.description!.trim() | slice:0:30) + '...' : (story.description!.trim()) }}</span>
                 </mat-panel-description>
             </mat-expansion-panel-header>
             <mat-divider></mat-divider>
@@ -40,46 +40,66 @@
                             </mat-card-header>
                             <mat-card-content>
                                 <p *ngIf="!nodesReady">No nodes and links to display.</p>
-                                <ngx-graph *ngIf="story.id && nodesReady && storyNodes.get(story.id) && storyEdges.get(story.id)"
-                                           class="chart-container"
-                                           [view]="[800, 200]"
-                                           [showMiniMap]="true"
-                                           [links]="storyEdges.get(story.id)!"
-                                           [nodes]="storyNodes.get(story.id)!"
-                                           [layoutSettings]="layoutSettings"
-                                           [autoZoom]="true"
+                                <ngx-graph
+                                        *ngIf="story.id && nodesReady && storyNodes.get(story.id) && storyEdges.get(story.id)"
+                                        class="chart-container"
+                                        [view]="[800, 200]"
+                                        [showMiniMap]="true"
+                                        [links]="storyEdges.get(story.id)!"
+                                        [nodes]="storyNodes.get(story.id)!"
+                                        [layoutSettings]="layoutSettings"
+                                        [autoZoom]="true"
                                 >
                                     <!-- defining the arrow head as end of edge -->
                                     <ng-template #defsTemplate>
-                                        <svg:marker id="arrow{{story.id}}" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="4" markerHeight="4" orient="auto">
+                                        <svg:marker id="arrow{{story.id}}" viewBox="0 -5 10 10" refX="8" refY="0"
+                                                    markerWidth="4" markerHeight="4" orient="auto">
                                             <svg:path d="M0,-5L10,0L0,5" class="arrow-head"/>
                                         </svg:marker>
                                     </ng-template>
 
                                     <ng-template #nodeTemplate let-node>
                                         <svg xmlns:svg="http://www.w3.org/2000/svg">
-                                        <svg:g class="node" width="180" height="150">
-                                            <svg:foreignObject width="180" height="150" xmlns:svg="http://www.w3.org/2000/svg"
-                                                               xmlns:xhtml="http://www.w3.org/1999/xhtml">
-                                                <xhtml:div class="nodeBox">
-                                                    <table class="full-width">
-                                                        <tr class="nodeBox-headline"><td>{{ node.label }}</td></tr>
-                                                        <tr class="nodeBox-row"><td class="nodeBox-data-headline">Owned By</td></tr>
-                                                        <tr class="nodeBox-row"><td class="nodeBox-data"><mat-icon>group</mat-icon>{{ node.data.ownedBy }}</td></tr>
-                                                        <tr><td></td></tr>
-                                                        <tr class="nodeBox-row"><td class="nodeBox-data-headline">Contact</td></tr>
-                                                        <tr class="nodeBox-row"><td class="nodeBox-data"><mat-icon>contact_support</mat-icon> {{ node.data.spoc }}</td></tr>
-                                                    </table>
-                                                </xhtml:div>
-                                            </svg:foreignObject>
-                                        </svg:g>
+                                            <svg:g class="node" width="180" height="150">
+                                                <svg:foreignObject width="180" height="150"
+                                                                   xmlns:svg="http://www.w3.org/2000/svg"
+                                                                   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+                                                    <xhtml:div class="nodeBox">
+                                                        <table class="full-width">
+                                                            <tr class="nodeBox-headline">
+                                                                <td>{{ node.label }}</td>
+                                                            </tr>
+                                                            <tr class="nodeBox-row">
+                                                                <td class="nodeBox-data-headline">Owned By</td>
+                                                            </tr>
+                                                            <tr class="nodeBox-row">
+                                                                <td class="nodeBox-data">
+                                                                    <mat-icon>group</mat-icon>
+                                                                    {{ node.data.ownedBy }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr class="nodeBox-row">
+                                                                <td class="nodeBox-data-headline">Contact</td>
+                                                            </tr>
+                                                            <tr class="nodeBox-row">
+                                                                <td class="nodeBox-data">
+                                                                    <mat-icon>contact_support</mat-icon>
+                                                                    {{ node.data.spoc }}</td>
+                                                            </tr>
+                                                        </table>
+                                                    </xhtml:div>
+                                                </svg:foreignObject>
+                                            </svg:g>
                                         </svg>
                                     </ng-template>
 
                                     <!-- defining the style of edges -->
                                     <ng-template #linkTemplate let-link>
                                         <svg:g class="edge">
-                                            <svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" stroke-width="3"
+                                            <svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line"
+                                                      stroke-width="3"
                                                       [attr.marker-end]="'url(#arrow'+story.id+')'"></svg:path>
                                             <svg:text class="edge-label" text-anchor="middle">
                                                 <textPath class="text-path" [attr.href]="'#' + link.id"
@@ -107,12 +127,16 @@
                 </tr>
                 <tr>
                     <td>
-                        <p>
-                            <button mat-flat-button color="primary" [routerLink]="['/system',sysId,'stories','edit',story.id]">
-                                <mat-icon>edit</mat-icon>
-                                Edit Story
-                            </button>
-                        </p>
+                        <button mat-flat-button color="primary"
+                                [routerLink]="['/system',sysId,'stories','edit',story.id]">
+                            <mat-icon>edit</mat-icon>
+                            Edit Story
+                        </button>
+
+                        <button style="margin-left:5px;" matTooltip="click to delete story" mat-flat-button color="warn"
+                                (click)="deleteStory(story.id!)">
+                            Delete
+                        </button>
                     </td>
                 </tr>
             </table>

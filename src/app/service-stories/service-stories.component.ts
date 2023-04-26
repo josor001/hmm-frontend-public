@@ -13,6 +13,7 @@ import {TeamService} from "../shared/services/team.service";
 import {ActivatedRoute} from "@angular/router";
 import {Member} from "../shared/models/member.model";
 import {Team} from "../shared/models/team.model";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
     selector: 'app-service-stories',
@@ -46,6 +47,7 @@ export class ServiceStoriesComponent implements OnInit, OnDestroy {
         private microserviceService: MicroserviceService,
         private memberService: MemberService,
         private teamService: TeamService,
+        private snackBar: MatSnackBar,
         private activatedRoute: ActivatedRoute) {
     }
 
@@ -139,5 +141,21 @@ export class ServiceStoriesComponent implements OnInit, OnDestroy {
             }
         }
         return <Node>{};
+    }
+
+    deleteStory(id: number) {
+        this.storyService.deleteServiceStory(id).subscribe(
+            value => {
+                this.openSnackBar("Story deleted.", "SUCCESS");
+                this.storyService.getServiceStories(this.sysId).subscribe(newStories => {
+                    this.stories = newStories;
+                })
+            }
+        )
+    }
+    openSnackBar(message: string, action: string) {
+        this.snackBar.open(message, action, {
+            duration: 2000,
+        });
     }
 }

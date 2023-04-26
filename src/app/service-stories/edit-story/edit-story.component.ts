@@ -104,6 +104,8 @@ export class EditStoryComponent implements OnInit, OnDestroy {
                 if (oldEdge.id) {
                     promises.push(lastValueFrom(this.edgeService.updateServiceStoryEdge(oldEdge)))
                 } else {
+                    if(!oldEdge.description)
+                        oldEdge.description=""
                     promises.push(lastValueFrom(this.edgeService.createServiceStoryEdge(oldEdge.sourceId!, oldEdge.targetId!, oldEdge.description!, this.editStory!.sysId!)))
                 }
             })
