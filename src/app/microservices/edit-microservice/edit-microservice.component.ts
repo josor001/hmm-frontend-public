@@ -11,11 +11,11 @@ import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {Member} from "../../shared/models/member.model";
 
 @Component({
-    selector: 'app-edit-service',
-    templateUrl: './edit-service.component.html',
-    styleUrls: ['./edit-service.component.scss']
+    selector: 'app-edit-microservice',
+    templateUrl: './edit-microservice.component.html',
+    styleUrls: ['./edit-microservice.component.scss']
 })
-export class EditServiceComponent implements OnInit, OnDestroy {
+export class EditMicroserviceComponent implements OnInit, OnDestroy {
     sysId: number = 0;
 
     editService: Microservice | undefined;
@@ -52,7 +52,6 @@ export class EditServiceComponent implements OnInit, OnDestroy {
                 }
             )
         });
-
     }
 
     ngOnDestroy(): void {

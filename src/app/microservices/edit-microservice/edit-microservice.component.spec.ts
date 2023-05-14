@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditServiceComponent } from './edit-service.component';
+import { EditMicroserviceComponent } from './edit-microservice.component';
 
 describe('EditServiceComponent', () => {
-  let component: EditServiceComponent;
-  let fixture: ComponentFixture<EditServiceComponent>;
+  let component: EditMicroserviceComponent;
+  let fixture: ComponentFixture<EditMicroserviceComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditServiceComponent ]
+      declarations: [ EditMicroserviceComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditServiceComponent);
+    fixture = TestBed.createComponent(EditMicroserviceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

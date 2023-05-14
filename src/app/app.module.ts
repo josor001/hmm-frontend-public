@@ -31,7 +31,7 @@ import {MatInputModule} from "@angular/material/input";
 import { AddMemberComponent } from './members/add-member/add-member.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { EditTeamComponent } from './teams/edit-team/edit-team.component';
-import { EditServiceComponent } from './microservices/edit-service/edit-service.component';
+import { EditMicroserviceComponent } from './microservices/edit-microservice/edit-microservice.component';
 import {MatChipsModule} from "@angular/material/chips";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { ServiceStoriesComponent } from './service-stories/service-stories.component';
@@ -48,6 +48,7 @@ import { WidgetMicroservicesComponent } from './dashboard/widget-microservices/w
 import { WidgetTeamsComponent } from './dashboard/widget-teams/widget-teams.component';
 import { WidgetStoriesComponent } from './dashboard/widget-stories/widget-stories.component';
 import { WidgetMembersComponent } from './dashboard/widget-members/widget-members.component';
+import { ViewMicroserviceComponent } from './microservices/view-microservice/view-microservice.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,7 @@ import { WidgetMembersComponent } from './dashboard/widget-members/widget-member
     EditMemberComponent,
     AddMemberComponent,
     EditTeamComponent,
-    EditServiceComponent,
+    EditMicroserviceComponent,
     ServiceStoriesComponent,
     SelectMemberDialogComponent,
     SelectMicroserviceDialogComponent,
@@ -73,6 +74,7 @@ import { WidgetMembersComponent } from './dashboard/widget-members/widget-member
     WidgetTeamsComponent,
     WidgetStoriesComponent,
     WidgetMembersComponent,
+    ViewMicroserviceComponent,
   ],
     imports: [
         BrowserModule,
