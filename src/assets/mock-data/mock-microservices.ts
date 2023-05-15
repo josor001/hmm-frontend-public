@@ -5,7 +5,7 @@ export const MICROSERVICES: Microservice[] = [
         name: "User Service",
         repositoryLink: "https://github.com/user-service",
         contactPersonId: 1,
-        plannedFeatures: ["Authentication", "Profile Management"],
+        plannedFeatures: new Map<string, string>([["Authentication", "super desc of auth feature"], ["Profile Management", "super desc of profile feature"]]),
         modelIds: [1, 2],
         id: 1
     },
@@ -13,7 +13,7 @@ export const MICROSERVICES: Microservice[] = [
         name: "Product Service",
         repositoryLink: "https://github.com/product-service",
         contactPersonId: 2,
-        plannedFeatures: ["Inventory Management", "Order Tracking"],
+        plannedFeatures: new Map<string, string>([["Inventory Management", "super desc of inv management feature"], ["Order Tracking", "super desc of tracking feature"]]),
         modelIds: [3, 4, 5],
         id: 2
     },
@@ -21,7 +21,7 @@ export const MICROSERVICES: Microservice[] = [
         name: "Payment Service",
         repositoryLink: "https://github.com/payment-service",
         contactPersonId: 4,
-        plannedFeatures: ["Credit Card Processing", "Refunds"],
+        plannedFeatures: new Map<string, string>([["Credit Card Processing", "super desc of credit card feature"], ["Refunds", "super desc of refund feature"]]),
         modelIds: [6],
         id: 3
     },
@@ -29,7 +29,7 @@ export const MICROSERVICES: Microservice[] = [
         name: "Messaging Service",
         repositoryLink: "https://github.com/messaging-service",
         contactPersonId: 3,
-        plannedFeatures: ["Email Notifications", "SMS Notifications"],
+        plannedFeatures: new Map<string, string>([["Email Notifications", "super desc of mail notifications feature"], ["SMS Notifications", "super desc of sms notifications feature"]]),
         modelIds: [7, 8],
         id: 4
     }

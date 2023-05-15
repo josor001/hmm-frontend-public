@@ -73,9 +73,9 @@
                     <p></p>
                     <h2 class="card-headline">Planned Features</h2>
                     <mat-chip-list role="list">
-                        <mat-chip *ngFor="let feature of microservice.plannedFeatures">
+                        <mat-chip *ngFor="let feature of microservice.plannedFeatures | keyvalue">
                             <mat-icon>settings</mat-icon>
-                            <span> {{feature}}</span>
+                            <span> {{feature.key}}</span>
                         </mat-chip>
                     </mat-chip-list>
 

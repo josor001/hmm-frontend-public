@@ -3,7 +3,7 @@ export interface Microservice {
     purpose?: string;
     repositoryLink?: string;
     contactPersonId?: number;
-    plannedFeatures?: Array<string>;
+    plannedFeatures?: Map<string, string>;
     modelIds?: Array<number>;
     sysId?: number;
     id?: number;

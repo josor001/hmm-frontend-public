@@ -3,7 +3,7 @@
         <mat-card-title>Edit Microservice {{editService.name}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <form class="microservice-edit-form">
+        <div class="microservice-edit-form">
             <h2 class="card-headline">Name</h2>
 
                         <mat-form-field appearance="outline" class="full-width">
@@ -42,25 +42,38 @@
             <mat-chip-list class="full-width"><mat-chip><mat-icon>sentiment_very_dissatisfied</mat-icon>not implemented yet.</mat-chip></mat-chip-list>
 
             <h2 class="card-headline">Planned Features</h2>
-            <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Planned Features</mat-label>
-                <mat-chip-list #chipList>
-                    <mat-chip *ngFor="let feature of editService.plannedFeatures" (removed)="removeFeature(feature)">
-                        {{feature}}
-                        <button matChipRemove>
-                            <mat-icon>cancel</mat-icon>
-                        </button>
-                    </mat-chip>
-                    <input placeholder="New Feature..."
-                           [matChipInputFor]="chipList"
-                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                           [matChipInputAddOnBlur]="addOnBlur"
-                           (matChipInputTokenEnd)="addFeature($event)">
-                </mat-chip-list>
-                <mat-hint align="end">Press Enter after writing the feature.</mat-hint>
-            </mat-form-field>
 
-        </form>
+            <table>
+                <tr>
+                    <td><button (click)="addFeature()"><mat-icon>add</mat-icon></button></td>
+                </tr>
+                <!--TODO somehow this trackBy thing does not work. Angular still loses focus and ngModel doesnt work.
+                Future Jonas: I suggest to just list all features here as text and have a separate edit button or, even better, a modal window for a single feature
+                Also Keys should not be changeable! (maybe hint: cannot be changed later?)
+                maybe than ngModel can work and .key can still be used as identifier?
+                -->
+                <tr *ngFor="let feature of editService.plannedFeatures | keyvalue; trackBy:identify">
+                    <td>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Feature Name</mat-label>
+                            <input matInput placeholder="Fancy feature" [(ngModel)]="feature.key" required>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Feature Description</mat-label>
+                            <textarea matInput placeholder="Fancy feature description" [(ngModel)]="feature.value"></textarea>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <button (click)="removeFeature(feature.key)"><mat-icon>cancel</mat-icon></button>
+                    </td>
+                    <td>
+                        <button (click)="console()">CONSOLE</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </mat-card-content>
     <mat-card-actions>
         <a mat-flat-button class="microservice-button" color="primary" (click)="save()">Save</a>

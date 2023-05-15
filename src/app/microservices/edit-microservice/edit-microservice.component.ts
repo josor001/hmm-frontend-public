@@ -9,6 +9,7 @@ import {MemberService} from "../../shared/services/member.service";
 import {MatChipInputEvent} from "@angular/material/chips";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {Member} from "../../shared/models/member.model";
+import {FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'app-edit-microservice',
@@ -25,8 +26,6 @@ export class EditMicroserviceComponent implements OnInit, OnDestroy {
     routerSysSub: Subscription | undefined;
     teamSub: Subscription | undefined;
     updateSub: Subscription | undefined;
-    //variables for feature chip input
-    addOnBlur = true;
 
     readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
@@ -49,6 +48,11 @@ export class EditMicroserviceComponent implements OnInit, OnDestroy {
                 (microservice) => {
                     this.editService = microservice;
                     this.populateServiceTeam();
+                    //if there are no features yet and therefore plannedFeatures is not initialized properly
+                    //this creates an empty Map
+                    if(!(this.editService.plannedFeatures instanceof Map)) {
+                        this.editService.plannedFeatures = new Map<string, string>()
+                    }
                 }
             )
         });
@@ -76,24 +80,20 @@ export class EditMicroserviceComponent implements OnInit, OnDestroy {
       this.router.navigate([`/system/${this.sysId}/microservices`]);
     }
 
-    addFeature(event: MatChipInputEvent): void {
-        const value = (event.value || '').trim();
-
-        // Add feature
-        if (value && this.editService) {
-            this.editService.plannedFeatures!.push(value);
+    addFeature(): void {
+        if(this.editService) {
+            this.editService.plannedFeatures!!.set("testa", "aaa")
         }
-
-        // Clear the input value
-        event.chipInput!.clear();
     }
 
-    removeFeature(feature: string): void {
+    console(): void {
+        console.log(this.editService?.plannedFeatures)
+    }
+
+    removeFeature(featureKey: string): void {
         if (this.editService && this.editService.plannedFeatures) {
-            const index = this.editService.plannedFeatures.indexOf(feature);
-            if (index >= 0) {
-                this.editService.plannedFeatures.splice(index, 1);
-            }
+            this.editService.plannedFeatures.delete(featureKey)
+            this.console()
         }
     }
 
@@ -118,4 +118,9 @@ export class EditMicroserviceComponent implements OnInit, OnDestroy {
       duration: 2000,
     });
   }
+
+    identify(index : any, feature : any){
+        return feature.key;
+    }
+
 }
