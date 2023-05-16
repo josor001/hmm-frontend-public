@@ -10,6 +10,8 @@ import {MatChipInputEvent} from "@angular/material/chips";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {Member} from "../../shared/models/member.model";
 import {FormGroup} from "@angular/forms";
+import {MatDialog} from "@angular/material/dialog";
+import {AddFeatureDialogComponent, DialogFeature} from "./add-feature-dialog/add-feature-dialog.component";
 
 @Component({
     selector: 'app-edit-microservice',
@@ -34,7 +36,8 @@ export class EditMicroserviceComponent implements OnInit, OnDestroy {
                 private memberService: MemberService,
                 private activatedRoute: ActivatedRoute,
                 private router: Router,
-                private snackBar: MatSnackBar) {
+                private snackBar: MatSnackBar,
+                public dialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -119,8 +122,30 @@ export class EditMicroserviceComponent implements OnInit, OnDestroy {
     });
   }
 
-    identify(index : any, feature : any){
-        return feature.key;
+    openNewDialog(): void {
+        const dialogRef = this.dialog.open(AddFeatureDialogComponent, {
+            data: {type: "new", name: "", description: ""},
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if(result) {
+                this.editService?.plannedFeatures?.set(result.name, result.description);
+                console.log(this.editService?.plannedFeatures);
+            }
+        });
     }
 
+    openEditDialog(name: string, description: string): void {
+        const dialogRef = this.dialog.open(AddFeatureDialogComponent, {
+            data: {type: "edit", name: name, description: description},
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if(result) {
+                this.editService?.plannedFeatures?.set(result.name, result.description);
+                console.log(this.editService?.plannedFeatures);
+            }
+        });
+    }
 }
+

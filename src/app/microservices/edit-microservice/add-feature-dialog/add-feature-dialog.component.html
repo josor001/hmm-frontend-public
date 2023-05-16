@@ -1,0 +1,20 @@
+<h1 mat-dialog-title *ngIf="feature.type==='new'">New Planned Feature</h1>
+<h1 mat-dialog-title *ngIf="feature.type==='edit'">Edit Planned Feature</h1>
+
+<div mat-dialog-content>
+    <mat-form-field appearance="outline">
+        <mat-label>Feature Name</mat-label>
+        <input matInput [(ngModel)]="feature.name" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Feature Description</mat-label>
+        <textarea matInput [(ngModel)]="feature.description"></textarea>
+    </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+    <button *ngIf="feature.name.trim() === ''" disabled mat-flat-button color="primary" [mat-dialog-close]="feature" autofocus>Ok</button>
+    <button *ngIf="feature.name.trim() !== ''" mat-flat-button color="primary" [mat-dialog-close]="feature" autofocus>Ok</button>
+    <button mat-flat-button color="warn" (click)="close()">Cancel</button>
+</div>

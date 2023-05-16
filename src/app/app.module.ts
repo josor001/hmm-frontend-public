@@ -49,6 +49,7 @@ import { WidgetTeamsComponent } from './dashboard/widget-teams/widget-teams.comp
 import { WidgetStoriesComponent } from './dashboard/widget-stories/widget-stories.component';
 import { WidgetMembersComponent } from './dashboard/widget-members/widget-members.component';
 import { ViewMicroserviceComponent } from './microservices/view-microservice/view-microservice.component';
+import { AddFeatureDialogComponent } from './microservices/edit-microservice/add-feature-dialog/add-feature-dialog.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { ViewMicroserviceComponent } from './microservices/view-microservice/vie
     WidgetStoriesComponent,
     WidgetMembersComponent,
     ViewMicroserviceComponent,
+    AddFeatureDialogComponent,
   ],
     imports: [
         BrowserModule,
