@@ -9,8 +9,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {HighlightAutoResult, HighlightLoader} from "ngx-highlightjs";
 
-const themeGithub: string = 'node_modules/highlight.js/styles/github.css';
-const themeGithubDark: string = 'node_modules/highlight.js/styles/github-dark.css';
+//const themeGithub: string = '../node_modules/highlight.js/styles/github.css';
+//const themeGithubDark: string = 'node_modules/highlight.js/styles/github-dark.css';
 
 @Component({
   selector: 'app-view-microservice',
@@ -29,8 +29,10 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
   teamSub: Subscription | undefined;
   updateSub: Subscription | undefined;
   //TODO just a test
-  currentTheme: string = themeGithub;
+  //currentTheme: string = themeGithub;
+
   response: HighlightAutoResult | undefined;
+
   code = `function myFunction() {
     document.getElementById("demo1").innerHTML = "Test 1!";
     document.getElementById("demo2").innerHTML = "Test 2!";
@@ -79,9 +81,9 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
     };
   }
 
-  changeTheme() {
-    this.currentTheme = this.currentTheme === themeGithub ? themeGithubDark : themeGithub;
-    this.hljsLoader.setTheme(this.currentTheme);
-  }
+  //changeTheme() {
+  //  this.currentTheme = this.currentTheme === themeGithub ? themeGithubDark : themeGithub;
+  //  this.hljsLoader.setTheme(this.currentTheme);
+  //}
 
 }
