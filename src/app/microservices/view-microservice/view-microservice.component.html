@@ -3,4 +3,15 @@
     <p>{{viewService.id}}</p>
     <p>{{viewService.name}}</p>
 </div>
+<div>
 
+<pre><code [highlight]="code" [languages]="['typescript']" (highlighted)="onHighlight($event)" [lineNumbers]="true"></code></pre>
+
+<button (click)="changeTheme()">Change theme</button>
+
+<h4>Highlight response</h4>
+<!-- TODO this response thing seems to be problematic due to possible undefined status
+<pre>{{ response | json }}</pre>
+-->
+
+</div>

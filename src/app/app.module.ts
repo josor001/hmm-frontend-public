@@ -50,6 +50,7 @@ import { WidgetStoriesComponent } from './dashboard/widget-stories/widget-storie
 import { WidgetMembersComponent } from './dashboard/widget-members/widget-members.component';
 import { ViewMicroserviceComponent } from './microservices/view-microservice/view-microservice.component';
 import { AddFeatureDialogComponent } from './microservices/edit-microservice/add-feature-dialog/add-feature-dialog.component';
+import {HIGHLIGHT_OPTIONS, HighlightModule} from "ngx-highlightjs";
 
 @NgModule({
   declarations: [
@@ -105,9 +106,17 @@ import { AddFeatureDialogComponent } from './microservices/edit-microservice/add
         MatTooltipModule,
         MatDialogModule,
         MatExpansionModule,
-        NgxGraphModule
+        NgxGraphModule,
+        HighlightModule
     ],
-  providers: [],
+    providers: [
+        {
+            provide: HIGHLIGHT_OPTIONS,
+            useValue: {
+                fullLibraryLoader: () => import('highlight.js'),
+            }
+        }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

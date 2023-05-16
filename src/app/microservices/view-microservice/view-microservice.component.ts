@@ -7,6 +7,10 @@ import {TeamService} from "../../shared/services/team.service";
 import {MemberService} from "../../shared/services/member.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {HighlightAutoResult, HighlightLoader} from "ngx-highlightjs";
+
+const themeGithub: string = 'node_modules/highlight.js/styles/github.css';
+const themeGithubDark: string = 'node_modules/highlight.js/styles/github-dark.css';
 
 @Component({
   selector: 'app-view-microservice',
@@ -24,11 +28,19 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
   routerSysSub: Subscription | undefined;
   teamSub: Subscription | undefined;
   updateSub: Subscription | undefined;
+  //TODO just a test
+  currentTheme: string = themeGithub;
+  response: HighlightAutoResult | undefined;
+  code = `function myFunction() {
+    document.getElementById("demo1").innerHTML = "Test 1!";
+    document.getElementById("demo2").innerHTML = "Test 2!";
+  }`;
 
   constructor(private microserviceService: MicroserviceService,
               private teamService: TeamService,
               private memberService: MemberService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private hljsLoader: HighlightLoader) {
   }
 
 
@@ -56,6 +68,20 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
     this.routerSub?.unsubscribe();
     this.updateSub?.unsubscribe();
     this.teamSub?.unsubscribe();
+  }
+
+  onHighlight(e: HighlightAutoResult) {
+    this.response = {
+      language: e.language,
+      relevance: e.relevance,
+      secondBest: '{...}',
+      value: '{...}',
+    };
+  }
+
+  changeTheme() {
+    this.currentTheme = this.currentTheme === themeGithub ? themeGithubDark : themeGithub;
+    this.hljsLoader.setTheme(this.currentTheme);
   }
 
 }
