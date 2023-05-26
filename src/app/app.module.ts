@@ -59,7 +59,10 @@ import {
     HIGHLIGHT_OPTIONS,
     HighlightOptions,
 } from 'ngx-highlightjs';
+import { AddModelArtifactDialogComponent } from './model-artifacts/add-model-artifact-dialog/add-model-artifact-dialog.component';
+import { ModelArtifactsComponent } from './model-artifacts/model-artifacts.component';
 
+// @ts-ignore
 // @ts-ignore
 // @ts-ignore
 // @ts-ignore
@@ -89,6 +92,8 @@ import {
         WidgetMembersComponent,
         ViewMicroserviceComponent,
         AddFeatureDialogComponent,
+        AddModelArtifactDialogComponent,
+        ModelArtifactsComponent,
     ],
     imports: [
         BrowserModule,
@@ -127,13 +132,15 @@ import {
             useValue: <HighlightOptions>{
                 lineNumbers: true,
                 coreLibraryLoader: () => import('highlight.js/lib/core'),
-                //@ts-ignore
+                //@ts-ignore - necessary due to highlightjs-line-numbers not being a defined module, i.e., it lacks the .d.ts file :-(
                 lineNumbersLoader: () => import('highlightjs-line-numbers.js'),
-                themePath: 'node_modules/highlight.js/styles/github.css',
+                themePath: 'assets/hljs-styles/github.css',
                 languages: {
                     typescript: () => import('highlight.js/lib/languages/typescript'),
                     css: () => import('highlight.js/lib/languages/css'),
                     xml: () => import('highlight.js/lib/languages/xml'),
+                    //@ts-ignore
+                    lemma: () => import('hljs-lemma/src/languages/lemma'),
                 },
             },
         },

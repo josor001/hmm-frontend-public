@@ -1,0 +1,25 @@
+<h2 class="card-headline">Related Modeling Artifacts<button mat-mini-fab color="primary" (click)="openArtifactNewDialog()"><mat-icon>add</mat-icon></button></h2>
+
+editServiceModelArtifacts
+<table>
+    <tr>
+        <th>Unique Name</th>
+        <th>Model Kind</th>
+        <th>Link</th>
+        <th>Actions</th>
+    </tr>
+    <tr *ngFor="let artifact of editServiceModelArtifacts" style="vertical-align: top">
+        <td>
+            <strong>{{artifact.name}}</strong>
+        </td>
+        <td>
+            {{artifact.kind}}
+        </td>
+        <td>
+            {{artifact.location}}
+        </td>
+        <td>
+            <button mat-icon-button class="microservice-button" color="warn" (click)="removeArtifact(artifact)"><mat-icon>cancel</mat-icon></button>
+        </td>
+    </tr>
+</table>

@@ -12,6 +12,8 @@ import {Member} from "../../shared/models/member.model";
 import {FormGroup} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {AddFeatureDialogComponent, DialogFeature} from "./add-feature-dialog/add-feature-dialog.component";
+import {AddModelArtifactDialogComponent} from "../../model-artifacts/add-model-artifact-dialog/add-model-artifact-dialog.component";
+import {ModelArtifact} from "../../shared/models/modelartifact.model";
 
 @Component({
     selector: 'app-edit-microservice',
@@ -23,6 +25,7 @@ export class EditMicroserviceComponent implements OnInit, OnDestroy {
 
     editService: Microservice | undefined;
     editServiceTeamMember: Member[] = [];
+
     routerSub: Subscription | undefined;
     serviceSub: Subscription | undefined;
     routerSysSub: Subscription | undefined;
@@ -83,20 +86,9 @@ export class EditMicroserviceComponent implements OnInit, OnDestroy {
       this.router.navigate([`/system/${this.sysId}/microservices`]);
     }
 
-    addFeature(): void {
-        if(this.editService) {
-            this.editService.plannedFeatures!!.set("testa", "aaa")
-        }
-    }
-
-    console(): void {
-        console.log(this.editService?.plannedFeatures)
-    }
-
     removeFeature(featureKey: string): void {
         if (this.editService && this.editService.plannedFeatures) {
             this.editService.plannedFeatures.delete(featureKey)
-            this.console()
         }
     }
 
@@ -122,7 +114,7 @@ export class EditMicroserviceComponent implements OnInit, OnDestroy {
     });
   }
 
-    openNewDialog(): void {
+    openFeatureNewDialog(): void {
         const dialogRef = this.dialog.open(AddFeatureDialogComponent, {
             data: {type: "new", name: "", description: ""},
         });
@@ -135,7 +127,7 @@ export class EditMicroserviceComponent implements OnInit, OnDestroy {
         });
     }
 
-    openEditDialog(name: string, description: string): void {
+    openFeatureEditDialog(name: string, description: string): void {
         const dialogRef = this.dialog.open(AddFeatureDialogComponent, {
             data: {type: "edit", name: name, description: description},
         });

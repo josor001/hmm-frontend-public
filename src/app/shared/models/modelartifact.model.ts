@@ -1,7 +1,7 @@
 export interface ModelArtifact { 
     name?: string;
     kind?: string;
-    location?: string;
     microserviceId?: number;
+    location?: string;
     id?: number;
 }

@@ -4,7 +4,6 @@ export interface Microservice {
     repositoryLink?: string;
     contactPersonId?: number;
     plannedFeatures?: Map<string, string>;
-    modelIds?: Array<number>;
     sysId?: number;
     id?: number;
 }
