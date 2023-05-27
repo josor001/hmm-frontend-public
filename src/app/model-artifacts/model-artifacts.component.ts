@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {AddModelArtifactDialogComponent} from "./add-model-artifact-dialog/add-model-artifact-dialog.component";
 import {ModelArtifact} from "../shared/models/modelartifact.model";
 import {Subscription} from "rxjs";
@@ -11,6 +11,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {ModelArtifactService} from "../shared/services/modelartifact.service";
 import {Microservice} from "../shared/models/microservice.model";
 import {MatDialog} from "@angular/material/dialog";
+import {MatTable, MatTableDataSource} from "@angular/material/table";
+import {Member} from "../shared/models/member.model";
 
 @Component({
   selector: 'app-model-artifacts',
@@ -24,7 +26,11 @@ export class ModelArtifactsComponent implements OnInit, OnDestroy {
   sysId: number = 0;
 
   microservices: Microservice[] = [];
-  modelArtifacts: ModelArtifact[] = [];
+
+  dataSource = new MatTableDataSource<ModelArtifact>();
+  columnsToDisplay = ['name', 'kind', 'location'];
+  @ViewChild(MatTable)
+  table!: MatTable<Member>;
 
   routerSub: Subscription | undefined;
   serviceSub: Subscription | undefined;
@@ -63,7 +69,7 @@ export class ModelArtifactsComponent implements OnInit, OnDestroy {
   getModelArtifacts(): void {
     //TODO service for model artifacts (front & backend!)
     this.artifactSub = this.modelArtifactService.getModelArtifacts(this.sysId).subscribe(artifacts => {
-      this.modelArtifacts = artifacts
+      this.dataSource.data = artifacts;
     });
   }
 
@@ -75,13 +81,14 @@ export class ModelArtifactsComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        //TODO do something with the newly created artifact
+        //TODO fix service!
+        this.modelArtifactService.createModelArtifact(result.name, result.kind, result.location, result.microserviceId);
       }
     });
   }
 
-  removeArtifact(artifact: ModelArtifact) {
-    this.editServiceModelArtifacts.delete(artifact)
+  removeArtifact(artifactId: number) {
+    this.dataSource.data = this.dataSource.data.filter(value => value.id !== artifactId);
   }
 
 

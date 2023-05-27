@@ -17,6 +17,7 @@ import {AddStoryComponent} from "./service-stories/add-story/add-story.component
 import {EditStoryComponent} from "./service-stories/edit-story/edit-story.component";
 import {AppComponent} from "./app.component";
 import {ViewMicroserviceComponent} from "./microservices/view-microservice/view-microservice.component";
+import {ModelArtifactsComponent} from "./model-artifacts/model-artifacts.component";
 
 const routes: Routes = [//
   { path: '', component: AppComponent },
@@ -36,6 +37,7 @@ const routes: Routes = [//
   { path: 'system/:sysId/stories', component: ServiceStoriesComponent },
   { path: 'system/:sysId/stories/edit/:id', component: EditStoryComponent },
   { path: 'system/:sysId/stories/new', component: AddStoryComponent },
+  { path: 'system/:sysId/modelartifacts', component: ModelArtifactsComponent },
 ];
 
 @NgModule({
