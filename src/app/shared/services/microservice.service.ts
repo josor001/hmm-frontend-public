@@ -75,20 +75,6 @@ export class MicroserviceService {
         }
     }
 
-    /** PUT a new artifact into a microservice */
-    addModelArtifact(serviceId: number, artifactId: number): Observable<Microservice> {
-        const url = `${this.entityUrl}/${serviceId}/artifacts`;
-        return this.http.put<Microservice>(url, artifactId, httpOptions)
-            .pipe(catchError(Utils.handleError));
-    }
-
-    /** DELETE an artifact from a microservice */
-    removeModelArtifact(serviceId: number, artifactId: number): Observable<unknown> {
-        const url = `${this.entityUrl}/${serviceId}/artifacts/${artifactId}`;
-        return this.http.delete(url, httpOptions)
-            .pipe(catchError(Utils.handleError));
-    }
-
     /** DELETE a microservice */
     deleteMicroservice(id: number): Observable<unknown> {
         const url = `${this.entityUrl}/${id}`;

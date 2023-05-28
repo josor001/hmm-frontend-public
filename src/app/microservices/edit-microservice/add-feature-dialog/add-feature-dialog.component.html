@@ -14,7 +14,7 @@
 </div>
 
 <div mat-dialog-actions>
-    <button *ngIf="feature.name.trim() === ''" disabled mat-flat-button color="primary" [mat-dialog-close]="feature" autofocus>Ok</button>
-    <button *ngIf="feature.name.trim() !== ''" mat-flat-button color="primary" [mat-dialog-close]="feature" autofocus>Ok</button>
+    <button *ngIf="feature.name.trim() === ''" disabled mat-flat-button color="primary" [mat-dialog-close]="feature">Ok</button>
+    <button *ngIf="feature.name.trim() !== ''" mat-flat-button color="primary" [mat-dialog-close]="feature">Ok</button>
     <button mat-flat-button color="warn" (click)="close()">Cancel</button>
 </div>

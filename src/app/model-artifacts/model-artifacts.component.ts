@@ -22,15 +22,15 @@ import {Member} from "../shared/models/member.model";
 export class ModelArtifactsComponent implements OnInit, OnDestroy {
   //TODO create a new menu entry and design HTML side for this component
   //TODO clear residues from edit-microservice regarding this shit.
-  //TODO clear microservice overview concerning modelartifacts and maybe also planned features (make overview simply more simple ^^)
+  //TODO clear microservice overview concerning model artifacts and maybe also planned features (make overview simply more simple ^^)
   sysId: number = 0;
 
   microservices: Microservice[] = [];
 
   dataSource = new MatTableDataSource<ModelArtifact>();
-  columnsToDisplay = ['name', 'kind', 'location'];
+  displayedColumns = ['name', 'microserviceId', 'kind', 'location', 'actions'];
   @ViewChild(MatTable)
-  table!: MatTable<Member>;
+  table!: MatTable<ModelArtifact>;
 
   routerSub: Subscription | undefined;
   serviceSub: Subscription | undefined;
@@ -67,22 +67,36 @@ export class ModelArtifactsComponent implements OnInit, OnDestroy {
   }
 
   getModelArtifacts(): void {
-    //TODO service for model artifacts (front & backend!)
     this.artifactSub = this.modelArtifactService.getModelArtifacts(this.sysId).subscribe(artifacts => {
       this.dataSource.data = artifacts;
     });
   }
 
   openArtifactNewDialog(): void {
+    //create a map with id and service names for selecting a microservice in the artifact dialog
+    let microserviceIdsWithNames = new Map<number, string>();
+    this.microservices.forEach(service => {
+      if(service.id && service.name)
+        microserviceIdsWithNames.set(service.id, service.name)
+    })
+
     const dialogRef = this.dialog.open(AddModelArtifactDialogComponent, {
-      //fill if there is any data
-      data: {},
+      data: {microserviceIdsWithNames},
+      width: '50%'
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        //TODO fix service!
-        this.modelArtifactService.createModelArtifact(result.name, result.kind, result.location, result.microserviceId);
+        console.log(result)
+        this.modelArtifactService.createModelArtifact(
+            result.name,
+            result.kind,
+            result.location,
+            result.microserviceId,
+            this.sysId).subscribe(
+                //TODO apparently this does not work or is not called? It might be necessary to refresh the datasource here
+                newArtifact => {this.dataSource.data.push(newArtifact)}
+        );
       }
     });
   }

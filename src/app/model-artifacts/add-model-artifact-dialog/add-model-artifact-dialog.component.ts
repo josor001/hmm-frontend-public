@@ -6,6 +6,7 @@ export interface DialogModelArtifact {
   name: string;
   kind: string;
   location: string;
+  microserviceId: number;
 }
 
 interface ModelKind {
@@ -19,7 +20,8 @@ interface ModelKind {
   styleUrls: ['./add-model-artifact-dialog.component.scss']
 })
 export class AddModelArtifactDialogComponent {
-  artifact: DialogModelArtifact = {name:"",kind:"",location:""}
+  artifact: DialogModelArtifact = {name:"",kind:"",location:"", microserviceId:0}
+  microserviceIdsWithNames: Map<number, string>;
 
   kinds: ModelKind[] = [
     {value: 'graphical', viewValue: 'Graphical'},
@@ -28,11 +30,13 @@ export class AddModelArtifactDialogComponent {
   ];
 
   constructor(public dialogRef: MatDialogRef<AddModelArtifactDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+              @Inject(MAT_DIALOG_DATA) public data : any) {
+    this.microserviceIdsWithNames = new Map<number, string>(data.microserviceIdsWithNames);
+    console.log(data);
   }
 
   validArtifact() : boolean {
-    return !!(this.artifact.location && this.artifact.name && this.artifact.kind);
+    return !!(this.artifact.location && this.artifact.name && this.artifact.kind && this.artifact.microserviceId!=0);
 
   }
 
