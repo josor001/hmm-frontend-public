@@ -47,6 +47,20 @@ export class ServiceStoryService {
     }
   }
 
+  /** GET all ServiceStories */
+  getServiceStoriesContainingMicroservice(microserviceId : number): Observable<ServiceStory[]> {
+    const url = `${this.entityUrl}/microservice/${microserviceId}`;
+    if (environment.useMockData) {
+      return of(STORIES.filter(story => story.vertexIds?.includes(microserviceId)));
+    } else {
+      return this.http.get<ServiceStory[]>(url)
+          .pipe(catchError(Utils.handleError));
+    }
+  }
+
+
+
+
   /** POST a new ServiceStory */  
   createServiceStory(name: string, sysId: number): Observable<ServiceStory> {
     var storyDto = {name, sysId}

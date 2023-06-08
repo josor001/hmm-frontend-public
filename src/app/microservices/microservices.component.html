@@ -89,17 +89,6 @@
                                     <mat-icon>details</mat-icon> Details
                                 </button>
                             </td>
-                            <td>
-                                <button mat-flat-button color="accent" matTooltip="click to edit service"
-                                        [routerLink]="['/system',sysId,'microservices','edit', microservice.id]">
-                                    <mat-icon>edit</mat-icon> Edit
-                                </button>
-                            </td>
-                            <td>
-                                <button matTooltip="click to delete service" mat-flat-button color="warn" (click)="deleteMicroservice(microservice.id!)">
-                                    <mat-icon>delete</mat-icon> Delete
-                                </button>
-                            </td>
                         </tr>
                     </table>
                 </mat-card-actions>

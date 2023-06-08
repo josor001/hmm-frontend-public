@@ -1,14 +1,14 @@
+@import '../../../colors.scss';
+
 .microservice-button {
   margin: 5px;
 }
-.microservice-edit {
+.microservice-view {
   margin: 20px;
 }
 
-.microservice-edit-form {
-  min-width: 350px;
-  max-width: 700px;
-  width:50%;
+.small-button {
+  transform: scale(0.8);
 }
 
 .full-width {
@@ -76,4 +76,39 @@ td.hljs-ln-numbers {
 /* for block of code */
 td.hljs-ln-code {
   padding-left: 8px !important;
+}
+
+/* STYLES FOR NGX-GRAPH */
+/** graph styles */
+.node {
+  background-color: $my-primary;
+
+}
+.nodeBox {
+  border: 3px solid $my-primary;
+  border-radius: 5%;
+  background-color: transparent;
+  width: 170px;
+  height: 145px;
+}
+.nodeBox-headline {
+  background-color: $my-primary;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  width:100%;
+}
+.nodeBox-row {
+  color: black;
+  width:100%;
+  height: 1.5em;
+  vertical-align: middle;
+}
+.nodeBox-data {
+  justify-content: left;
+}
+.nodeBox-data-headline {
+  justify-content: left;
+  font-weight: bold;
+  color:dimgray;
 }

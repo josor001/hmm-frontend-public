@@ -21,7 +21,7 @@
 
         <ng-container matColumnDef="microserviceId">
             <th mat-header-cell *matHeaderCellDef> MicroserviceId </th>
-            <td mat-cell *matCellDef="let modelArtifact"> {{modelArtifact.microserviceId}} </td>
+            <td mat-cell *matCellDef="let modelArtifact"> {{findMicroserviceName(modelArtifact.microserviceId)}} </td>
         </ng-container>
 
         <ng-container matColumnDef="kind">
@@ -37,10 +37,7 @@
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Actions </th>
             <td mat-cell *matCellDef="let artifact">
-                <button mat-icon-button aria-label="action row">
-                    <button mat-icon-button class="microservice-button" color="warn" (click)="removeArtifact(artifact.id)"><mat-icon>cancel</mat-icon></button>
-                    <mat-icon>keyboard_arrow_up</mat-icon>
-                </button>
+                <button mat-icon-button class="microservice-button" color="warn" (click)="removeArtifact(artifact.id)"><mat-icon>cancel</mat-icon></button>
             </td>
         </ng-container>
 

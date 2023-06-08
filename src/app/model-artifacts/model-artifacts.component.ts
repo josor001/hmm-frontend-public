@@ -44,6 +44,11 @@ export class ModelArtifactsComponent implements OnInit, OnDestroy {
               public dialog: MatDialog) {
   }
 
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
 
   ngOnInit(): void {
     this.routerSub = this.activatedRoute.paramMap.subscribe((params) => {
@@ -72,6 +77,13 @@ export class ModelArtifactsComponent implements OnInit, OnDestroy {
     });
   }
 
+  findMicroserviceName(id: number) : string {
+    const service = this.microservices.find(value => value.id === id)
+    if(service)
+      return service.name!!
+    return "no service found"
+  }
+
   openArtifactNewDialog(): void {
     //create a map with id and service names for selecting a microservice in the artifact dialog
     let microserviceIdsWithNames = new Map<number, string>();
@@ -93,19 +105,20 @@ export class ModelArtifactsComponent implements OnInit, OnDestroy {
             result.kind,
             result.location,
             result.microserviceId,
-            this.sysId).subscribe(
-                //TODO apparently this does not work or is not called? It might be necessary to refresh the datasource here
-                newArtifact => {this.dataSource.data.push(newArtifact)}
+            this.sysId).subscribe(value => {
+                  //a somewhat dirty refresh
+                  this.openSnackBar(`New ModelArtifact ${value.name} added!`, "SUCCESS")
+                  this.getModelArtifacts();
+                }
         );
       }
     });
   }
 
   removeArtifact(artifactId: number) {
-    this.dataSource.data = this.dataSource.data.filter(value => value.id !== artifactId);
+    this.modelArtifactService.deleteModelArtifact(artifactId).subscribe(value => {
+      this.openSnackBar(`ModelArtifact deleted!`, "SUCCESS")
+      this.dataSource.data = this.dataSource.data.filter(value => value.id !== artifactId);
+    })
   }
-
-
-
-
 }

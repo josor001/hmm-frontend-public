@@ -1,22 +1,171 @@
 <p>view-microservice works!</p>
-<div *ngIf="viewService">
-    <p>{{viewService.id}}</p>
-    <p>{{viewService.name}}</p>
+<div *ngIf="microservice">
+    <p>{{microservice.id}}</p>
+    <p>{{microservice.name}}</p>
 </div>
 <div>
 
 
 
 <pre><code [highlight]="typescript" [languages]="['typescript']" [lineNumbers]="true"></code></pre>
-
-<pre><code [highlight]="lemma" [languages]="['lemma']" [lineNumbers]="true"></code></pre>
+<h2>TEST CODE</h2>
+<pre *ngIf="lemma_highlighted"><code [innerHTML]="lemma_highlighted"></code></pre>
+<!--<pre><code [highlight]="lemma" [languages]="['lemma']" [lineNumbers]="true"></code></pre>-->
 
     <!-- TODO theme path to .css file seems troublesome?
 <button (click)="changeTheme()">Change theme</button> -->
-
 <h4>Highlight response</h4>
 <!-- TODO this response thing seems to be problematic due to possible undefined status
 <pre>{{ response | json }}</pre>
 -->
-
 </div>
+
+<!-- ACTUAL HTML FROM HERE -->
+
+<mat-card class="microservice-view" *ngIf="microservice">
+    <mat-card-header>
+        <mat-card-subtitle>Microservice</mat-card-subtitle>
+        <mat-card-title>{{microservice.name}}</mat-card-title>
+    </mat-card-header>
+    <mat-divider class="mat-elevation-z5"></mat-divider>
+    <mat-card-content class="microservice-card-content">
+        <h2 class="card-headline">Owned By</h2>
+        <p *ngIf="!microserviceTeam">service is orphaned</p>
+        <table>
+            <tr *ngIf="microserviceTeam">
+                <th><mat-icon color="primary">group</mat-icon></th>
+                <th colspan="2">{{microserviceTeam.name}}</th>
+            </tr>
+                <tr  *ngFor="let member of microserviceTeamMember">
+                    <td><mat-icon *ngIf="microservice.contactPersonId === member.id">contact_support</mat-icon></td>
+                    <td><span>{{member.firstname}} {{member.lastname}}</span></td>
+                    <td><a mat-mini-fab href="mailto:{{member.email}}"  class="small-button"><mat-icon>email</mat-icon></a></td>
+                </tr>
+        </table>
+
+        <h2>SHOW DIAGRAM FROM SERVICE STORIES</h2>
+        <p *ngFor="let story of microserviceStories">
+            <strong>{{story.name}}</strong>
+            {{story.description}}
+        </p>
+
+        <div xmlns:svg="http://www.w3.org/2000/svg">
+            <p *ngIf="!nodesReady">No nodes and links to display.</p>
+            <p *ngIf="nodesReady">THEY ARE READY!</p>
+            <ngx-graph
+                    *ngIf="nodesReady"
+                    class="chart-container"
+                    [view]="[800, 200]"
+                    [showMiniMap]="true"
+                    [links]="this.graphEdges"
+                    [nodes]="this.graphNodes"
+                    [clusters]="this.graphClusters"
+                    [layoutSettings]="layoutSettings"
+                    [autoZoom]="true"
+            >
+            </ngx-graph>
+
+
+                <!-- defining the arrow head as end of edge -->
+                <!-- <ng-template #defsTemplate>
+                    <svg:marker id="arrow{{microservice.id}}" viewBox="0 -5 10 10" refX="8" refY="0"
+                                markerWidth="4" markerHeight="4" orient="auto">
+                        <svg:path d="M0,-5L10,0L0,5" class="arrow-head"/>
+                    </svg:marker>
+                </ng-template> -->
+                <!--
+
+                <ng-template #nodeTemplate let-node>
+                    <svg xmlns:svg="http://www.w3.org/2000/svg">
+                        <svg:g class="node" width="180" height="150">
+                            <svg:foreignObject width="180" height="150"
+                                               xmlns:svg="http://www.w3.org/2000/svg"
+                                               xmlns:xhtml="http://www.w3.org/1999/xhtml">
+                                <xhtml:div class="nodeBox">
+                                    <table class="full-width">
+                                        <tr class="nodeBox-headline">
+                                            <td>{{ node.label }}</td>
+                                        </tr>
+                                    </table>
+                                </xhtml:div>
+                            </svg:foreignObject>
+                        </svg:g>
+                    </svg>
+                </ng-template> -->
+
+                <!-- defining the style of edges -->
+                <!--
+                <ng-template #linkTemplate let-link>
+                    <svg:g class="edge">
+                        <svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line"
+                                  stroke-width="3"
+                                  [attr.marker-end]="'url(#arrow'+microservice.id+')'"></svg:path>
+                        <svg:text class="edge-label" text-anchor="middle">
+                            <textPath class="text-path" [attr.href]="'#' + link.id"
+                                      startOffset="50%">
+                                {{link.label}}
+                            </textPath>
+                        </svg:text>
+                    </svg:g>
+                </ng-template>  -->
+
+                <!-- defining the style of clusters -->
+                <!-- TODO -->
+        </div>
+        -->
+        <h2>SHOW ARTIFACTS</h2>
+
+        <h2>LINK FEATURES, ISSUE PAGE, ...</h2>
+
+        <h2 class="card-headline">Purpose</h2>
+        <p *ngIf="microservice.purpose">{{microservice.purpose}}</p>
+
+
+        <h2 class="card-headline">Availability</h2>
+        <p>
+            <a mat-flat-button matTooltip="click to visit team repository" color="primary" href="{{microservice.repositoryLink}}" target="_blank"
+               class="mat-button" *ngIf="microservice.repositoryLink">Repository</a>
+            <a mat-flat-button color="primary" href="{{microservice.repositoryLink}}" target="_blank"
+               class="mat-button" *ngIf="!microservice.repositoryLink" disabled matTooltip="no repository set.">Repository</a>
+
+            <a mat-flat-button color="primary" href="" target="_blank"
+               class="mat-button" *ngIf="true" disabled matTooltip="not implemented yet.">Documentation</a>
+
+            <a mat-flat-button color="primary" href="" target="_blank"
+               class="mat-button" *ngIf="true" disabled matTooltip="not implemented yet.">Known Bugs</a>
+        </p>
+        <h2 class="card-headline">Associated Models</h2>
+        <mat-chip-list>
+            <mat-chip>
+                <mat-icon>sentiment_very_dissatisfied</mat-icon>
+                not implemented yet.
+            </mat-chip>
+        </mat-chip-list>
+        <p></p>
+        <h2 class="card-headline">Planned Features</h2>
+        <mat-chip-list role="list">
+            <mat-chip *ngFor="let feature of microservice.plannedFeatures | keyvalue">
+                <mat-icon>settings</mat-icon>
+                <span> {{feature.value}}</span>
+            </mat-chip>
+        </mat-chip-list>
+
+    </mat-card-content>
+    <mat-card-actions class="full-width">
+        <table class="full-width">
+            <tr>
+                <td>
+                    <button mat-flat-button color="accent" matTooltip="click to edit service"
+                            [routerLink]="['/system',sysId,'microservices','edit', microservice.id]">
+                        <mat-icon>edit</mat-icon> Edit
+                    </button>
+                </td>
+                <td>
+                    <button matTooltip="click to delete service" mat-flat-button color="warn" (click)="deleteMicroservice(microservice.id!)">
+                        <mat-icon>delete</mat-icon> Delete
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </mat-card-actions>
+</mat-card>

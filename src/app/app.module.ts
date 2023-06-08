@@ -139,8 +139,6 @@ import { ModelArtifactsComponent } from './model-artifacts/model-artifacts.compo
                     typescript: () => import('highlight.js/lib/languages/typescript'),
                     css: () => import('highlight.js/lib/languages/css'),
                     xml: () => import('highlight.js/lib/languages/xml'),
-                    //@ts-ignore
-                    lemma: () => import('hljs-lemma/src/languages/lemma'),
                 },
             },
         },
