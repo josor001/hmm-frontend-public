@@ -132,13 +132,13 @@ import { ModelArtifactsComponent } from './model-artifacts/model-artifacts.compo
             useValue: <HighlightOptions>{
                 lineNumbers: true,
                 coreLibraryLoader: () => import('highlight.js/lib/core'),
-                //@ts-ignore - necessary due to highlightjs-line-numbers not being a defined module, i.e., it lacks the .d.ts file :-(
                 lineNumbersLoader: () => import('highlightjs-line-numbers.js'),
                 themePath: 'assets/hljs-styles/github.css',
                 languages: {
                     typescript: () => import('highlight.js/lib/languages/typescript'),
                     css: () => import('highlight.js/lib/languages/css'),
                     xml: () => import('highlight.js/lib/languages/xml'),
+                    lemma: () => import('hljs-lemma/src/languages/lemma')
                 },
             },
         },

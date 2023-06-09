@@ -7,7 +7,7 @@ import {TeamService} from "../../shared/services/team.service";
 import {MemberService} from "../../shared/services/member.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {HighlightAutoResult, HighlightJS, HighlightLoader} from "ngx-highlightjs";
+import {HighlightAutoResult, HighlightLoader} from "ngx-highlightjs";
 import {Team} from "../../shared/models/team.model";
 import {ModelArtifactService} from "../../shared/services/modelartifact.service";
 import {ModelArtifact} from "../../shared/models/modelartifact.model";
@@ -46,7 +46,7 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
     response: HighlightAutoResult | undefined;
 
     // Stuff for displaying the ServiceStories
-    graphNodes: Node[] = [];
+    graphNodes : Node[] = [];
     graphEdges: Edge[] = [];
     graphClusters: ClusterNode[] = [];
     nodesReady: boolean = false;
@@ -97,7 +97,6 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
                 private activatedRoute: ActivatedRoute,
                 private router: Router,
                 private snackBar: MatSnackBar,
-                private hljsService: HighlightJS,
                 private hljsLoader: HighlightLoader) {
     }
 
@@ -105,17 +104,6 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.routerSysSub = this.activatedRoute.paramMap.subscribe((params) => {
             this.sysId = parseInt(<string>params.get('sysId'));
-            var hljsLemma = require('hljs-lemma')
-            console.log(hljsLemma)
-            this.hljsService.registerLanguage("lemma", hljsLemma).subscribe(value => {
-                value.listLanguages().forEach(value1 => {
-                    console.log("LANGUAGE", value1)
-                })
-                this.hljsService.highlight(this.lemma_str, {ignoreIllegals: true, language: "lemma"}).subscribe(value  => {
-                    console.log(value)
-                    this.lemma_highlighted = value.value;
-                })
-            })
 
         });
 
@@ -154,10 +142,11 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
         this.storySub = this.storyService.getServiceStoriesContainingMicroservice(microserviceId).subscribe(async stories => {
             this.microserviceStories = stories;
             await this.buildEdges(stories);
-            await this.buildNodesAndClusters(stories);
-            console.log("CLUSTERS", this.graphClusters);
-            console.log("NODES", this.graphNodes);
-            console.log("EDGES", this.graphEdges);
+            await this.buildNodes(stories);
+            //get rid of duplicate node entries
+            this.graphNodes = this.graphNodes.filter(
+                (node, i, arr) => arr.findIndex(t => t.id === node.id) === i
+            )
             this.nodesReady = true;
         })
     }
@@ -197,9 +186,10 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
                 storyEdges.forEach(edge => {
                     if (edge && edge.targetId && edge.sourceId) {
                         // create the corresponding ngx-graph edge for each story edge
-                        this.graphEdges.push({
+                        this.graphEdges.push(<Edge>{
                             id: "e" + edge.id,
                             label: edge.description,
+                            data: {color: uniqolor(story.name!!).color},
                             source: "ms" + edge.sourceId,
                             target: "ms" + edge.targetId
                         })
@@ -210,7 +200,7 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
     }
 
 
-    private async buildNodesAndClusters(stories: ServiceStory[]): Promise<void> {
+    private async buildNodes(stories: ServiceStory[]): Promise<void> {
         for (const story of stories) {
             if (story.id != null) {
                 if (story.vertexIds) {
@@ -220,7 +210,6 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
                         nodeQueries.push(lastValueFrom(this.microserviceService.getMicroservice(id)));
                     }
                     const microservices = await Promise.all(nodeQueries)
-                    const clusterChildIds: string[] = [];
                     //CREATE NODES FOR EACH STORY
                     for (const microservice of microservices) {
                         let node= <Node>{
@@ -228,16 +217,7 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
                             label: microservice!!.name
                         }
                         this.graphNodes.push(node)
-                        clusterChildIds.push("ms" + microservice!!.id)
                     }
-                    //CREATE A CLUSTER FOR EACH STORY
-                    let clusterNode = <ClusterNode>{
-                        id: "cluster" + story.id,
-                        label: story.name,
-                        data: {color: uniqolor(story.name!!).color},
-                        childNodeIds: clusterChildIds
-                    }
-                    this.graphClusters.push(clusterNode)
                 }
             }
         }
@@ -249,18 +229,6 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
         });
     }
 
-    onHighlight(e: HighlightAutoResult) {
-        this.response = {
-            language: e.language,
-            relevance: e.relevance,
-            secondBest: '{...}',
-            value: '{...}',
-        };
-    }
-
-    //changeTheme() {
-    //  this.currentTheme = this.currentTheme === themeGithub ? themeGithubDark : themeGithub;
-    //  this.hljsLoader.setTheme(this.currentTheme);
-    //}
-
+    protected readonly Array = Array;
+    protected readonly uniqolor = uniqolor;
 }

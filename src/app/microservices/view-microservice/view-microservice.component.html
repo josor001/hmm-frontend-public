@@ -10,7 +10,7 @@
 <pre><code [highlight]="typescript" [languages]="['typescript']" [lineNumbers]="true"></code></pre>
 <h2>TEST CODE</h2>
 <pre *ngIf="lemma_highlighted"><code [innerHTML]="lemma_highlighted"></code></pre>
-<!--<pre><code [highlight]="lemma" [languages]="['lemma']" [lineNumbers]="true"></code></pre>-->
+<pre><code [highlight]="lemma_str" [languages]="['lemma']" [lineNumbers]="true" ></code></pre>
 
     <!-- TODO theme path to .css file seems troublesome?
 <button (click)="changeTheme()">Change theme</button> -->
@@ -45,7 +45,8 @@
 
         <h2>SHOW DIAGRAM FROM SERVICE STORIES</h2>
         <p *ngFor="let story of microserviceStories">
-            <strong>{{story.name}}</strong>
+            <span *ngIf="story.name" [ngStyle]="{'color': uniqolor(story.name, {}).color}"><strong>{{story.name}}</strong></span>
+
             {{story.description}}
         </p>
 
@@ -60,20 +61,20 @@
                     [links]="this.graphEdges"
                     [nodes]="this.graphNodes"
                     [clusters]="this.graphClusters"
+                    layout="dagreCluster"
                     [layoutSettings]="layoutSettings"
                     [autoZoom]="true"
             >
-            </ngx-graph>
+
 
 
                 <!-- defining the arrow head as end of edge -->
-                <!-- <ng-template #defsTemplate>
+                <ng-template #defsTemplate>
                     <svg:marker id="arrow{{microservice.id}}" viewBox="0 -5 10 10" refX="8" refY="0"
                                 markerWidth="4" markerHeight="4" orient="auto">
                         <svg:path d="M0,-5L10,0L0,5" class="arrow-head"/>
                     </svg:marker>
-                </ng-template> -->
-                <!--
+                </ng-template>
 
                 <ng-template #nodeTemplate let-node>
                     <svg xmlns:svg="http://www.w3.org/2000/svg">
@@ -91,13 +92,12 @@
                             </svg:foreignObject>
                         </svg:g>
                     </svg>
-                </ng-template> -->
+                </ng-template>
 
                 <!-- defining the style of edges -->
-                <!--
                 <ng-template #linkTemplate let-link>
                     <svg:g class="edge">
-                        <svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line"
+                        <svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" style="stroke: {{link.data.color}}"
                                   stroke-width="3"
                                   [attr.marker-end]="'url(#arrow'+microservice.id+')'"></svg:path>
                         <svg:text class="edge-label" text-anchor="middle">
@@ -107,12 +107,10 @@
                             </textPath>
                         </svg:text>
                     </svg:g>
-                </ng-template>  -->
-
-                <!-- defining the style of clusters -->
-                <!-- TODO -->
+                </ng-template>
+            </ngx-graph>
         </div>
-        -->
+
         <h2>SHOW ARTIFACTS</h2>
 
         <h2>LINK FEATURES, ISSUE PAGE, ...</h2>
