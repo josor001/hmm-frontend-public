@@ -2,9 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import {Observable, Subscription} from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import {SoftwaresystemService} from "./shared/services/softwaresystem.service";
-import {Softwaresystem} from "./shared/models/softwaresystem.model";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',

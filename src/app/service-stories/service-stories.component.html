@@ -26,7 +26,7 @@
                 <mat-panel-title>{{story.name}}</mat-panel-title>
                 <mat-panel-description *ngIf="story.description">
                     <span><mat-icon>book</mat-icon>
-                    {{ (story.description.length > 30) ? (story.description!.trim() | slice:0:30) + '...' : (story.description!.trim()) }}</span>
+                    {{ story.description | truncate:[30]}}</span>
                 </mat-panel-description>
             </mat-expansion-panel-header>
             <mat-divider></mat-divider>
@@ -45,6 +45,7 @@
                                         class="chart-container"
                                         [view]="[800, 200]"
                                         [showMiniMap]="true"
+                                        [draggingEnabled] ="false"
                                         [links]="storyEdges.get(story.id)!"
                                         [nodes]="storyNodes.get(story.id)!"
                                         [layoutSettings]="layoutSettings"

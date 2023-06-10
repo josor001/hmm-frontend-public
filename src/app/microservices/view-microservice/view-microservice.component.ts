@@ -17,6 +17,7 @@ import {ServiceStory} from "../../shared/models/servicestory.model";
 import {ClusterNode, Edge, Node} from "@swimlane/ngx-graph";
 import {ServiceStoryEdge} from "../../shared/models/servicestoryedge.model";
 import * as uniqolor from "uniqolor";
+import {MatTableDataSource} from "@angular/material/table";
 
 //const themeGithub: string = '../node_modules/highlight.js/styles/github.css';
 //const themeGithubDark: string = 'node_modules/highlight.js/styles/github-dark.css';
@@ -29,21 +30,20 @@ import * as uniqolor from "uniqolor";
 export class ViewMicroserviceComponent implements OnInit, OnDestroy {
     sysId: number = 0;
 
+    // DATA OBJECTS FOR RETRIEVAL
     microservice: Microservice | undefined;
     microserviceTeam: Team | undefined;
     microserviceTeamMember: Member[] = [];
     microserviceArtifacts: ModelArtifact[] = [];
     microserviceStories: ServiceStory[] = [];
 
+    //SUBSCRIPTIONS
     routerSub: Subscription | undefined;
     serviceSub: Subscription | undefined;
     routerSysSub: Subscription | undefined;
     teamSub: Subscription | undefined;
     modelSub: Subscription | undefined;
     storySub: Subscription | undefined;
-    //currentTheme: string = themeGithub;
-
-    response: HighlightAutoResult | undefined;
 
     // Stuff for displaying the ServiceStories
     graphNodes : Node[] = [];
@@ -53,6 +53,10 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
     layoutSettings = {
         orientation: 'LR'
     };
+
+    // Stuff for displaying the model artifact table
+    displayedArtifactColumns: string[] = ['action', 'name', 'kind'];
+    artifactTableDataSource = new MatTableDataSource();
 
     // Stuff for Code Highlighting with highlightJS
     typescript = `function myFunction() {
@@ -84,7 +88,6 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
 
     collection ActionList {Action action}
     }`;
-
 
     lemma_highlighted: string | undefined;
 
@@ -135,6 +138,7 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
     getArtifacts(microserviceId: number) {
         this.modelSub = this.modelArtifactService.getModelArtifactsByMicroserviceId(microserviceId).subscribe(artifacts => {
             this.microserviceArtifacts = artifacts;
+            this.artifactTableDataSource.data = artifacts;
         })
     }
 
@@ -229,6 +233,9 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
         });
     }
 
-    protected readonly Array = Array;
     protected readonly uniqolor = uniqolor;
+
+    openViewer(artifact : ModelArtifact) {
+        //TODO
+    }
 }

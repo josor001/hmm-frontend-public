@@ -6,6 +6,9 @@
 .microservice-view {
   margin: 20px;
 }
+.microservice-card-content {
+  padding-left:16px;
+}
 
 .small-button {
   transform: scale(0.8);
@@ -15,11 +18,17 @@
   width: 100%;
 }
 
-.card-headline {
-  margin-top: 1em;
-  color : darkgray;
+.mat-button {
+  margin-right: 2%;
 }
-
+h4 {
+  color : dimgray;
+}
+h3 {
+  margin-top: 1em;
+  color : dimgray;
+  font-weight: 600;
+}
 /** styles for code blocks highlighted with highlight.js */
 pre {
   display: flex;
@@ -40,7 +49,30 @@ pre {
   }
 }
 
-/** Line numbers styles */
+/** MODEL ARTIFACTS */
+
+.artifact-table {
+  min-width: 50%;
+}
+.mat-column-name {
+  width: 40% !important;
+}
+.mat-column-kind {
+  width: 30% !important;
+}
+.mat-column-action {
+  width: 20% !important;
+}
+/** NGX-GRAPH */
+.ngx-box {
+  border: 1px solid gray;
+  border-radius: 5px;
+  width: 800px;
+  height: 300px;
+  align-content: center;
+}
+
+/** HIGHLIGHTJS */
 .hljs {
   margin: 0 1em;
   padding: 10px;
@@ -85,30 +117,15 @@ td.hljs-ln-code {
 
 }
 .nodeBox {
+  display: table-cell;
   border: 3px solid $my-primary;
   border-radius: 5%;
-  background-color: transparent;
-  width: 170px;
-  height: 145px;
-}
-.nodeBox-headline {
+  #background-color: transparent;
   background-color: $my-primary;
   color: white;
   font-weight: bold;
   text-align: center;
-  width:100%;
-}
-.nodeBox-row {
-  color: black;
-  width:100%;
-  height: 1.5em;
   vertical-align: middle;
-}
-.nodeBox-data {
-  justify-content: left;
-}
-.nodeBox-data-headline {
-  justify-content: left;
-  font-weight: bold;
-  color:dimgray;
+  width: 170px;
+  height: 45px;
 }

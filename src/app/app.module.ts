@@ -61,11 +61,9 @@ import {
 } from 'ngx-highlightjs';
 import { AddModelArtifactDialogComponent } from './model-artifacts/add-model-artifact-dialog/add-model-artifact-dialog.component';
 import { ModelArtifactsComponent } from './model-artifacts/model-artifacts.component';
+import {MatTreeModule} from "@angular/material/tree";
+import {TruncatePipe} from "./shared/helpers/TruncatePipe";
 
-// @ts-ignore
-// @ts-ignore
-// @ts-ignore
-// @ts-ignore
 @NgModule({
     declarations: [
         AppComponent,
@@ -94,6 +92,7 @@ import { ModelArtifactsComponent } from './model-artifacts/model-artifacts.compo
         AddFeatureDialogComponent,
         AddModelArtifactDialogComponent,
         ModelArtifactsComponent,
+        TruncatePipe
     ],
     imports: [
         BrowserModule,
