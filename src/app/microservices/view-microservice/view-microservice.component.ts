@@ -18,6 +18,11 @@ import {ClusterNode, Edge, Node} from "@swimlane/ngx-graph";
 import {ServiceStoryEdge} from "../../shared/models/servicestoryedge.model";
 import * as uniqolor from "uniqolor";
 import {MatTableDataSource} from "@angular/material/table";
+import {MatDialog} from "@angular/material/dialog";
+import {
+    AddModelArtifactDialogComponent
+} from "../../model-artifacts/add-model-artifact-dialog/add-model-artifact-dialog.component";
+import {ViewArtifactDialogComponent} from "./view-artifact-dialog/view-artifact-dialog.component";
 
 //const themeGithub: string = '../node_modules/highlight.js/styles/github.css';
 //const themeGithubDark: string = 'node_modules/highlight.js/styles/github-dark.css';
@@ -100,7 +105,7 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
                 private activatedRoute: ActivatedRoute,
                 private router: Router,
                 private snackBar: MatSnackBar,
-                private hljsLoader: HighlightLoader) {
+                public dialog: MatDialog) {
     }
 
 
@@ -235,7 +240,16 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
 
     protected readonly uniqolor = uniqolor;
 
-    openViewer(artifact : ModelArtifact) {
-        //TODO
+    openViewer(artifact : ModelArtifact) : void {
+        const dialogRef = this.dialog.open(ViewArtifactDialogComponent, {
+            data: {artifact},
+            width: '50%'
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if(result) {
+                console.log(result)
+            }
+        });
     }
 }

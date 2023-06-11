@@ -61,8 +61,11 @@ import {
 } from 'ngx-highlightjs';
 import { AddModelArtifactDialogComponent } from './model-artifacts/add-model-artifact-dialog/add-model-artifact-dialog.component';
 import { ModelArtifactsComponent } from './model-artifacts/model-artifacts.component';
-import {MatTreeModule} from "@angular/material/tree";
 import {TruncatePipe} from "./shared/helpers/TruncatePipe";
+import { ViewArtifactDialogComponent } from './microservices/view-microservice/view-artifact-dialog/view-artifact-dialog.component';
+import {HighlightPlusModule} from "ngx-highlightjs/plus";
+import {NgxViewerModule} from "@erengee/ngx-viewer";
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
     declarations: [
@@ -92,7 +95,8 @@ import {TruncatePipe} from "./shared/helpers/TruncatePipe";
         AddFeatureDialogComponent,
         AddModelArtifactDialogComponent,
         ModelArtifactsComponent,
-        TruncatePipe
+        TruncatePipe,
+        ViewArtifactDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -122,7 +126,10 @@ import {TruncatePipe} from "./shared/helpers/TruncatePipe";
         MatDialogModule,
         MatExpansionModule,
         NgxGraphModule,
-        HighlightModule
+        HighlightModule,
+        HighlightPlusModule,
+        NgxViewerModule,
+        NgOptimizedImage
     ],
     bootstrap: [AppComponent],
     providers: [
@@ -134,10 +141,9 @@ import {TruncatePipe} from "./shared/helpers/TruncatePipe";
                 lineNumbersLoader: () => import('highlightjs-line-numbers.js'),
                 themePath: 'assets/hljs-styles/github.css',
                 languages: {
-                    typescript: () => import('highlight.js/lib/languages/typescript'),
-                    css: () => import('highlight.js/lib/languages/css'),
-                    xml: () => import('highlight.js/lib/languages/xml'),
-                    lemma: () => import('hljs-lemma/src/languages/lemma')
+                    yaml: () => import('highlight.js/lib/languages/yaml'),
+                    lemma: () => import('hljs-lemma/src/languages/lemma'),
+                    json: () => import('highlight.js/lib/languages/json')
                 },
             },
         },

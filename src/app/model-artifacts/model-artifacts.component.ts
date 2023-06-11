@@ -20,9 +20,6 @@ import {Member} from "../shared/models/member.model";
   styleUrls: ['./model-artifacts.component.scss']
 })
 export class ModelArtifactsComponent implements OnInit, OnDestroy {
-  //TODO create a new menu entry and design HTML side for this component
-  //TODO clear residues from edit-microservice regarding this shit.
-  //TODO clear microservice overview concerning model artifacts and maybe also planned features (make overview simply more simple ^^)
   sysId: number = 0;
 
   microservices: Microservice[] = [];

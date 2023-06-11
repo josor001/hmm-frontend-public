@@ -1,27 +1,3 @@
-<p>view-microservice works!</p>
-<div *ngIf="microservice">
-    <p>{{microservice.id}}</p>
-    <p>{{microservice.name}}</p>
-</div>
-<div>
-
-
-
-<pre><code [highlight]="typescript" [languages]="['typescript']" [lineNumbers]="true"></code></pre>
-<h3>TEST CODE</h3>
-<pre *ngIf="lemma_highlighted"><code [innerHTML]="lemma_highlighted"></code></pre>
-<pre><code [highlight]="lemma_str" [languages]="['lemma']" [lineNumbers]="true" ></code></pre>
-
-    <!-- TODO theme path to .css file seems troublesome?
-<button (click)="changeTheme()">Change theme</button> -->
-<h4>Highlight response</h4>
-<!-- TODO this response thing seems to be problematic due to possible undefined status
-<pre>{{ response | json }}</pre>
--->
-</div>
-
-<!-- ACTUAL HTML FROM HERE -->
-
 <mat-card class="microservice-view" *ngIf="microservice">
     <mat-card-header>
         <mat-card-subtitle>Microservice</mat-card-subtitle>
@@ -181,20 +157,14 @@
     </mat-card-content>
 
     <mat-card-actions class="full-width">
-        <table class="full-width">
-            <tr>
-                <td>
                     <button mat-flat-button color="accent" matTooltip="click to edit service"
-                            [routerLink]="['/system',sysId,'microservices','edit', microservice.id]">
+                            [routerLink]="['/system',sysId,'microservices','edit', microservice.id]"
+                    style="margin-right:5px;">
                         <mat-icon>edit</mat-icon> Edit
                     </button>
-                </td>
-                <td>
+
                     <button matTooltip="click to delete service" mat-flat-button color="warn" (click)="deleteMicroservice(microservice.id!)">
                         <mat-icon>delete</mat-icon> Delete
                     </button>
-                </td>
-            </tr>
-        </table>
     </mat-card-actions>
 </mat-card>

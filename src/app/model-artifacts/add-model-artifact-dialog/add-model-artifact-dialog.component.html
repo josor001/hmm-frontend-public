@@ -11,8 +11,8 @@
         <mat-form-field appearance="outline">
             <mat-label>Model Kind</mat-label>
             <mat-select [(ngModel)]="artifact.kind" name="kind" required>
-                <mat-option *ngFor="let kind of kinds" [value]="kind.value">
-                    {{kind.viewValue}}
+                <mat-option *ngFor="let kind of MODEL_KIND | keyvalue" [value]="kind.value">
+                    {{kind.value}}
                 </mat-option>
             </mat-select>
         </mat-form-field>

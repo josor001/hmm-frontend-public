@@ -22,6 +22,7 @@
     "@angular/platform-browser": "^14.3.0",
     "@angular/platform-browser-dynamic": "^14.3.0",
     "@angular/router": "^14.3.0",
+    "@erengee/ngx-viewer": "^1.1.0",
     "@swimlane/ngx-graph": "^8.0.3",
     "highlight.js": "^11.6.0",
     "highlightjs-line-numbers.js": "^2.8.0",
@@ -30,6 +31,7 @@
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "uniqolor": "^1.1.0",
+    "viewerjs": "^1.11.3",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

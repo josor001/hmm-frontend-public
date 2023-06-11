@@ -1,17 +1,13 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {DialogFeature} from "../../microservices/edit-microservice/add-feature-dialog/add-feature-dialog.component";
+import {MODEL_KIND} from "../../shared/models/modelkind.enum";
 
 export interface DialogModelArtifact {
   name: string;
   kind: string;
   location: string;
   microserviceId: number;
-}
-
-interface ModelKind {
-  value: string;
-  viewValue: string;
 }
 
 @Component({
@@ -22,12 +18,6 @@ interface ModelKind {
 export class AddModelArtifactDialogComponent {
   artifact: DialogModelArtifact = {name:"",kind:"",location:"", microserviceId:0}
   microserviceIdsWithNames: Map<number, string>;
-
-  kinds: ModelKind[] = [
-    {value: 'graphical', viewValue: 'Graphical'},
-    {value: 'textual', viewValue: 'Textual'},
-    {value: 'lemma', viewValue: 'LEMMA'},
-  ];
 
   constructor(public dialogRef: MatDialogRef<AddModelArtifactDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data : any) {
@@ -46,4 +36,6 @@ export class AddModelArtifactDialogComponent {
   close() {
     this.dialogRef.close();
   }
+
+  protected readonly MODEL_KIND = MODEL_KIND;
 }
