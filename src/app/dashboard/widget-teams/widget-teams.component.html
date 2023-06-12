@@ -3,4 +3,9 @@
         <mat-card-title>Teams</mat-card-title>
         <mat-card-subtitle>Count {{numberOfTeams}}</mat-card-subtitle>
     </mat-card-header>
+    <mat-card-content>
+        <mat-list *ngFor="let team of teams">
+            <a mat-stroked-button href="/system/{{sysId}}/teams"><mat-icon>group</mat-icon> {{team.name}}</a>
+        </mat-list>
+    </mat-card-content>
 </mat-card>

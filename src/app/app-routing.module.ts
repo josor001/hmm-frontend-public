@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {TeamsComponent} from "./teams/teams.component";
 import {MicroservicesComponent} from "./microservices/microservices.component";
-import {OrganizationComponent} from "./organization/organization.component";
 import {SystemComponent} from "./system/system.component";
 import {MembersComponent} from "./members/members.component";
 import {EditMemberComponent} from "./members/edit-member/edit-member.component";
@@ -26,7 +25,6 @@ const routes: Routes = [//
   { path: 'system/:sysId/teams', component: TeamsComponent },
   { path: 'system/:sysId/teams/edit/:id', component: EditTeamComponent },
   { path: 'system/:sysId/teams/new', component: AddTeamComponent },
-  { path: 'organization', component: OrganizationComponent },
   { path: 'system/:sysId/members', component: MembersComponent },
   { path: 'system/:sysId/members/edit/:id', component: EditMemberComponent },
   { path: 'system/:sysId/members/new', component: AddMemberComponent },

@@ -74,6 +74,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
         this.completeTeams = [];
         this.teams.forEach(team => {
             if(team.name && team.id && team.sysId) {
+                console.log("is the error happening here?")
                 let compTeam = new CompleteTeam(team.name, team.id, team.sysId);
                 compTeam.ownedMicroservices = this.getMicroservices(team);
                 compTeam.members = (this.getMembers(team));

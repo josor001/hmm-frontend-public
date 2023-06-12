@@ -22,7 +22,6 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
 import {MatMenuModule} from '@angular/material/menu';
 import {MicroservicesComponent} from './microservices/microservices.component';
-import {OrganizationComponent} from './organization/organization.component';
 import {MatSelectModule} from "@angular/material/select";
 import {MembersComponent} from './members/members.component';
 import {MatTableModule} from "@angular/material/table";
@@ -66,6 +65,7 @@ import { ViewArtifactDialogComponent } from './microservices/view-microservice/v
 import {HighlightPlusModule} from "ngx-highlightjs/plus";
 import {NgxViewerModule} from "@erengee/ngx-viewer";
 import {NgOptimizedImage} from "@angular/common";
+import { WidgetSystemOverviewComponent } from './dashboard/widget-system-overview/widget-system-overview.component';
 
 @NgModule({
     declarations: [
@@ -74,7 +74,6 @@ import {NgOptimizedImage} from "@angular/common";
         SystemComponent,
         DashboardComponent,
         MicroservicesComponent,
-        OrganizationComponent,
         MembersComponent,
         EditMemberComponent,
         AddMemberComponent,
@@ -96,7 +95,8 @@ import {NgOptimizedImage} from "@angular/common";
         AddModelArtifactDialogComponent,
         ModelArtifactsComponent,
         TruncatePipe,
-        ViewArtifactDialogComponent
+        ViewArtifactDialogComponent,
+        WidgetSystemOverviewComponent
     ],
     imports: [
         BrowserModule,

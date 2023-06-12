@@ -125,8 +125,6 @@ export class ServiceStoriesComponent implements OnInit, OnDestroy {
             var spocName = ""
             if (service.contactPersonId) {
                 const member = await lastValueFrom(this.memberService.getMember(service.contactPersonId!))
-                console.log("MEMBER FOUND?", member)
-                console.log("SEARCHED FOR MEMBER WITH ID", service.contactPersonId)
                 spocName = `${member.firstname} ${member.lastname}`
             }
             //get the name of a possible team which owns the service

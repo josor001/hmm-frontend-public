@@ -53,7 +53,6 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
     // Stuff for displaying the ServiceStories
     graphNodes : Node[] = [];
     graphEdges: Edge[] = [];
-    graphClusters: ClusterNode[] = [];
     nodesReady: boolean = false;
     layoutSettings = {
         orientation: 'LR'
@@ -62,39 +61,6 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
     // Stuff for displaying the model artifact table
     displayedArtifactColumns: string[] = ['action', 'name', 'kind'];
     artifactTableDataSource = new MatTableDataSource();
-
-    // Stuff for Code Highlighting with highlightJS
-    typescript = `function myFunction() {
-    document.getElementById("demo1").innerHTML = "Test 1!";
-    document.getElementById("demo2").innerHTML = "Test 2!";
-  }`;
-
-    lemma_str = `context Delivery {
-    structure Courier<aggregate, entity> {
-        long id<identifier>,
-        Plan plan<part>,
-        boolean available,
-        function ActionList actionsForDelivery(long deliveryId),
-        procedure noteAvailable(),
-        procedure addAction(Action action),
-        procedure cancelDelivery(long deliveryId),
-        function Courier create(long courierId)  //STATIC
-    }
-
-    structure Action<valueObject> {
-      immutable DeliveryAPI::Web.DeliveryActionType type,
-      immutable Common::Common.Address address,
-      immutable date time,
-      immutable long deliveryId,
-      function boolean actionFor(long deliveryId)<sideEffectFree>,
-      function Action makePickup(long deliveryId, Common::Common.Address pickupAddress, date pickupTime)<sideEffectFree>,
-      function Action makeDropoff(long deliveryId, Common::Common.Address deliveryAddress, date deliveryTime)<sideEffectFree>
-    }
-
-    collection ActionList {Action action}
-    }`;
-
-    lemma_highlighted: string | undefined;
 
     constructor(private microserviceService: MicroserviceService,
                 private teamService: TeamService,

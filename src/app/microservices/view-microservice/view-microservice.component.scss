@@ -72,6 +72,18 @@ pre {
   align-content: center;
 }
 
+.nodeBox {
+  display: table-cell;
+  border-radius: 5px;
+  background-color: gray;
+  color: white;
+  font-weight: 550;
+  text-align: center;
+  vertical-align: middle;
+  width: 170px;
+  height: 45px;
+}
+
 /** HIGHLIGHTJS */
 .hljs {
   margin: 0 1em;
@@ -110,22 +122,3 @@ td.hljs-ln-code {
   padding-left: 8px !important;
 }
 
-/* STYLES FOR NGX-GRAPH */
-/** graph styles */
-.node {
-  background-color: $my-primary;
-
-}
-.nodeBox {
-  display: table-cell;
-  border: 3px solid $my-primary;
-  border-radius: 5%;
-  #background-color: transparent;
-  background-color: $my-primary;
-  color: white;
-  font-weight: bold;
-  text-align: center;
-  vertical-align: middle;
-  width: 170px;
-  height: 45px;
-}

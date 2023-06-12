@@ -87,7 +87,7 @@
 
         <h3>Service Stories</h3>
 
-        <h4>This list displays all service stories that {{microservice.name}} is involved in.
+        <h4>This list displays all service stories that <code>{{microservice.name}}</code> is involved in.
             The story names are colored to identify them in the diagram displayed below the list.</h4>
 
         <mat-list>
@@ -98,7 +98,7 @@
             </mat-list-item>
         </mat-list>
 
-        <h4>This diagram shows a unified view of all stories in which the {{microservice.name}} microservice is involved.
+        <h4>This diagram shows a unified view of all stories in which the <code>{{microservice.name}}</code> microservice is involved.
             The edges are colored based on their origin service story.</h4>
 
         <div xmlns:svg="http://www.w3.org/2000/svg" class="ngx-box">
@@ -111,7 +111,6 @@
                     [showMiniMap]="true"
                     [links]="this.graphEdges"
                     [nodes]="this.graphNodes"
-                    [clusters]="this.graphClusters"
                     layout="dagreCluster"
                     [layoutSettings]="layoutSettings"
                     [autoZoom]="true"
@@ -119,7 +118,7 @@
 
                 <!-- defining the arrow head as end of edge -->
                 <ng-template #defsTemplate>
-                    <svg:marker id="arrow{{microservice.id}}" viewBox="0 -5 10 10" refX="8" refY="0"
+                    <svg:marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0"
                                 markerWidth="4" markerHeight="4" orient="auto">
                         <svg:path d="M0,-5L10,0L0,5" class="arrow-head"/>
                     </svg:marker>
@@ -127,7 +126,7 @@
 
                 <ng-template #nodeTemplate let-node>
                     <svg xmlns:svg="http://www.w3.org/2000/svg">
-                        <svg:g class="node" width="180" height="50">
+                        <svg:g class="node">
                             <svg:foreignObject width="180" height="50"
                                                xmlns:svg="http://www.w3.org/2000/svg"
                                                xmlns:xhtml="http://www.w3.org/1999/xhtml">
@@ -142,7 +141,7 @@
                     <svg:g class="edge">
                         <svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" style="stroke: {{link.data.color}}"
                                   stroke-width="3"
-                                  [attr.marker-end]="'url(#arrow'+microservice.id+')'"></svg:path>
+                                  marker-end="url(#arrow)"></svg:path>
                         <svg:text class="edge-label" text-anchor="middle">
                             <textPath class="text-path" [attr.href]="'#' + link.id"
                                       startOffset="50%">

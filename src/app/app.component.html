@@ -1,32 +1,21 @@
-<div *ngIf="!sysId" style="
-  position: absolute;
-  left: 50%;
-  top: 30%;
-  width: 400px;
-  height: 400px;
-  margin-left: -200px;
-  /* -1/2 width */
-  margin-top: -200px;
-  /* -1/2 height */">
-    <h1>Please Select Your Testsystem</h1>
-    <mat-form-field appearance="outline">
-        <mat-label>System</mat-label>
-        <mat-select [(ngModel)]="sysId" (selectionChange)="forwardToDashboard()">
-            <mat-option [value]="">None</mat-option>
-            <mat-option [value]="1">System 1</mat-option>
-            <mat-option [value]="2">System 2</mat-option>
-            <mat-option [value]="3">System 3</mat-option>
-            <mat-option [value]="4">System 4</mat-option>
-        </mat-select>
-    </mat-form-field>
-</div>
-
 <mat-sidenav-container class="sidenav-container" *ngIf="sysId">
     <mat-sidenav #drawer class="sidenav" fixedInViewport
                  [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                  [mode]="(isHandset$ | async) ? 'over' : 'side'"
                  [opened]="(isHandset$ | async) === false">
         <mat-toolbar><img src="/assets/img/logo_simple.jpeg" alt="image" class="logo"></mat-toolbar>
+
+        <!-- TODO ACTUALLY ADD SYSTEM COMPONENT WITH SYSTEM SHORTHANDLE, NAME and PURPOSE -->
+        <mat-form-field appearance="outline" style="width:96%; margin: 2%;">
+            <mat-label>System</mat-label>
+            <mat-select [(ngModel)]="sysId" (selectionChange)="forwardToDashboard()">
+                <mat-option [value]="1">System 1</mat-option>
+                <mat-option [value]="2">System 2</mat-option>
+                <mat-option [value]="3">System 3</mat-option>
+                <mat-option [value]="4">System 4</mat-option>
+            </mat-select>
+        </mat-form-field>
+
         <mat-nav-list>
             <a mat-list-item routerLink="system/{{sysId}}/dashboard" routerLinkActive="active-link">
                 <mat-icon>dashboard</mat-icon><span class="menu_item_text">Dashboard</span>
@@ -52,12 +41,6 @@
             </a>
 
             <div mat-subheader>Organizational</div>
-            <div matTooltip="Disabled during beta test" matTooltipPosition="right">
-                <a mat-list-item routerLink="system/{{sysId}}/organization" routerLinkActive="active-link" disabled>
-                    <mat-icon>domain</mat-icon>
-                    <span class="menu_item_text">Organization</span>
-                </a>
-            </div>
             <a mat-list-item routerLink="system/{{sysId}}/members" routerLinkActive="active-link">
                 <mat-icon>person</mat-icon>
                 <span class="menu_item_text">People</span>

@@ -1,5 +1,10 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span>Dashboard</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
 <div class="grid-container">
-  <h1 class="mat-h1">Dashboard for System {{sysId}}</h1>
   <mat-card>
     <mat-card-header>
       <mat-card-title>Welcome!</mat-card-title>
@@ -7,27 +12,29 @@
     </mat-card-header>
     <mat-card-content>
       <p>Hello all,
-
         welcome to the Holistic Microservice Management Platform or <strong>HMM</strong> for short. The goal of HMM is to provide companies and organizations developing microservices systems with a simple and clear collection point for all information pertaining to development.
         HMM is primarily developed by the University of Applied Sciences Dortmund and is currently still in an early alpha phase. I.e. not all features are implemented yet and it is likely that you will find one or the other bug while using it. Your feedback is all the more important to us.
         Do you think such a platform is useful? What information and/or features are you definitely missing? How can we further increase the usefulness?
         Please note that we do NOT try to build the next GitHub Issue Tracker or a Confluence-like wiki system. Instead we plan to link/integrate all those (probably) existing information sources into one single space.
         Features we have planned for the future include the following.</p>
       <ul>
-        <li>Connection of services to model artifact (e.g. UML diagrams)</li>
+        <li>Authentication</li>
         <li>Integration of documentation artifacts (e.g. Requirements Documentation or Git Issues)</li>
-        <li>Automated visualization of the overall system</li>
         <li>Add known misbehaviour/errors to microservices</li>
       </ul>
       <p>But for now, have fun exploring. We are eager for your feedback!</p>
     </mat-card-content>
   </mat-card>
   <table class="widget-table">
-    <tr>
+    <tr style="vertical-align: top;">
+      <td colspan="2"><app-widget-system-overview [sysId]="sysId"></app-widget-system-overview></td>
       <td (click)="forward('stories')"><app-widget-stories [sysId]="sysId"></app-widget-stories></td>
+    </tr>
+    <tr style="vertical-align: top;">
       <td (click)="forward('microservices')"><app-widget-microservices [sysId]="sysId"></app-widget-microservices></td>
       <td (click)="forward('teams')"><app-widget-teams [sysId]="sysId"></app-widget-teams></td>
       <td (click)="forward('members')"><app-widget-members [sysId]="sysId"></app-widget-members></td>
+      <td></td>
     </tr>
   </table>
 </div>
