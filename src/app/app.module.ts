@@ -66,6 +66,8 @@ import {HighlightPlusModule} from "ngx-highlightjs/plus";
 import {NgxViewerModule} from "@erengee/ngx-viewer";
 import {NgOptimizedImage} from "@angular/common";
 import { WidgetSystemOverviewComponent } from './dashboard/widget-system-overview/widget-system-overview.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { NewSystemComponent } from './system/new-system/new-system.component';
 
 @NgModule({
     declarations: [
@@ -96,7 +98,9 @@ import { WidgetSystemOverviewComponent } from './dashboard/widget-system-overvie
         ModelArtifactsComponent,
         TruncatePipe,
         ViewArtifactDialogComponent,
-        WidgetSystemOverviewComponent
+        WidgetSystemOverviewComponent,
+        ErrorPageComponent,
+        NewSystemComponent,
     ],
     imports: [
         BrowserModule,

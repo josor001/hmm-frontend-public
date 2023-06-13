@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import {Observable, Subscription} from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
+import {SoftwaresystemService} from "./shared/services/softwaresystem.service";
+import {Softwaresystem} from "./shared/models/softwaresystem.model";
 
 @Component({
   selector: 'app-root',
@@ -12,29 +14,37 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class AppComponent implements OnInit {
   title = 'Holistic Microservice Management Platform';
   routerSub: Subscription | undefined;
-  sysId: number = 1;
+  sysId: number = 2;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
           map(result => result.matches),
           shareReplay()
       );
-  private routerSysSub: any;
+  private routerSysSub: Subscription | undefined;
+  private sysSub: Subscription | undefined;
+  systems: Softwaresystem[] = [];
 
   constructor(private breakpointObserver: BreakpointObserver,
-              private router: Router) {
+              private router: Router,
+              private systemService : SoftwaresystemService) {
   }
 
   ngOnDestroy(): void {
     this.routerSysSub?.unsubscribe();
+    this.sysSub?.unsubscribe();
   }
 
   ngOnInit(): void {
+    this.sysSub = this.systemService.getSoftwaresystems().subscribe(systems => {
+      this.systems = systems;
+    })
   }
 
   forwardToDashboard() {
     let currentUrl = `/system/${this.sysId}/dashboard`;
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+    console.log(currentUrl);
+    this.router.navigateByUrl('/systems/new', {skipLocationChange: true}).then(() => {
       this.router.navigate([currentUrl]);
     });
   }

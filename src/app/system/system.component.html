@@ -1,1 +1,26 @@
-<p>System works!</p>
+<mat-toolbar>
+    <mat-toolbar-row>
+        <span>System</span>
+        <span class="toolbar-spacer"></span>
+        <div class="menu-button-row">
+            <button mat-flat-button color="primary" routerLink="/systems/new">
+                <mat-icon>add</mat-icon>
+                <span class="menu_item_text">New</span>
+            </button>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-card *ngIf="system" class="container">
+    <mat-card-header>
+        <mat-card-title>
+            {{system.name}}
+        </mat-card-title>
+        <mat-card-subtitle>
+            Software System | ID {{system.id}}
+        </mat-card-subtitle>
+    </mat-card-header>
+<mat-card-content>
+<p>{{system.description}}</p>
+</mat-card-content>
+</mat-card>

@@ -1,0 +1,29 @@
+<mat-card class="system-add" *ngIf="newSystem">
+    <mat-card-header>
+        <mat-card-title>New System</mat-card-title>
+        <mat-card-subtitle>Please fill in all fields!</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="system-add-form">
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input matInput name="name" placeholder="(Y)et (A)nother (A)mazing (S)ystem"
+                           [(ngModel)]="newSystem.name" required>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput type="text" name="description" placeholder="The system's purpose and story"
+                              [(ngModel)]="newSystem.description" required></textarea>
+                </mat-form-field>
+            </p>
+        </form>
+
+    </mat-card-content>
+    <mat-card-actions>
+        <a mat-flat-button class="system-button" color="primary" (click)="save()">Save</a>
+        <a mat-flat-button class="system-button" color="warn" (click)="abort()">Abort</a>
+    </mat-card-actions>
+</mat-card>

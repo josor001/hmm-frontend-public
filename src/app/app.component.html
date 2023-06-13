@@ -5,14 +5,13 @@
                  [opened]="(isHandset$ | async) === false">
         <mat-toolbar><img src="/assets/img/logo_simple.jpeg" alt="image" class="logo"></mat-toolbar>
 
-        <!-- TODO ACTUALLY ADD SYSTEM COMPONENT WITH SYSTEM SHORTHANDLE, NAME and PURPOSE -->
         <mat-form-field appearance="outline" style="width:96%; margin: 2%;">
             <mat-label>System</mat-label>
-            <mat-select [(ngModel)]="sysId" (selectionChange)="forwardToDashboard()">
-                <mat-option [value]="1">System 1</mat-option>
-                <mat-option [value]="2">System 2</mat-option>
-                <mat-option [value]="3">System 3</mat-option>
-                <mat-option [value]="4">System 4</mat-option>
+            <!-- TODO THIS SOMEHOW DOES NOT WORK -->
+            <!-- TODO MAKE IT THAT SYSTEM 1 CAN NEVER BE DELETED AND IS DEFAULT-->
+            <!-- TODO MAYBE ADD THE SELECTION THING AGAIN (look old code) -->
+            <mat-select [(value)]="sysId" (selectionChange)="forwardToDashboard()">
+                <mat-option *ngFor="let system of systems" [value]="system.id">{{system.name}}</mat-option>
             </mat-select>
         </mat-form-field>
 
@@ -21,12 +20,10 @@
                 <mat-icon>dashboard</mat-icon><span class="menu_item_text">Dashboard</span>
             </a>
             <div mat-subheader>Technical</div>
-            <div matTooltip="Disabled during beta test" matTooltipPosition="right">
-                <a mat-list-item routerLink="/system" routerLinkActive="active-link" disabled>
+                <a mat-list-item routerLink="/system/{{sysId}}" routerLinkActive="active-link">
                     <mat-icon>webhook</mat-icon>
                     <span class="menu_item_text">System</span>
                 </a>
-            </div>
             <a mat-list-item routerLink="system/{{sysId}}/stories" routerLinkActive="active-link">
                 <mat-icon>book</mat-icon>
                 <span class="menu_item_text">Stories</span>
