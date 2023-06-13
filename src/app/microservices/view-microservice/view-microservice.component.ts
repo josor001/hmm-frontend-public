@@ -87,6 +87,7 @@ export class ViewMicroserviceComponent implements OnInit, OnDestroy {
                 microservice => {
                     //if there is a service found, set this as the to be viewed service
                     this.microservice = microservice;
+                    console.log(microservice)
                     // get all other data to be displayed based on the set viewService
                     this.getTeamAndMembers(this.microservice.id!!)
                     this.getArtifacts(this.microservice.id!!)

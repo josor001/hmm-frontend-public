@@ -28,6 +28,15 @@
                        placeholder="https://github.com/user/repo" [(ngModel)]="editService.repositoryLink">
             </mat-form-field>
 
+            <h2 class="card-headline">Issue Link</h2>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Issue Link</mat-label>
+                <input matInput type="url"
+                       name="issue"
+                       placeholder="https://github.com/user/repo/issues" [(ngModel)]="editService.issueLink">
+            </mat-form-field>
+
             <h2 class="card-headline">Contact Person</h2>
 
             <mat-form-field appearance="outline">
@@ -39,12 +48,15 @@
 
             <h2 class="card-headline">Planned Features <button mat-mini-fab color="primary" (click)="openFeatureNewDialog()"><mat-icon>add</mat-icon></button></h2>
 
-            <table>
-                <tr>
+            <table class="full-width feature-table">
+                <thead>
+                <tr id="head">
                     <th>Unique Name</th>
                     <th>Description</th>
                     <th>Actions</th>
                 </tr>
+                </thead>
+                <tbody>
                 <tr *ngFor="let feature of editService.plannedFeatures | keyvalue" style="vertical-align: top">
                     <td>
                         <strong>{{feature.key}}</strong>
@@ -57,6 +69,7 @@
                         <button mat-icon-button class="microservice-button" color="warn" (click)="removeFeature(feature.key)"><mat-icon>cancel</mat-icon></button>
                     </td>
                 </tr>
+                </tbody>
             </table>
         </div>
     </mat-card-content>

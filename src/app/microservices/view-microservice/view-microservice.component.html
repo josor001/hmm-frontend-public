@@ -25,7 +25,6 @@
         <p *ngIf="microservice.purpose">{{microservice.purpose}}</p>
         <p></p>
         <h4>For the future the following features can be expected.</h4>
-        <!-- TODO this somehow does not work. planned features is apparently set although no values are included?-->
         <p *ngIf="!microservice.plannedFeatures">Currently no new features planned.</p>
         <mat-list *ngIf="microservice.plannedFeatures">
             <mat-list-item *ngFor="let feature of microservice.plannedFeatures | keyvalue">

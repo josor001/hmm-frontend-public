@@ -6,14 +6,9 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {Microservice} from "../../shared/models/microservice.model";
 import {MicroserviceService} from "../../shared/services/microservice.service";
 import {MemberService} from "../../shared/services/member.service";
-import {MatChipInputEvent} from "@angular/material/chips";
-import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {Member} from "../../shared/models/member.model";
-import {FormGroup} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
-import {AddFeatureDialogComponent, DialogFeature} from "./add-feature-dialog/add-feature-dialog.component";
-import {AddModelArtifactDialogComponent} from "../../model-artifacts/add-model-artifact-dialog/add-model-artifact-dialog.component";
-import {ModelArtifact} from "../../shared/models/modelartifact.model";
+import {AddFeatureDialogComponent} from "./add-feature-dialog/add-feature-dialog.component";
 
 @Component({
     selector: 'app-edit-microservice',
@@ -31,9 +26,6 @@ export class EditMicroserviceComponent implements OnInit, OnDestroy {
     routerSysSub: Subscription | undefined;
     teamSub: Subscription | undefined;
     updateSub: Subscription | undefined;
-
-    readonly separatorKeysCodes = [ENTER, COMMA] as const;
-
     constructor(private microserviceService: MicroserviceService,
                 private teamService: TeamService,
                 private memberService: MemberService,
@@ -53,11 +45,12 @@ export class EditMicroserviceComponent implements OnInit, OnDestroy {
             this.serviceSub = this.microserviceService.getMicroservice(id).subscribe(
                 (microservice) => {
                     this.editService = microservice;
+                    console.log("RESULT FROM GET",microservice);
                     this.populateServiceTeam();
                     //if there are no features yet and therefore plannedFeatures is not initialized properly
                     //this creates an empty Map
-                    if(!(this.editService.plannedFeatures instanceof Map)) {
-                        this.editService.plannedFeatures = new Map<string, string>()
+                    if(!this.editService.plannedFeatures) {
+                        this.editService.plannedFeatures = {};
                     }
                 }
             )
@@ -86,9 +79,9 @@ export class EditMicroserviceComponent implements OnInit, OnDestroy {
       this.router.navigate([`/system/${this.sysId}/microservices`]);
     }
 
-    removeFeature(featureKey: string): void {
+    removeFeature(featureName: string): void {
         if (this.editService && this.editService.plannedFeatures) {
-            this.editService.plannedFeatures.delete(featureKey)
+            delete this.editService.plannedFeatures[featureName];
         }
     }
 
@@ -120,9 +113,9 @@ export class EditMicroserviceComponent implements OnInit, OnDestroy {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            if(result) {
-                this.editService?.plannedFeatures?.set(result.name, result.description);
-                console.log(this.editService?.plannedFeatures);
+            if(result && this.editService && this.editService.plannedFeatures) {
+                this.editService.plannedFeatures[result.name] = result.description;
+                console.log("ADDED AFTER NEW",this.editService?.plannedFeatures);
             }
         });
     }
@@ -133,9 +126,9 @@ export class EditMicroserviceComponent implements OnInit, OnDestroy {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            if(result) {
-                this.editService?.plannedFeatures?.set(result.name, result.description);
-                console.log(this.editService?.plannedFeatures);
+            if(result && this.editService && this.editService.plannedFeatures) {
+                this.editService.plannedFeatures[result.name] = result.description;
+                console.log("ADDED AFTER EDIT",this.editService?.plannedFeatures);
             }
         });
     }
