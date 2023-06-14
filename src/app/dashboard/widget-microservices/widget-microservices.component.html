@@ -3,4 +3,9 @@
         <mat-card-title>Microservices</mat-card-title>
         <mat-card-subtitle>Count {{numberOfServices}}</mat-card-subtitle>
     </mat-card-header>
+    <mat-card-content>
+        <mat-list *ngFor="let service of microservices">
+            <a mat-stroked-button href="/system/{{sysId}}/microservices/details/{{service.id}}"><mat-icon>code</mat-icon> {{service.name}}</a>
+        </mat-list>
+    </mat-card-content>
 </mat-card>

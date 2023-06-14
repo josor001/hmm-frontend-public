@@ -6,7 +6,7 @@ import {Team} from "../shared/models/team.model";
 import {TeamService} from "../shared/services/team.service";
 import {MemberService} from "../shared/services/member.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {CompleteTeam} from "../shared/models/completeTeam.model";
+import {CompleteTeam} from "../shared/models/completeteam.model";
 import {Microservice} from "../shared/models/microservice.model";
 import {Member} from "../shared/models/member.model";
 import {MicroserviceService} from "../shared/services/microservice.service";
@@ -74,6 +74,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
         this.completeTeams = [];
         this.teams.forEach(team => {
             if(team.name && team.id && team.sysId) {
+                console.log("is the error happening here?")
                 let compTeam = new CompleteTeam(team.name, team.id, team.sysId);
                 compTeam.ownedMicroservices = this.getMicroservices(team);
                 compTeam.members = (this.getMembers(team));

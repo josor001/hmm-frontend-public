@@ -34,11 +34,6 @@ export class SelectMemberDialogComponent implements OnInit, OnDestroy {
     this.subGet = this.memberService.getMembers(this.sysId).subscribe(
         members => {
           this.members = members;
-          //OLD reduce members regarding members already included with the team.
-          /* this.members = this.members.filter(member => {
-            return this.alreadyIncluded.map(m => m.id).indexOf(member.id) < 0;
-          });*/
-
           //NEW reduce this.members regarding members, that are already owned by ANY other team
           this.members.forEach(member => {
             this.teamService.getTeamByMemberId(member.id!).subscribe(team => {

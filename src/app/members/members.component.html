@@ -17,6 +17,16 @@
             <th mat-header-cell *matHeaderCellDef> {{column}} </th>
             <td mat-cell *matCellDef="let member"> {{member[column]}} </td>
         </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let member">
+                <button mat-flat-button class="expanded-button" color="primary" [routerLink]="['/system',sysId,'members','edit', member.id]">Edit</button>
+                <button mat-flat-button class="expanded-button" color="warn" (click)="deleteMember(member.id)">Delete</button>
+            </td>
+        </ng-container>
+
+
         <ng-container matColumnDef="expand">
             <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
             <td mat-cell *matCellDef="let member">
@@ -33,18 +43,6 @@
             <td mat-cell *matCellDef="let member" [attr.colspan]="columnsToDisplayWithExpand.length">
                 <div class="member-detail"
                      [@detailExpand]="member == expandedMember ? 'expanded' : 'collapsed'">
-                    <mat-card class="expanded-content">
-                        <mat-card-header>
-                            <mat-card-subtitle>Actions</mat-card-subtitle>
-                        </mat-card-header>
-                        <mat-card-content>
-                            <mat-list class="detail-list">
-                                <!-- <a mat-button class="expanded-button" (click)="selectMember(member)">Edit</a> -->
-                                <a mat-flat-button class="expanded-button" color="primary" [routerLink]="['/system',sysId,'members','edit', member.id]">Edit</a>
-                                <a mat-flat-button class="expanded-button" color="warn" (click)="deleteMember(member.id)">Delete</a>
-                            </mat-list>
-                        </mat-card-content>
-                    </mat-card>
                     <mat-card class="expanded-content">
                         <mat-card-header>
                             <mat-card-subtitle>Expertise</mat-card-subtitle>

@@ -1,0 +1,28 @@
+@import '../../../colors.scss';
+.ngx-box {
+  border: 1px solid gray;
+  border-radius: 5px;
+  min-width: 800px;
+  height: 300px;
+  align-content: center;
+
+}
+
+.list-box {
+  float:right;
+  border: 1px solid gray;
+  border-radius: 5px;
+  align-content: center;
+}
+
+.nodeBox {
+  display: table-cell;
+  border-radius: 5px;
+  background-color: gray;
+  color: white;
+  font-weight: 550;
+  text-align: center;
+  vertical-align: middle;
+  width: 170px;
+  height: 45px;
+}

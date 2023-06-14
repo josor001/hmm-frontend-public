@@ -3,7 +3,7 @@
         <mat-card-title>Edit Microservice {{editService.name}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <form class="microservice-edit-form">
+        <div class="microservice-edit-form">
             <h2 class="card-headline">Name</h2>
 
                         <mat-form-field appearance="outline" class="full-width">
@@ -28,6 +28,15 @@
                        placeholder="https://github.com/user/repo" [(ngModel)]="editService.repositoryLink">
             </mat-form-field>
 
+            <h2 class="card-headline">Issue Link</h2>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Issue Link</mat-label>
+                <input matInput type="url"
+                       name="issue"
+                       placeholder="https://github.com/user/repo/issues" [(ngModel)]="editService.issueLink">
+            </mat-form-field>
+
             <h2 class="card-headline">Contact Person</h2>
 
             <mat-form-field appearance="outline">
@@ -37,30 +46,32 @@
                 </mat-select>
             </mat-form-field>
 
-            <h2 class="card-headline">Related Modeling Artifacts</h2>
+            <h2 class="card-headline">Planned Features <button mat-mini-fab color="primary" (click)="openFeatureNewDialog()"><mat-icon>add</mat-icon></button></h2>
 
-            <mat-chip-list class="full-width"><mat-chip><mat-icon>sentiment_very_dissatisfied</mat-icon>not implemented yet.</mat-chip></mat-chip-list>
-
-            <h2 class="card-headline">Planned Features</h2>
-            <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Planned Features</mat-label>
-                <mat-chip-list #chipList>
-                    <mat-chip *ngFor="let feature of editService.plannedFeatures" (removed)="removeFeature(feature)">
-                        {{feature}}
-                        <button matChipRemove>
-                            <mat-icon>cancel</mat-icon>
-                        </button>
-                    </mat-chip>
-                    <input placeholder="New Feature..."
-                           [matChipInputFor]="chipList"
-                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                           [matChipInputAddOnBlur]="addOnBlur"
-                           (matChipInputTokenEnd)="addFeature($event)">
-                </mat-chip-list>
-                <mat-hint align="end">Press Enter after writing the feature.</mat-hint>
-            </mat-form-field>
-
-        </form>
+            <table class="full-width feature-table">
+                <thead>
+                <tr id="head">
+                    <th>Unique Name</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let feature of editService.plannedFeatures | keyvalue" style="vertical-align: top">
+                    <td>
+                        <strong>{{feature.key}}</strong>
+                    </td>
+                    <td>
+                        {{feature.value}}
+                    </td>
+                    <td>
+                        <button mat-icon-button class="microservice-button" color="primary" (click)="openFeatureEditDialog(feature.key, feature.value)"><mat-icon>edit</mat-icon></button>
+                        <button mat-icon-button class="microservice-button" color="warn" (click)="removeFeature(feature.key)"><mat-icon>cancel</mat-icon></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </mat-card-content>
     <mat-card-actions>
         <a mat-flat-button class="microservice-button" color="primary" (click)="save()">Save</a>

@@ -15,6 +15,21 @@
   width: 100%;
 }
 
+.feature-table{
+  border: 0;
+  thead {
+    background-color: white;
+    color: gray;
+    height:2em;
+  }
+  th {
+    text-align: left;
+  }
+  td {
+    text-align: left;
+  }
+}
+
 .card-headline {
   margin-top: 1em;
   color : darkgray;

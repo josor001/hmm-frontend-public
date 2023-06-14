@@ -50,43 +50,46 @@ describe('ModelArtifactService', () => {
         name: 'Mock Model Artifact 1',
         kind: 'Mock Kind 1',
         location: 'Mock Location 1',
-        microserviceId: 123
+        microserviceId: 123,
+        sysId: 1,
       },
       {
         id: 2,
         name: 'Mock Model Artifact 2',
         kind: 'Mock Kind 2',
         location: 'Mock Location 2',
-        microserviceId: 456
+        microserviceId: 456,
+        sysId: 1,
       }
     ];
 
-    service.getModelArtifacts().subscribe((modelArtifacts) => {
+    service.getModelArtifacts(1).subscribe((modelArtifacts) => {
       expect(modelArtifacts).toEqual(mockModelArtifacts);
     });
 
-    const request = httpMock.expectOne(`${environment.serverUrl}/artifacts`);
+    const request = httpMock.expectOne(`${environment.serverUrl}/artifacts?sysId=1`);
     expect(request.request.method).toBe('GET');
     request.flush(mockModelArtifacts);
   });
 
   it('should create a new ModelArtifact', () => {
-    const mockModelArtifact: ModelArtifact = {
+    const mock: ModelArtifact = {
       id: 1,
       name: 'Mock Model Artifact',
       kind: 'Mock Kind',
       location: 'Mock Location',
-      microserviceId: 123
+      microserviceId: 123,
+      sysId: 1,
     };
 
-    service.createModelArtifact(mockModelArtifact.name!!).subscribe((modelArtifact) => {
-      expect(modelArtifact).toEqual(mockModelArtifact);
+    service.createModelArtifact(mock.name!!, mock.kind!!, mock.location!!, mock.microserviceId!!, mock.sysId!!).subscribe((modelArtifact) => {
+      expect(modelArtifact).toEqual(mock);
     });
 
     const request = httpMock.expectOne(`${environment.serverUrl}/artifacts`);
     expect(request.request.method).toBe('POST');
-    expect(request.request.body).toEqual(mockModelArtifact.name);
-    request.flush(mockModelArtifact);
+    expect(request.request.body).toEqual({ name: 'Mock Model Artifact', kind: 'Mock Kind', location: 'Mock Location', microserviceId: 123, sysId: 1 });
+    request.flush(mock);
   });
   it('should update a model artifact', () => {
     const mockArtifact: ModelArtifact = { name: 'Test Artifact', kind: 'Test Kind', location: 'Test Location', microserviceId: 1, id: 1 };

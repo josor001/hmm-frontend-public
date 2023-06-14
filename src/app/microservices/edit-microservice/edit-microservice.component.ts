@@ -6,36 +6,33 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {Microservice} from "../../shared/models/microservice.model";
 import {MicroserviceService} from "../../shared/services/microservice.service";
 import {MemberService} from "../../shared/services/member.service";
-import {MatChipInputEvent} from "@angular/material/chips";
-import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {Member} from "../../shared/models/member.model";
+import {MatDialog} from "@angular/material/dialog";
+import {AddFeatureDialogComponent} from "./add-feature-dialog/add-feature-dialog.component";
 
 @Component({
-    selector: 'app-edit-service',
-    templateUrl: './edit-service.component.html',
-    styleUrls: ['./edit-service.component.scss']
+    selector: 'app-edit-microservice',
+    templateUrl: './edit-microservice.component.html',
+    styleUrls: ['./edit-microservice.component.scss']
 })
-export class EditServiceComponent implements OnInit, OnDestroy {
+export class EditMicroserviceComponent implements OnInit, OnDestroy {
     sysId: number = 0;
 
     editService: Microservice | undefined;
     editServiceTeamMember: Member[] = [];
+
     routerSub: Subscription | undefined;
     serviceSub: Subscription | undefined;
     routerSysSub: Subscription | undefined;
     teamSub: Subscription | undefined;
     updateSub: Subscription | undefined;
-    //variables for feature chip input
-    addOnBlur = true;
-
-    readonly separatorKeysCodes = [ENTER, COMMA] as const;
-
     constructor(private microserviceService: MicroserviceService,
                 private teamService: TeamService,
                 private memberService: MemberService,
                 private activatedRoute: ActivatedRoute,
                 private router: Router,
-                private snackBar: MatSnackBar) {
+                private snackBar: MatSnackBar,
+                public dialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -48,11 +45,16 @@ export class EditServiceComponent implements OnInit, OnDestroy {
             this.serviceSub = this.microserviceService.getMicroservice(id).subscribe(
                 (microservice) => {
                     this.editService = microservice;
+                    console.log("RESULT FROM GET",microservice);
                     this.populateServiceTeam();
+                    //if there are no features yet and therefore plannedFeatures is not initialized properly
+                    //this creates an empty Map
+                    if(!this.editService.plannedFeatures) {
+                        this.editService.plannedFeatures = {};
+                    }
                 }
             )
         });
-
     }
 
     ngOnDestroy(): void {
@@ -77,24 +79,9 @@ export class EditServiceComponent implements OnInit, OnDestroy {
       this.router.navigate([`/system/${this.sysId}/microservices`]);
     }
 
-    addFeature(event: MatChipInputEvent): void {
-        const value = (event.value || '').trim();
-
-        // Add feature
-        if (value && this.editService) {
-            this.editService.plannedFeatures!.push(value);
-        }
-
-        // Clear the input value
-        event.chipInput!.clear();
-    }
-
-    removeFeature(feature: string): void {
+    removeFeature(featureName: string): void {
         if (this.editService && this.editService.plannedFeatures) {
-            const index = this.editService.plannedFeatures.indexOf(feature);
-            if (index >= 0) {
-                this.editService.plannedFeatures.splice(index, 1);
-            }
+            delete this.editService.plannedFeatures[featureName];
         }
     }
 
@@ -119,4 +106,31 @@ export class EditServiceComponent implements OnInit, OnDestroy {
       duration: 2000,
     });
   }
+
+    openFeatureNewDialog(): void {
+        const dialogRef = this.dialog.open(AddFeatureDialogComponent, {
+            data: {type: "new", name: "", description: ""},
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if(result && this.editService && this.editService.plannedFeatures) {
+                this.editService.plannedFeatures[result.name] = result.description;
+                console.log("ADDED AFTER NEW",this.editService?.plannedFeatures);
+            }
+        });
+    }
+
+    openFeatureEditDialog(name: string, description: string): void {
+        const dialogRef = this.dialog.open(AddFeatureDialogComponent, {
+            data: {type: "edit", name: name, description: description},
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if(result && this.editService && this.editService.plannedFeatures) {
+                this.editService.plannedFeatures[result.name] = result.description;
+                console.log("ADDED AFTER EDIT",this.editService?.plannedFeatures);
+            }
+        });
+    }
 }
+

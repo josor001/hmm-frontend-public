@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddStoryComponent } from './add-story.component';
+import {HttpClientModule} from "@angular/common/http";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {RouterModule} from "@angular/router";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('AddStoryComponent', () => {
   let component: AddStoryComponent;
@@ -8,6 +12,7 @@ describe('AddStoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [HttpClientModule, MatSnackBarModule, RouterTestingModule],
       declarations: [ AddStoryComponent ]
     })
     .compileComponents();

@@ -23,7 +23,7 @@ export class MembersComponent implements OnInit, OnDestroy {
   sysId: number = 0;
   dataSource = new MatTableDataSource<Member>();
   columnsToDisplay = ['firstname', 'lastname', 'email'];
-  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
+  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'actions','expand'];
   expandedMember: Member | null | undefined;
 
   @ViewChild(MatTable)

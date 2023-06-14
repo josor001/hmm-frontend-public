@@ -1,0 +1,124 @@
+@import '../../../colors.scss';
+
+.microservice-button {
+  margin: 5px;
+}
+.microservice-view {
+  margin: 20px;
+}
+.microservice-card-content {
+  padding-left:16px;
+}
+
+.small-button {
+  transform: scale(0.8);
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mat-button {
+  margin-right: 2%;
+}
+h4 {
+  color : dimgray;
+}
+h3 {
+  margin-top: 1em;
+  color : dimgray;
+  font-weight: 600;
+}
+/** styles for code blocks highlighted with highlight.js */
+pre {
+  display: flex;
+  margin-top: 0;
+  margin-bottom: 0;
+  word-wrap: break-word;
+
+  code {
+    flex: 1;
+    line-height: 1.5em;
+    font-size: 14px;
+    min-height: 100%;
+    padding: 1em 1.2em;
+
+    &.hljs-line-numbers {
+      padding: 0 !important;
+    }
+  }
+}
+
+/** MODEL ARTIFACTS */
+
+.artifact-table {
+  min-width: 50%;
+}
+.mat-column-name {
+  width: 40% !important;
+}
+.mat-column-kind {
+  width: 30% !important;
+}
+.mat-column-action {
+  width: 20% !important;
+}
+/** NGX-GRAPH */
+.ngx-box {
+  border: 1px solid gray;
+  border-radius: 5px;
+  width: 800px;
+  height: 300px;
+  align-content: center;
+}
+
+.nodeBox {
+  display: table-cell;
+  border-radius: 5px;
+  background-color: gray;
+  color: white;
+  font-weight: 550;
+  text-align: center;
+  vertical-align: middle;
+  width: 170px;
+  height: 45px;
+}
+
+/** HIGHLIGHTJS */
+.hljs {
+  margin: 0 1em;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  transition: border ease 1s;
+}
+
+.hljs-ln {
+  padding: 8px 0;
+
+  tr {
+    &:first-child td {
+      padding-top: 8px !important;
+    }
+
+    &:last-child td {
+      padding-bottom: 8px !important;
+    }
+  }
+}
+
+/* for block of numbers */
+td.hljs-ln-numbers {
+  user-select: none;
+  text-align: center;
+  border-right: 1px solid gray;
+  vertical-align: top;
+  padding-right: 8px !important;
+  padding-left: 8px !important;
+}
+
+/* for block of code */
+td.hljs-ln-code {
+  padding-left: 8px !important;
+}
+

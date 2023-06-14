@@ -1,6 +1,8 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {ServiceStoryService} from "../../shared/services/servicestory.service";
+import * as uniqolor from "uniqolor";
+import {ServiceStory} from "../../shared/models/servicestory.model";
 
 @Component({
   selector: 'app-widget-stories',
@@ -9,6 +11,7 @@ import {ServiceStoryService} from "../../shared/services/servicestory.service";
 })
 export class WidgetStoriesComponent implements OnInit, OnDestroy {
   numberOfStories: number = 0;
+  stories: ServiceStory[] = [];
   sub: Subscription | undefined;
   @Input() sysId: number = 0;
   constructor(private storyService: ServiceStoryService) {
@@ -16,10 +19,13 @@ export class WidgetStoriesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sub = this.storyService.getServiceStories(this.sysId).subscribe(stories => {
-      this.numberOfStories = stories.length
+      this.numberOfStories = stories.length;
+      this.stories = stories;
     })
   }
   ngOnDestroy(): void {
     this.sub?.unsubscribe()
   }
+
+  protected readonly uniqolor = uniqolor;
 }

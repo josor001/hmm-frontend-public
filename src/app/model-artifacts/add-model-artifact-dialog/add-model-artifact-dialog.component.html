@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>Add Model Artifact</h1>
+
+<div mat-dialog-content>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Model Name</mat-label>
+            <input matInput [(ngModel)]="artifact.name" name="name" required>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Model Kind</mat-label>
+            <mat-select [(ngModel)]="artifact.kind" name="kind" required>
+                <mat-option *ngFor="let kind of MODEL_KIND | keyvalue" [value]="kind.value">
+                    {{kind.value}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Described Microservice</mat-label>
+            <mat-select [(ngModel)]="artifact.microserviceId" name="microserviceId" required>
+                <mat-option *ngFor="let service of this.microserviceIdsWithNames | keyvalue" [value]="service.key">
+                    {{service.value}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Model Location</mat-label>
+            <input type="url" matInput [(ngModel)]="artifact.location" required>
+        </mat-form-field>
+    </p>
+</div>
+
+<div mat-dialog-actions>
+    <button *ngIf="!validArtifact()" disabled mat-flat-button color="primary" [mat-dialog-close]="artifact">Ok</button>
+    <button *ngIf="validArtifact()" mat-flat-button color="primary" [mat-dialog-close]="artifact">Ok</button>
+    <button mat-flat-button color="warn" (click)="close()">Cancel</button>
+</div>

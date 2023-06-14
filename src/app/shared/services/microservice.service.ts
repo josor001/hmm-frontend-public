@@ -62,6 +62,7 @@ export class MicroserviceService {
 
     /** PUT a microservice to be updated */
     updateMicroservice(microservice: Microservice): Observable<Microservice> {
+        console.log("UPDATE", microservice)
         if (environment.useMockData) {
             let found = of(MICROSERVICES.find(oldService => oldService.id == microservice.id))
             if (found !== undefined) {
@@ -70,23 +71,12 @@ export class MicroserviceService {
                 return of({})
             }
         } else {
+            // Unfortunately, it is not possible to past Maps directly with http.put
+            // Therefore, the conversion into an any object is needed
+            // see https://stackoverflow.com/questions/49292475/passing-typescript-map-as-a-part-of-angular4-http-post-request
             return this.http.put<Microservice>(this.entityUrl, microservice, httpOptions)
                 .pipe(catchError(Utils.handleError));
         }
-    }
-
-    /** PUT a new artifact into a microservice */
-    addModelArtifact(serviceId: number, artifactId: number): Observable<Microservice> {
-        const url = `${this.entityUrl}/${serviceId}/artifacts`;
-        return this.http.put<Microservice>(url, artifactId, httpOptions)
-            .pipe(catchError(Utils.handleError));
-    }
-
-    /** DELETE an artifact from a microservice */
-    removeModelArtifact(serviceId: number, artifactId: number): Observable<unknown> {
-        const url = `${this.entityUrl}/${serviceId}/artifacts/${artifactId}`;
-        return this.http.delete(url, httpOptions)
-            .pipe(catchError(Utils.handleError));
     }
 
     /** DELETE a microservice */

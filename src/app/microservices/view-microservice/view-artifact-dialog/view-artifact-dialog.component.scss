@@ -1,0 +1,45 @@
+@import 'viewerjs/dist/viewer.css';
+
+.mat-dialog-actions {
+  width:100%;
+  justify-content: center;
+}
+
+.mat-dialog-content {
+  width: 100%;
+}
+
+.image-viewer {
+  border: 1px dimgray solid;
+  border-radius: 3px;
+  overflow: hidden;
+  width: 100%;
+}
+
+img {
+  width: inherit;
+}
+
+.code-viewer {
+  border: 1px dimgray solid;
+  border-radius: 3px;
+}
+
+pre {
+  display: flex;
+  margin-top: 0;
+  margin-bottom: 0;
+  word-wrap: break-word;
+
+  code {
+    flex: 1;
+    line-height: 1.5em;
+    font-size: 14px;
+    min-height: 100%;
+    padding: 1em 1.2em;
+
+    &.hljs-line-numbers {
+      padding: 0 !important;
+    }
+  }
+}

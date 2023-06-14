@@ -1,0 +1,74 @@
+<mat-card class="clickable">
+    <mat-card-header>
+        <mat-card-title>System Overview</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <table>
+            <tr>
+                <td>
+                    <p>This story diagram shows all microservices created in the system and their relationships,
+                        which were derived based on the service stories.
+                        The colors show the affiliation to the service story.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div xmlns:svg="http://www.w3.org/2000/svg" class="ngx-box">
+                        <p *ngIf="!nodesReady || !edgesReady">No data to display in diagram.</p>
+                        <ngx-graph
+                                *ngIf="nodesReady && edgesReady"
+                                class="chart-container"
+                                [view]="[800, 300]"
+                                [draggingEnabled] ="false"
+                                [showMiniMap]="true"
+                                [links]="this.graphEdges"
+                                [nodes]="this.graphNodes"
+                                layout="dagreCluster"
+                                [layoutSettings]="layoutSettings"
+                                [autoZoom]="true"
+                                [autoCenter]="true"
+                        >
+
+                            <!-- defining the arrow head as end of edge -->
+                            <ng-template #defsTemplate>
+                                <svg:marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0"
+                                            markerWidth="4" markerHeight="4" orient="auto">
+                                    <svg:path d="M0,-5L10,0L0,5" class="arrow-head"/>
+                                </svg:marker>
+                            </ng-template>
+
+                            <ng-template #nodeTemplate let-node>
+                                <svg xmlns:svg="http://www.w3.org/2000/svg">
+                                    <svg:g class="node">
+                                        <svg:foreignObject width="180" height="50"
+                                                           xmlns:svg="http://www.w3.org/2000/svg"
+                                                           xmlns:xhtml="http://www.w3.org/1999/xhtml">
+                                            <xhtml:div class="nodeBox">{{ node.label }}</xhtml:div>
+                                        </svg:foreignObject>
+                                    </svg:g>
+                                </svg>
+                            </ng-template>
+
+                            <!-- defining the style of edges -->
+                            <ng-template #linkTemplate let-link>
+                                <svg:g class="edge">
+                                    <svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" style="stroke: {{link.data.color}}"
+                                              stroke-width="3"
+                                              marker-end="url(#arrow)"></svg:path>
+                                    <svg:text class="edge-label" text-anchor="middle">
+                                        <textPath class="text-path" [attr.href]="'#' + link.id"
+                                                  startOffset="50%">
+                                            {{link.label}}
+                                        </textPath>
+                                    </svg:text>
+                                </svg:g>
+                            </ng-template>
+                        </ngx-graph>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </mat-card-content>
+</mat-card>
+
+

@@ -3,13 +3,14 @@ import {MemberService} from "../shared/services/member.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MicroserviceService} from "../shared/services/microservice.service";
 import {Microservice} from "../shared/models/microservice.model";
-import {Observable, Subscription} from "rxjs";
+import {lastValueFrom, Observable, Subscription} from "rxjs";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {map, shareReplay} from "rxjs/operators";
 import {TeamService} from "../shared/services/team.service";
 import {Member} from "../shared/models/member.model";
 import {Team} from "../shared/models/team.model";
 import {ActivatedRoute} from "@angular/router";
+import {Node} from "@swimlane/ngx-graph";
 
 @Component({
   selector: 'app-microservices',
@@ -87,15 +88,6 @@ export class MicroservicesComponent implements OnInit, OnDestroy {
     this.snackBar.open(message, action, {
       duration: 2000,
     });
-  }
-
-  deleteMicroservice(id: number) {
-    this.microserviceService.deleteMicroservice(id).subscribe(
-        value => {
-          this.openSnackBar("Microservice deleted.", "SUCCESS");
-            this.getMicroservices();
-        }
-    )
   }
 
   ngOnInit(): void {

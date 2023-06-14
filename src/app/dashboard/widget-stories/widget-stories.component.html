@@ -3,4 +3,13 @@
         <mat-card-title>Service Stories</mat-card-title>
         <mat-card-subtitle>Count {{numberOfStories}}</mat-card-subtitle>
     </mat-card-header>
+    <mat-card-content>
+            <mat-list>
+                <mat-list-item *ngFor="let story of stories">
+                    <mat-icon mat-list-icon color="#333333">book</mat-icon>
+                    <div mat-line *ngIf="story.name" [ngStyle]="{'color': uniqolor(story.name, {}).color}">{{story.name}}</div>
+                    <div mat-line *ngIf="story.description"> {{story.description | truncate:[100]}} </div>
+                </mat-list-item>
+            </mat-list>
+    </mat-card-content>
 </mat-card>

@@ -36,21 +36,21 @@ describe('MicroserviceService', () => {
 
   it('should get all microservices', () => {
     const mockMicroservices: Microservice[] = [
-      { id: 1, name: 'Test Microservice 1' },
-      { id: 2, name: 'Test Microservice 2' }
+      { id: 1, sysId: 1, name: 'Test Microservice 1' },
+      { id: 2, sysId: 1, name: 'Test Microservice 2' }
     ];
-    service.getMicroservices().subscribe((microservices: Microservice[]) => {
+    service.getMicroservices(1).subscribe((microservices: Microservice[]) => {
       expect(microservices.length).toBe(2);
       expect(microservices).toEqual(mockMicroservices);
     });
-    const req = httpMock.expectOne(service['entityUrl']);
+    const req = httpMock.expectOne(service['entityUrl']+"?sysId=1");
     expect(req.request.method).toBe('GET');
     req.flush(mockMicroservices);
   });
 
   it('should create a microservice', () => {
-    const mockMicroservice: Microservice = { id: 1, name: 'Test Microservice' };
-    service.createMicroservice('Test Microservice').subscribe((microservice: Microservice) => {
+    const mockMicroservice: Microservice = { id: 1, sysId: 1, name: 'Test Microservice' };
+    service.createMicroservice('Test Microservice', 1).subscribe((microservice: Microservice) => {
       expect(microservice).toEqual(mockMicroservice);
     });
     const req = httpMock.expectOne(service['entityUrl']);
@@ -66,42 +66,5 @@ describe('MicroserviceService', () => {
     const req = httpMock.expectOne(service['entityUrl']);
     expect(req.request.method).toBe('PUT');
     req.flush(mockMicroservice);
-  });
-
-  it('should add an artifact to a microservice', () => {
-    const mockServiceId = 1;
-    const mockArtifactId = 2;
-    const mockMicroservice: Microservice = { id: mockServiceId, name: 'Test Microservice' };
-    service.addModelArtifact(mockServiceId, mockArtifactId).subscribe((microservice: Microservice) => {
-      expect(microservice).toEqual(mockMicroservice);
-    });
-    const req = httpMock.expectOne(`${service['entityUrl']}/${mockServiceId}/artifacts`);
-    expect(req.request.method).toBe('PUT');
-    req.flush(mockMicroservice);
-  });
-
-  describe('removeModelArtifact', () => {
-    it('should remove model artifact from microservice', () => {
-      const serviceId = 1;
-      const artifactId = 2;
-      const mockMicroservice: Microservice = {
-        id: serviceId,
-        name: 'Test Service',
-        modelIds: [artifactId],
-      };
-      const expectedResponse: Microservice = {
-        id: serviceId,
-        name: 'Test Service',
-        modelIds: [],
-      };
-
-      service.removeModelArtifact(serviceId, artifactId).subscribe((data) => {
-        expect(data).toEqual(expectedResponse);
-      });
-
-      const req = httpMock.expectOne(`${service['entityUrl']}/${serviceId}/artifacts/${artifactId}`);
-      expect(req.request.method).toEqual('DELETE');
-      req.flush(expectedResponse);
-    });
   });
 });

@@ -1,6 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {MicroserviceService} from "../../shared/services/microservice.service";
 import {Subscription} from "rxjs";
+import {Microservice} from "../../shared/models/microservice.model";
 
 @Component({
     selector: 'app-widget-microservices',
@@ -9,6 +10,7 @@ import {Subscription} from "rxjs";
 })
 export class WidgetMicroservicesComponent implements OnInit, OnDestroy {
     numberOfServices: number = 0;
+    microservices: Microservice[] = [];
     sub: Subscription | undefined;
     @Input() sysId: number = 0;
     constructor(private microserviceService: MicroserviceService) {
@@ -16,7 +18,8 @@ export class WidgetMicroservicesComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.sub = this.microserviceService.getMicroservices(this.sysId).subscribe(services => {
-            this.numberOfServices = services.length
+            this.numberOfServices = services.length;
+            this.microservices = services;
         })
     }
     ngOnDestroy(): void {

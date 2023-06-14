@@ -1,13 +1,13 @@
 {
   "name": "HMM",
-  "version": "0.2.0-beta",
+  "version": "0.3.0-beta",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "buildprod" : "ng build --configuration production"
+    "buildprod": "ng build --configuration production"
   },
   "private": true,
   "dependencies": {
@@ -22,9 +22,16 @@
     "@angular/platform-browser": "^14.3.0",
     "@angular/platform-browser-dynamic": "^14.3.0",
     "@angular/router": "^14.3.0",
+    "@erengee/ngx-viewer": "^1.1.0",
     "@swimlane/ngx-graph": "^8.0.3",
+    "highlight.js": "^11.6.0",
+    "highlightjs-line-numbers.js": "^2.8.0",
+    "hljs-lemma": "^1.0.2-beta",
+    "ngx-highlightjs": "^7.0.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
+    "uniqolor": "^1.1.0",
+    "viewerjs": "^1.11.3",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

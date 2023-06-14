@@ -1,0 +1,168 @@
+<mat-card class="microservice-view" *ngIf="microservice">
+    <mat-card-header>
+        <mat-card-subtitle>Microservice</mat-card-subtitle>
+        <mat-card-title>{{microservice.name}}</mat-card-title>
+    </mat-card-header>
+    <mat-divider class="mat-elevation-z5"></mat-divider>
+    <mat-card-content class="microservice-card-content">
+        <p></p>
+        <h3>Availability</h3>
+        <p>
+            <a mat-flat-button matTooltip="click to visit team repository" color="primary" href="{{microservice.repositoryLink}}" target="_blank"
+               class="mat-button" *ngIf="microservice.repositoryLink">Repository</a>
+            <a mat-flat-button color="primary" href="{{microservice.repositoryLink}}" target="_blank"
+               class="mat-button" *ngIf="!microservice.repositoryLink" disabled matTooltip="no repository set.">Repository</a>
+
+            <a mat-flat-button color="primary" href="" target="_blank"
+               class="mat-button" *ngIf="true" disabled matTooltip="not implemented yet.">Documentation</a>
+
+            <a mat-flat-button color="primary" href="" target="_blank"
+               class="mat-button" *ngIf="true" disabled matTooltip="not implemented yet.">Known Bugs</a>
+        </p>
+
+        <h3>Purpose & Planned Features</h3>
+        <h4>The purpose of the service is as follows.</h4>
+        <p *ngIf="microservice.purpose">{{microservice.purpose}}</p>
+        <p></p>
+        <h4>For the future the following features can be expected.</h4>
+        <p *ngIf="!microservice.plannedFeatures">Currently no new features planned.</p>
+        <mat-list *ngIf="microservice.plannedFeatures">
+            <mat-list-item *ngFor="let feature of microservice.plannedFeatures | keyvalue">
+                <mat-icon mat-list-icon>settings</mat-icon>
+                <div mat-line *ngIf="feature.key">{{feature.key}}</div>
+                <div mat-line *ngIf="feature.value"> {{feature.value}} </div>
+            </mat-list-item>
+        </mat-list>
+
+        <h3>Owned By</h3>
+        <h4>The following team is responsible for the lifecycle of the service, i.e., it <i>owns</i> the service.</h4>
+        <p *ngIf="!microserviceTeam">service is orphaned. <mat-icon>sentiment_very_dissatisfied</mat-icon></p>
+        <mat-expansion-panel *ngIf="microserviceTeam">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-icon color="primary">group</mat-icon> {{microserviceTeam.name}}
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <table>
+                <tr  *ngFor="let member of microserviceTeamMember">
+                    <td><mat-icon *ngIf="microservice.contactPersonId === member.id">contact_support</mat-icon></td>
+                    <td><span>{{member.firstname}} {{member.lastname}}</span></td>
+                    <td><a mat-mini-fab href="mailto:{{member.email}}"  class="small-button"><mat-icon>email</mat-icon></a></td>
+                </tr>
+            </table>
+        </mat-expansion-panel>
+
+        <h3>Model Artifacts</h3>
+        <h4>The following table gives an overview of all available model artifacts for {{microservice.name}}.
+            Click on the view button to open a particular artifact.</h4>
+
+        <table mat-table [dataSource]="artifactTableDataSource" class="artifact-table">
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let artifact"> {{artifact.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="kind">
+                <th mat-header-cell *matHeaderCellDef> Kind </th>
+                <td mat-cell *matCellDef="let artifact"> {{artifact.kind}} </td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell *matCellDef="let artifact">
+                    <button mat-icon-button color="primary"
+                            matTooltip="click to view artifact"
+                            (click)="openViewer(artifact)">
+                        <mat-icon>pageview</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedArtifactColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedArtifactColumns;"></tr>
+        </table>
+
+        <h3>Service Stories</h3>
+
+        <h4>This list displays all service stories that <code>{{microservice.name}}</code> is involved in.
+            The story names are colored to identify them in the diagram displayed below the list.</h4>
+
+        <mat-list>
+            <mat-list-item *ngFor="let story of microserviceStories">
+                <mat-icon mat-list-icon color="#333333">book</mat-icon>
+                <div mat-line *ngIf="story.name" [ngStyle]="{'color': uniqolor(story.name, {}).color}">{{story.name}}</div>
+                <div mat-line *ngIf="story.description"> {{story.description | truncate:[100]}} </div>
+            </mat-list-item>
+        </mat-list>
+
+        <h4>This diagram shows a unified view of all stories in which the <code>{{microservice.name}}</code> microservice is involved.
+            The edges are colored based on their origin service story.</h4>
+
+        <div xmlns:svg="http://www.w3.org/2000/svg" class="ngx-box">
+            <p *ngIf="!nodesReady">No nodes and edges to display in diagram.</p>
+            <ngx-graph
+                    *ngIf="nodesReady"
+                    class="chart-container"
+                    [view]="[800, 300]"
+                    [draggingEnabled] ="false"
+                    [showMiniMap]="true"
+                    [links]="this.graphEdges"
+                    [nodes]="this.graphNodes"
+                    layout="dagreCluster"
+                    [layoutSettings]="layoutSettings"
+                    [autoZoom]="true"
+            >
+
+                <!-- defining the arrow head as end of edge -->
+                <ng-template #defsTemplate>
+                    <svg:marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0"
+                                markerWidth="4" markerHeight="4" orient="auto">
+                        <svg:path d="M0,-5L10,0L0,5" class="arrow-head"/>
+                    </svg:marker>
+                </ng-template>
+
+                <ng-template #nodeTemplate let-node>
+                    <svg xmlns:svg="http://www.w3.org/2000/svg">
+                        <svg:g class="node">
+                            <svg:foreignObject width="180" height="50"
+                                               xmlns:svg="http://www.w3.org/2000/svg"
+                                               xmlns:xhtml="http://www.w3.org/1999/xhtml">
+                                <xhtml:div class="nodeBox">{{ node.label }}</xhtml:div>
+                            </svg:foreignObject>
+                        </svg:g>
+                    </svg>
+                </ng-template>
+
+                <!-- defining the style of edges -->
+                <ng-template #linkTemplate let-link>
+                    <svg:g class="edge">
+                        <svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" style="stroke: {{link.data.color}}"
+                                  stroke-width="3"
+                                  marker-end="url(#arrow)"></svg:path>
+                        <svg:text class="edge-label" text-anchor="middle">
+                            <textPath class="text-path" [attr.href]="'#' + link.id"
+                                      startOffset="50%">
+                                {{link.label}}
+                            </textPath>
+                        </svg:text>
+                    </svg:g>
+                </ng-template>
+            </ngx-graph>
+        </div>
+
+    </mat-card-content>
+
+    <mat-card-actions class="full-width">
+                    <button mat-flat-button color="accent" matTooltip="click to edit service"
+                            [routerLink]="['/system',sysId,'microservices','edit', microservice.id]"
+                    style="margin-right:5px;">
+                        <mat-icon>edit</mat-icon> Edit
+                    </button>
+
+                    <button matTooltip="click to delete service" mat-flat-button color="warn" (click)="deleteMicroservice(microservice.id!)">
+                        <mat-icon>delete</mat-icon> Delete
+                    </button>
+    </mat-card-actions>
+</mat-card>

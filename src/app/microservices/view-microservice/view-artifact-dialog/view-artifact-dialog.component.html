@@ -1,0 +1,52 @@
+<div mat-dialog-title>
+    <h1>Model Artifact - {{artifact.name}}</h1>
+</div>
+
+<div mat-dialog-content>
+    <div *ngIf="artifact.kind === MODEL_KIND.GRAPHICAL" class="image-viewer">
+        <h3>Misc Graphical Model</h3>
+        <img src="{{artifact.location}}" alt="{{artifact.name}}">
+    </div>
+    <div *ngIf="artifact.kind === MODEL_KIND.UML" class="image-viewer">
+        <h3>UML Diagram</h3>
+        <img src="{{artifact.location}}" alt="{{artifact.name}}">
+    </div>
+    <div *ngIf="artifact.kind === MODEL_KIND.LEMMA" class="code-viewer">
+        <h3>LEMMA Model</h3>
+        <pre>
+            <code [languages]="['lemma']" [lineNumbers]="true" [highlight]="artifact.location | codeFromUrl | async"></code>
+        </pre>
+    </div>
+    <div *ngIf="artifact.kind === MODEL_KIND.OPENAPI" class="code-viewer">
+        <h3>OpenAPI Description</h3>
+        <pre>
+            <code [languages]="['yaml', 'json']" [lineNumbers]="true" [highlight]="artifact.location | codeFromUrl | async"></code>
+        </pre>
+    </div>
+    <div *ngIf="artifact.kind === MODEL_KIND.ASYNCAPI" class="code-viewer">
+        <h3>AsyncAPI Description</h3>
+        <pre>
+            <code [languages]="['yaml', 'json']" [lineNumbers]="true" [highlight]="artifact.location | codeFromUrl | async"></code>
+        </pre>
+    </div>
+    <div *ngIf="artifact.kind === MODEL_KIND.AVRO" class="code-viewer">
+        <h3>Avro Schema</h3>
+        <pre>
+            <code [languages]="['json']" [lineNumbers]="true" [highlight]="artifact.location | codeFromUrl | async"></code>
+        </pre>
+    </div>
+    <div *ngIf="artifact.kind === MODEL_KIND.TEXTUAL" class="code-viewer">
+        <h3>Misc Textual Model</h3>
+        <pre>
+            <code [lineNumbers]="true" [highlight]="artifact.location | codeFromUrl | async"></code>
+        </pre>
+    </div>
+
+
+</div>
+
+<div mat-dialog-actions>
+    <button mat-flat-button color="warn" (click)="close()">Close</button>
+</div>
+
+

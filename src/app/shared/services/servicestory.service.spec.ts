@@ -48,15 +48,15 @@ describe('ServiceStoryService', () => {
   describe('getServiceStories', () => {
     it('should return an observable of an array of ServiceStorys when called', () => {
       const mockStories: ServiceStory[] = [
-        {id: 1, name: 'mockStory1'},
-        {id: 2, name: 'mockStory2'}
+        {id: 1, sysId: 1, name: 'mockStory1'},
+        {id: 2, sysId: 1, name: 'mockStory2'}
       ];
 
-      service.getServiceStories().subscribe((stories: ServiceStory[]) => {
+      service.getServiceStories(1).subscribe((stories: ServiceStory[]) => {
         expect(stories).toEqual(mockStories);
       });
 
-      const req = httpMock.expectOne(storiesUrl);
+      const req = httpMock.expectOne(storiesUrl+'?sysId=1');
       expect(req.request.method).toBe('GET');
       req.flush(mockStories);
     });
@@ -65,9 +65,9 @@ describe('ServiceStoryService', () => {
   describe('createServiceStory', () => {
     it('should return an observable of a new ServiceStory when called with a name', () => {
       const name = 'newStory';
-      const mockStory: ServiceStory = {name: name};
+      const mockStory: ServiceStory = {id: 1, sysId: 1, name: name};
 
-      service.createServiceStory(name).subscribe((story: ServiceStory) => {
+      service.createServiceStory(name, 1).subscribe((story: ServiceStory) => {
         expect(story).toEqual(mockStory);
       });
 
@@ -79,16 +79,15 @@ describe('ServiceStoryService', () => {
 
   describe('updateServiceStory', () => {
     it('should return an observable of an updated ServiceStory when called with a ServiceStory', () => {
-      const mockStory: ServiceStory = {id: 1, name: 'mockStory'};
-      const updatedMockStory: ServiceStory = {id: 1, name: 'updatedMockStory'};
+      const mockStory: ServiceStory = {id: 1, sysId: 1, name: 'mockStory'};
 
       service.updateServiceStory(mockStory).subscribe((story: ServiceStory) => {
-        expect(story).toEqual(updatedMockStory);
+        expect(story).toEqual(mockStory);
       });
 
       const req = httpMock.expectOne(storiesUrl);
       expect(req.request.method).toBe('PUT');
-      req.flush(updatedMockStory);
+      req.flush(mockStory);
     });
   });
 

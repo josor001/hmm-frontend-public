@@ -1,3 +1,25 @@
+.system-add-form {
+  min-width: 300px;
+  width: 50%;
+}
+
+.xor-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.xor-line {
+  flex: 1;
+}
+
+.xor-text {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .sidenav-container {
   height: 100%;
 }

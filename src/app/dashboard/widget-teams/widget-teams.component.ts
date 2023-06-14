@@ -1,6 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {TeamService} from "../../shared/services/team.service";
+import {Team} from "../../shared/models/team.model";
 
 @Component({
   selector: 'app-widget-teams',
@@ -9,6 +10,7 @@ import {TeamService} from "../../shared/services/team.service";
 })
 export class WidgetTeamsComponent implements OnInit, OnDestroy {
   numberOfTeams: number = 0;
+  teams: Team[] = [];
   sub: Subscription | undefined;
   @Input() sysId: number = 0;
   constructor(private teamService: TeamService) {
@@ -16,7 +18,8 @@ export class WidgetTeamsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sub = this.teamService.getTeams(this.sysId).subscribe(teams => {
-      this.numberOfTeams = teams.length
+      this.numberOfTeams = teams.length;
+      this.teams = teams;
     })
   }
   ngOnDestroy(): void {

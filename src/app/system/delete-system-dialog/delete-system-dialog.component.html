@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Delete System <em>{{system.name}}</em></h2>
+<mat-dialog-content class="mat-typography">
+    <h3>IMPORTANT</h3>
+    <p>Attention, proceed with caution! Deleting the system also deletes all microservices, teams, members and service stories belonging to the system.
+        Only press the Delete button if you are sure that you want to delete the system and all associated elements.</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-flat-button (click)="close()">Cancel</button>
+    <button mat-flat-button color="warn" [mat-dialog-close]="true">DELETE</button>
+</mat-dialog-actions>
