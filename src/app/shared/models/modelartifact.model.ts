@@ -4,4 +4,5 @@ export interface ModelArtifact {
     microserviceId?: number;
     location?: string;
     id?: number;
+    sysId?: number;
 }

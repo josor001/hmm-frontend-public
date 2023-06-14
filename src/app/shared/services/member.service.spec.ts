@@ -43,13 +43,13 @@ describe('MemberService', () => {
   describe('getMembers', () => {
     it('should return a list of members', () => {
       const expectedMembers: Member[] = [
-        { id: 1, firstname: 'John', lastname: 'Doe', email: 'john.doe@example.com' },
-        { id: 2, firstname: 'Jane', lastname: 'Doe', email: 'jane.doe@example.com' },
+        { id: 1, sysId: 1, firstname: 'John', lastname: 'Doe', email: 'john.doe@example.com' },
+        { id: 2, sysId: 1, firstname: 'Jane', lastname: 'Doe', email: 'jane.doe@example.com' },
       ];
-      service.getMembers().subscribe((members) => {
+      service.getMembers(1).subscribe((members) => {
         expect(members).toEqual(expectedMembers);
       });
-      const req = httpMock.expectOne(`${serverUrl}/members`);
+      const req = httpMock.expectOne(`${serverUrl}/members?sysId=1`);
       expect(req.request.method).toEqual('GET');
       req.flush(expectedMembers);
     });
@@ -57,8 +57,8 @@ describe('MemberService', () => {
 
   describe('createMember', () => {
     it('should create a new member', () => {
-      const newMember: Member = { firstname: 'John', lastname: 'Doe', email: 'john.doe@example.com' };
-      service.createMember('John', 'Doe', 'john.doe@example.com').subscribe((member) => {
+      const newMember: Member = { firstname: 'John', lastname: 'Doe', email: 'john.doe@example.com', sysId: 1 };
+      service.createMember('John', 'Doe', 'john.doe@example.com', 1).subscribe((member) => {
         expect(member).toEqual({ id: 1, ...newMember });
       });
       const req = httpMock.expectOne(`${serverUrl}/members`);
@@ -70,7 +70,7 @@ describe('MemberService', () => {
 
   describe('updateMember', () => {
     it('should update an existing member', () => {
-      const updatedMember: Member = { id: 1, firstname: 'John', lastname: 'Doe', email: 'john.doe@example.com' };
+      const updatedMember: Member = { id: 1, sysId: 1, firstname: 'John', lastname: 'Doe', email: 'john.doe@example.com' };
       service.updateMember(updatedMember).subscribe((member) => {
         expect(member).toEqual(updatedMember);
       });
