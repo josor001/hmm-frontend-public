@@ -35,8 +35,8 @@ export class NewSystemComponent implements OnInit, OnDestroy {
     if(this.newSystem && this.newSystem.name && this.newSystem.description) {
       this.systemSub = this.systemService.createSoftwaresystem(this.newSystem.name, this.newSystem.description).subscribe(
           newSys => {
-            this.openSnackBar("New system "+newSys.name+"with id "+newSys.id+" saved!", "SUCCESS");
-            this.router.navigate([`/system/${newSys.id}/dashboard`]);
+            this.openSnackBar("New system "+newSys.name+"with id "+newSys.id+" added to existing systems.", "SUCCESS");
+            window.location.reload();
           }
       );
     } else {

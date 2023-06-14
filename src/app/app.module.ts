@@ -68,6 +68,7 @@ import {NgOptimizedImage} from "@angular/common";
 import { WidgetSystemOverviewComponent } from './dashboard/widget-system-overview/widget-system-overview.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { NewSystemComponent } from './system/new-system/new-system.component';
+import { DeleteSystemDialogComponent } from './system/delete-system-dialog/delete-system-dialog.component';
 
 @NgModule({
     declarations: [
@@ -101,6 +102,7 @@ import { NewSystemComponent } from './system/new-system/new-system.component';
         WidgetSystemOverviewComponent,
         ErrorPageComponent,
         NewSystemComponent,
+        DeleteSystemDialogComponent,
     ],
     imports: [
         BrowserModule,

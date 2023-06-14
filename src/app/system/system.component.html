@@ -3,15 +3,19 @@
         <span>System</span>
         <span class="toolbar-spacer"></span>
         <div class="menu-button-row">
-            <button mat-flat-button color="primary" routerLink="/systems/new">
-                <mat-icon>add</mat-icon>
-                <span class="menu_item_text">New</span>
+            <button mat-flat-button color="primary" (click)="editMode=true">
+                <mat-icon>edit</mat-icon>
+                <span class="menu_item_text">Edit</span>
+            </button>
+            <button style="margin-left: 5px;" mat-flat-button color="warn" (click)="openDeleteDialog()">
+                <mat-icon>delete</mat-icon>
+                <span class="menu_item_text">Delete</span>
             </button>
         </div>
     </mat-toolbar-row>
 </mat-toolbar>
 
-<mat-card *ngIf="system" class="container">
+<mat-card *ngIf="system && !editMode" class="container">
     <mat-card-header>
         <mat-card-title>
             {{system.name}}
@@ -20,7 +24,36 @@
             Software System | ID {{system.id}}
         </mat-card-subtitle>
     </mat-card-header>
-<mat-card-content>
-<p>{{system.description}}</p>
-</mat-card-content>
+    <mat-card-content>
+        <h3>Description</h3>
+        <p>{{system.description}}</p>
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="system-add" *ngIf="system && editMode">
+    <mat-card-header>
+        <mat-card-title>Edit {{system.name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="system-add-form">
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input matInput name="name" placeholder="(Y)et (A)nother (A)mazing (S)ystem"
+                           [(ngModel)]="system.name" required>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput type="text" name="description" placeholder="The system's purpose and story"
+                              [(ngModel)]="system.description" required></textarea>
+                </mat-form-field>
+            </p>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <a mat-flat-button class="system-button" color="primary" (click)="update()">Save</a>
+        <a mat-flat-button class="system-button" color="warn" (click)="abort()">Abort</a>
+    </mat-card-actions>
 </mat-card>

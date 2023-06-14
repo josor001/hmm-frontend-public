@@ -23,12 +23,6 @@ export class ViewArtifactDialogComponent {
         console.log(this.artifact)
     }
 
-    ngOnDestroy(): void {
-    }
-
-    ngOnInit(): void {
-    }
-
     close() {
         this.dialogRef.close();
     }

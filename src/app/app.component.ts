@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterContentChecked, Component, OnDestroy, OnInit} from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import {Observable, Subscription} from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -11,10 +11,10 @@ import {Softwaresystem} from "./shared/models/softwaresystem.model";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'Holistic Microservice Management Platform';
   routerSub: Subscription | undefined;
-  sysId: number = 2;
+  sysId: number | undefined;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(

@@ -12,14 +12,13 @@ export interface DialogFeature {
   templateUrl: './add-feature-dialog.component.html',
   styleUrls: ['./add-feature-dialog.component.scss']
 })
-export class AddFeatureDialogComponent implements OnInit, OnDestroy {
+export class AddFeatureDialogComponent implements OnInit {
   feature: DialogFeature = {type:"new",name:"",description:""}
 
   constructor(public dialogRef: MatDialogRef<AddFeatureDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogFeature) {
   }
 
-  ngOnDestroy(): void {}
   ngOnInit(): void {
     this.feature = this.data;
   }
