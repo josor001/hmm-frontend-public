@@ -1,0 +1,2334 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>HMM documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">HMM documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ViewMicroserviceComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/microservices/view-microservice/view-microservice.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+                <code>OnDestroy</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-view-microservice</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./view-microservice.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./view-microservice.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#artifactTableDataSource" >artifactTableDataSource</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#dialog" >dialog</a>
+                            </li>
+                            <li>
+                                <a href="#displayedArtifactColumns" >displayedArtifactColumns</a>
+                            </li>
+                            <li>
+                                <a href="#graphEdges" >graphEdges</a>
+                            </li>
+                            <li>
+                                <a href="#graphNodes" >graphNodes</a>
+                            </li>
+                            <li>
+                                <a href="#layoutSettings" >layoutSettings</a>
+                            </li>
+                            <li>
+                                <a href="#microservice" >microservice</a>
+                            </li>
+                            <li>
+                                <a href="#microserviceArtifacts" >microserviceArtifacts</a>
+                            </li>
+                            <li>
+                                <a href="#microserviceStories" >microserviceStories</a>
+                            </li>
+                            <li>
+                                <a href="#microserviceTeam" >microserviceTeam</a>
+                            </li>
+                            <li>
+                                <a href="#microserviceTeamMember" >microserviceTeamMember</a>
+                            </li>
+                            <li>
+                                <a href="#modelSub" >modelSub</a>
+                            </li>
+                            <li>
+                                <a href="#nodesReady" >nodesReady</a>
+                            </li>
+                            <li>
+                                <a href="#routerSub" >routerSub</a>
+                            </li>
+                            <li>
+                                <a href="#routerSysSub" >routerSysSub</a>
+                            </li>
+                            <li>
+                                <a href="#serviceSub" >serviceSub</a>
+                            </li>
+                            <li>
+                                <a href="#storySub" >storySub</a>
+                            </li>
+                            <li>
+                                <a href="#sysId" >sysId</a>
+                            </li>
+                            <li>
+                                <a href="#teamSub" >teamSub</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#uniqolor" >uniqolor</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#buildEdges" >buildEdges</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#buildNodes" >buildNodes</a>
+                            </li>
+                            <li>
+                                <a href="#deleteMicroservice" >deleteMicroservice</a>
+                            </li>
+                            <li>
+                                <a href="#getArtifacts" >getArtifacts</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getStories" >getStories</a>
+                            </li>
+                            <li>
+                                <a href="#getTeamAndMembers" >getTeamAndMembers</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#openSnackBar" >openSnackBar</a>
+                            </li>
+                            <li>
+                                <a href="#openViewer" >openViewer</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(microserviceService: <a href="../injectables/MicroserviceService.html" target="_self">MicroserviceService</a>, teamService: <a href="../injectables/TeamService.html" target="_self">TeamService</a>, memberService: <a href="../injectables/MemberService.html" target="_self">MemberService</a>, modelArtifactService: <a href="../injectables/ModelArtifactService.html" target="_self">ModelArtifactService</a>, storyService: <a href="../injectables/ServiceStoryService.html" target="_self">ServiceStoryService</a>, edgeService: <a href="../injectables/ServiceStoryEdgeService.html" target="_self">ServiceStoryEdgeService</a>, activatedRoute: ActivatedRoute, router: Router, snackBar: MatSnackBar, dialog: MatDialog)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:63</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>microserviceService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MicroserviceService.html" target="_self" >MicroserviceService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>teamService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TeamService.html" target="_self" >TeamService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>memberService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MemberService.html" target="_self" >MemberService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>modelArtifactService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ModelArtifactService.html" target="_self" >ModelArtifactService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>storyService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ServiceStoryService.html" target="_self" >ServiceStoryService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>edgeService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ServiceStoryEdgeService.html" target="_self" >ServiceStoryEdgeService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>activatedRoute</td>
+                                                  
+                                                        <td>
+                                                                    <code>ActivatedRoute</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>snackBar</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatSnackBar</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>dialog</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatDialog</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="buildEdges"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>buildEdges</b></span>
+                        <a href="#buildEdges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>buildEdges(stories: <a href="../interfaces/ServiceStory.html" target="_self">ServiceStory[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="150"
+                                    class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:150</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>stories</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ServiceStory.html" target="_self" >ServiceStory[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="buildNodes"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>buildNodes</b></span>
+                        <a href="#buildNodes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>buildNodes(stories: <a href="../interfaces/ServiceStory.html" target="_self">ServiceStory[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="179"
+                                    class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:179</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>stories</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ServiceStory.html" target="_self" >ServiceStory[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteMicroservice"></a>
+                    <span class="name">
+                        <span ><b>deleteMicroservice</b></span>
+                        <a href="#deleteMicroservice"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>deleteMicroservice(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="139"
+                                    class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:139</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getArtifacts"></a>
+                    <span class="name">
+                        <span ><b>getArtifacts</b></span>
+                        <a href="#getArtifacts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getArtifacts(microserviceId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="110"
+                                    class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:110</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>microserviceId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStories"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getStories</b></span>
+                        <a href="#getStories"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getStories(microserviceId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="117"
+                                    class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:117</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>microserviceId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTeamAndMembers"></a>
+                    <span class="name">
+                        <span ><b>getTeamAndMembers</b></span>
+                        <a href="#getTeamAndMembers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getTeamAndMembers(microserviceId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="101"
+                                    class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:101</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>microserviceId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:130</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="78"
+                                    class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:78</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openSnackBar"></a>
+                    <span class="name">
+                        <span ><b>openSnackBar</b></span>
+                        <a href="#openSnackBar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openSnackBar(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, action: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="202"
+                                    class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:202</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>action</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openViewer"></a>
+                    <span class="name">
+                        <span ><b>openViewer</b></span>
+                        <a href="#openViewer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openViewer(artifact: <a href="../interfaces/ModelArtifact.html" target="_self">ModelArtifact</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="210"
+                                    class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:210</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>artifact</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ModelArtifact.html" target="_self" >ModelArtifact</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="artifactTableDataSource"></a>
+                    <span class="name">
+                        <span ><b>artifactTableDataSource</b></span>
+                        <a href="#artifactTableDataSource"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new MatTableDataSource()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dialog"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>dialog</b></span>
+                        <a href="#dialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>MatDialog</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:74</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="displayedArtifactColumns"></a>
+                    <span class="name">
+                        <span ><b>displayedArtifactColumns</b></span>
+                        <a href="#displayedArtifactColumns"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[&#x27;action&#x27;, &#x27;name&#x27;, &#x27;kind&#x27;]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="graphEdges"></a>
+                    <span class="name">
+                        <span ><b>graphEdges</b></span>
+                        <a href="#graphEdges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Edge[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="graphNodes"></a>
+                    <span class="name">
+                        <span ><b>graphNodes</b></span>
+                        <a href="#graphNodes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Node[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="layoutSettings"></a>
+                    <span class="name">
+                        <span ><b>layoutSettings</b></span>
+                        <a href="#layoutSettings"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+        orientation: &#x27;LR&#x27;
+    }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="microservice"></a>
+                    <span class="name">
+                        <span ><b>microservice</b></span>
+                        <a href="#microservice"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Microservice.html" target="_self" >Microservice | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="microserviceArtifacts"></a>
+                    <span class="name">
+                        <span ><b>microserviceArtifacts</b></span>
+                        <a href="#microserviceArtifacts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ModelArtifact.html" target="_self" >ModelArtifact[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="microserviceStories"></a>
+                    <span class="name">
+                        <span ><b>microserviceStories</b></span>
+                        <a href="#microserviceStories"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ServiceStory.html" target="_self" >ServiceStory[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="microserviceTeam"></a>
+                    <span class="name">
+                        <span ><b>microserviceTeam</b></span>
+                        <a href="#microserviceTeam"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Team.html" target="_self" >Team | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="microserviceTeamMember"></a>
+                    <span class="name">
+                        <span ><b>microserviceTeamMember</b></span>
+                        <a href="#microserviceTeamMember"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Member.html" target="_self" >Member[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="modelSub"></a>
+                    <span class="name">
+                        <span ><b>modelSub</b></span>
+                        <a href="#modelSub"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="nodesReady"></a>
+                    <span class="name">
+                        <span ><b>nodesReady</b></span>
+                        <a href="#nodesReady"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="routerSub"></a>
+                    <span class="name">
+                        <span ><b>routerSub</b></span>
+                        <a href="#routerSub"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="routerSysSub"></a>
+                    <span class="name">
+                        <span ><b>routerSysSub</b></span>
+                        <a href="#routerSysSub"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="serviceSub"></a>
+                    <span class="name">
+                        <span ><b>serviceSub</b></span>
+                        <a href="#serviceSub"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="storySub"></a>
+                    <span class="name">
+                        <span ><b>storySub</b></span>
+                        <a href="#storySub"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sysId"></a>
+                    <span class="name">
+                        <span ><b>sysId</b></span>
+                        <a href="#sysId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="teamSub"></a>
+                    <span class="name">
+                        <span ><b>teamSub</b></span>
+                        <a href="#teamSub"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uniqolor"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>uniqolor</b></span>
+                        <a href="#uniqolor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>uniqolor</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="208" class="link-to-prism">src/app/microservices/view-microservice/view-microservice.component.ts:208</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, OnDestroy, OnInit} from &#x27;@angular/core&#x27;;
+import {Microservice} from &quot;../../shared/models/microservice.model&quot;;
+import {Member} from &quot;../../shared/models/member.model&quot;;
+import {lastValueFrom, Subscription} from &quot;rxjs&quot;;
+import {MicroserviceService} from &quot;../../shared/services/microservice.service&quot;;
+import {TeamService} from &quot;../../shared/services/team.service&quot;;
+import {MemberService} from &quot;../../shared/services/member.service&quot;;
+import {ActivatedRoute, Router} from &quot;@angular/router&quot;;
+import {MatSnackBar} from &quot;@angular/material/snack-bar&quot;;
+import {HighlightAutoResult, HighlightLoader} from &quot;ngx-highlightjs&quot;;
+import {Team} from &quot;../../shared/models/team.model&quot;;
+import {ModelArtifactService} from &quot;../../shared/services/modelartifact.service&quot;;
+import {ModelArtifact} from &quot;../../shared/models/modelartifact.model&quot;;
+import {ServiceStoryService} from &quot;../../shared/services/servicestory.service&quot;;
+import {ServiceStoryEdgeService} from &quot;../../shared/services/service-story-edge.service&quot;;
+import {ServiceStory} from &quot;../../shared/models/servicestory.model&quot;;
+import {ClusterNode, Edge, Node} from &quot;@swimlane/ngx-graph&quot;;
+import {ServiceStoryEdge} from &quot;../../shared/models/servicestoryedge.model&quot;;
+import * as uniqolor from &quot;uniqolor&quot;;
+import {MatTableDataSource} from &quot;@angular/material/table&quot;;
+import {MatDialog} from &quot;@angular/material/dialog&quot;;
+import {
+    AddModelArtifactDialogComponent
+} from &quot;../../model-artifacts/add-model-artifact-dialog/add-model-artifact-dialog.component&quot;;
+import {ViewArtifactDialogComponent} from &quot;./view-artifact-dialog/view-artifact-dialog.component&quot;;
+
+//const themeGithub: string &#x3D; &#x27;../node_modules/highlight.js/styles/github.css&#x27;;
+//const themeGithubDark: string &#x3D; &#x27;node_modules/highlight.js/styles/github-dark.css&#x27;;
+
+@Component({
+    selector: &#x27;app-view-microservice&#x27;,
+    templateUrl: &#x27;./view-microservice.component.html&#x27;,
+    styleUrls: [&#x27;./view-microservice.component.scss&#x27;]
+})
+export class ViewMicroserviceComponent implements OnInit, OnDestroy {
+    sysId: number &#x3D; 0;
+
+    // DATA OBJECTS FOR RETRIEVAL
+    microservice: Microservice | undefined;
+    microserviceTeam: Team | undefined;
+    microserviceTeamMember: Member[] &#x3D; [];
+    microserviceArtifacts: ModelArtifact[] &#x3D; [];
+    microserviceStories: ServiceStory[] &#x3D; [];
+
+    //SUBSCRIPTIONS
+    routerSub: Subscription | undefined;
+    serviceSub: Subscription | undefined;
+    routerSysSub: Subscription | undefined;
+    teamSub: Subscription | undefined;
+    modelSub: Subscription | undefined;
+    storySub: Subscription | undefined;
+
+    // Stuff for displaying the ServiceStories
+    graphNodes : Node[] &#x3D; [];
+    graphEdges: Edge[] &#x3D; [];
+    nodesReady: boolean &#x3D; false;
+    layoutSettings &#x3D; {
+        orientation: &#x27;LR&#x27;
+    };
+
+    // Stuff for displaying the model artifact table
+    displayedArtifactColumns: string[] &#x3D; [&#x27;action&#x27;, &#x27;name&#x27;, &#x27;kind&#x27;];
+    artifactTableDataSource &#x3D; new MatTableDataSource();
+
+    constructor(private microserviceService: MicroserviceService,
+                private teamService: TeamService,
+                private memberService: MemberService,
+                private modelArtifactService: ModelArtifactService,
+                private storyService: ServiceStoryService,
+                private edgeService: ServiceStoryEdgeService,
+                private activatedRoute: ActivatedRoute,
+                private router: Router,
+                private snackBar: MatSnackBar,
+                public dialog: MatDialog) {
+    }
+
+
+    ngOnInit(): void {
+        this.routerSysSub &#x3D; this.activatedRoute.paramMap.subscribe((params) &#x3D;&gt; {
+            this.sysId &#x3D; parseInt(&lt;string&gt;params.get(&#x27;sysId&#x27;));
+
+        });
+
+        this.routerSub &#x3D; this.activatedRoute.paramMap.subscribe((params) &#x3D;&gt; {
+            var id: number &#x3D; parseInt(&lt;string&gt;params.get(&#x27;id&#x27;))
+            this.serviceSub &#x3D; this.microserviceService.getMicroservice(id).subscribe(
+                microservice &#x3D;&gt; {
+                    //if there is a service found, set this as the to be viewed service
+                    this.microservice &#x3D; microservice;
+                    console.log(microservice)
+                    // get all other data to be displayed based on the set viewService
+                    this.getTeamAndMembers(this.microservice.id!!)
+                    this.getArtifacts(this.microservice.id!!)
+                    this.getStories(this.microservice.id!!)
+                }
+            )
+        });
+    }
+
+
+    getTeamAndMembers(microserviceId: number) {
+        this.teamSub &#x3D; this.teamService.getTeamByMicroserviceId(microserviceId).subscribe(team &#x3D;&gt; {
+            this.microserviceTeam &#x3D; team
+            team.memberIds?.forEach(memberId &#x3D;&gt; {
+                this.memberService.getMember(memberId).subscribe(newMember &#x3D;&gt; this.microserviceTeamMember.push(newMember))
+            })
+        })
+    }
+
+    getArtifacts(microserviceId: number) {
+        this.modelSub &#x3D; this.modelArtifactService.getModelArtifactsByMicroserviceId(microserviceId).subscribe(artifacts &#x3D;&gt; {
+            this.microserviceArtifacts &#x3D; artifacts;
+            this.artifactTableDataSource.data &#x3D; artifacts;
+        })
+    }
+
+    async getStories(microserviceId: number) {
+        this.storySub &#x3D; this.storyService.getServiceStoriesContainingMicroservice(microserviceId).subscribe(async stories &#x3D;&gt; {
+            this.microserviceStories &#x3D; stories;
+            await this.buildEdges(stories);
+            await this.buildNodes(stories);
+            //get rid of duplicate node entries
+            this.graphNodes &#x3D; this.graphNodes.filter(
+                (node, i, arr) &#x3D;&gt; arr.findIndex(t &#x3D;&gt; t.id &#x3D;&#x3D;&#x3D; node.id) &#x3D;&#x3D;&#x3D; i
+            )
+            this.nodesReady &#x3D; true;
+        })
+    }
+
+    ngOnDestroy(): void {
+        this.routerSysSub?.unsubscribe();
+        this.routerSub?.unsubscribe();
+        this.modelSub?.unsubscribe();
+        this.teamSub?.unsubscribe();
+        this.serviceSub?.unsubscribe();
+        this.storySub?.unsubscribe();
+    }
+
+    deleteMicroservice(id: number) {
+        this.microserviceService.deleteMicroservice(id).subscribe(
+            value &#x3D;&gt; {
+                this.router.navigate([&#x60;/system/${(this.sysId)}/microservices&#x60;]).then(value1 &#x3D;&gt; {
+                    this.openSnackBar(&quot;Microservice deleted.&quot;, &quot;SUCCESS&quot;);
+                });
+            }
+        )
+    }
+
+
+    private async buildEdges(stories: ServiceStory[]) {
+        for (const story of stories) {
+            if (story.id !&#x3D; null) {
+                let storyEdges: ServiceStoryEdge[] &#x3D; [];
+                if (story.directedEdgeIds) {
+                    const edgeQueries &#x3D; [];
+                    //fetch all necessary edges from backend
+                    for (const id of story.directedEdgeIds) {
+                        edgeQueries.push(lastValueFrom(this.edgeService.getServiceStoryEdge(id)));
+                    }
+                    storyEdges &#x3D; await Promise.all(edgeQueries)
+                }
+                storyEdges.forEach(edge &#x3D;&gt; {
+                    if (edge &amp;&amp; edge.targetId &amp;&amp; edge.sourceId) {
+                        // create the corresponding ngx-graph edge for each story edge
+                        this.graphEdges.push(&lt;Edge&gt;{
+                            id: &quot;e&quot; + edge.id,
+                            label: edge.description,
+                            data: {color: uniqolor(story.name!!).color},
+                            source: &quot;ms&quot; + edge.sourceId,
+                            target: &quot;ms&quot; + edge.targetId
+                        })
+                    }
+                })
+            }
+        }
+    }
+
+
+    private async buildNodes(stories: ServiceStory[]): Promise&lt;void&gt; {
+        for (const story of stories) {
+            if (story.id !&#x3D; null) {
+                if (story.vertexIds) {
+                    const nodeQueries &#x3D; [];
+                    //fetch all necessary node, i.e., microservices, from backend
+                    for (const id of story.vertexIds) {
+                        nodeQueries.push(lastValueFrom(this.microserviceService.getMicroservice(id)));
+                    }
+                    const microservices &#x3D; await Promise.all(nodeQueries)
+                    //CREATE NODES FOR EACH STORY
+                    for (const microservice of microservices) {
+                        let node&#x3D; &lt;Node&gt;{
+                            id: &quot;ms&quot; + microservice!!.id,
+                            label: microservice!!.name
+                        }
+                        this.graphNodes.push(node)
+                    }
+                }
+            }
+        }
+    }
+
+    openSnackBar(message: string, action: string) {
+        this.snackBar.open(message, action, {
+            duration: 2000,
+        });
+    }
+
+    protected readonly uniqolor &#x3D; uniqolor;
+
+    openViewer(artifact : ModelArtifact) : void {
+        const dialogRef &#x3D; this.dialog.open(ViewArtifactDialogComponent, {
+            data: {artifact},
+            width: &#x27;50%&#x27;
+        });
+
+        dialogRef.afterClosed().subscribe(result &#x3D;&gt; {
+            if(result) {
+                console.log(result)
+            }
+        });
+    }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;mat-card class&#x3D;&quot;microservice-view&quot; *ngIf&#x3D;&quot;microservice&quot;&gt;
+    &lt;mat-card-header&gt;
+        &lt;mat-card-subtitle&gt;Microservice&lt;/mat-card-subtitle&gt;
+        &lt;mat-card-title&gt;{{microservice.name}}&lt;/mat-card-title&gt;
+    &lt;/mat-card-header&gt;
+    &lt;mat-divider class&#x3D;&quot;mat-elevation-z5&quot;&gt;&lt;/mat-divider&gt;
+    &lt;mat-card-content class&#x3D;&quot;microservice-card-content&quot;&gt;
+        &lt;p&gt;&lt;/p&gt;
+        &lt;h3&gt;Availability&lt;/h3&gt;
+        &lt;p&gt;
+            &lt;a mat-flat-button matTooltip&#x3D;&quot;click to visit team repository&quot; color&#x3D;&quot;primary&quot; href&#x3D;&quot;{{microservice.repositoryLink}}&quot; target&#x3D;&quot;_blank&quot;
+               class&#x3D;&quot;mat-button&quot; *ngIf&#x3D;&quot;microservice.repositoryLink&quot;&gt;Repository&lt;/a&gt;
+            &lt;a mat-flat-button color&#x3D;&quot;primary&quot; href&#x3D;&quot;{{microservice.repositoryLink}}&quot; target&#x3D;&quot;_blank&quot;
+               class&#x3D;&quot;mat-button&quot; *ngIf&#x3D;&quot;!microservice.repositoryLink&quot; disabled matTooltip&#x3D;&quot;no repository set.&quot;&gt;Repository&lt;/a&gt;
+
+            &lt;a mat-flat-button color&#x3D;&quot;primary&quot; href&#x3D;&quot;&quot; target&#x3D;&quot;_blank&quot;
+               class&#x3D;&quot;mat-button&quot; *ngIf&#x3D;&quot;true&quot; disabled matTooltip&#x3D;&quot;not implemented yet.&quot;&gt;Documentation&lt;/a&gt;
+
+            &lt;a mat-flat-button color&#x3D;&quot;primary&quot; href&#x3D;&quot;&quot; target&#x3D;&quot;_blank&quot;
+               class&#x3D;&quot;mat-button&quot; *ngIf&#x3D;&quot;true&quot; disabled matTooltip&#x3D;&quot;not implemented yet.&quot;&gt;Known Bugs&lt;/a&gt;
+        &lt;/p&gt;
+
+        &lt;h3&gt;Purpose &amp; Planned Features&lt;/h3&gt;
+        &lt;h4&gt;The purpose of the service is as follows.&lt;/h4&gt;
+        &lt;p *ngIf&#x3D;&quot;microservice.purpose&quot;&gt;{{microservice.purpose}}&lt;/p&gt;
+        &lt;p&gt;&lt;/p&gt;
+        &lt;h4&gt;For the future the following features can be expected.&lt;/h4&gt;
+        &lt;p *ngIf&#x3D;&quot;!microservice.plannedFeatures&quot;&gt;Currently no new features planned.&lt;/p&gt;
+        &lt;mat-list *ngIf&#x3D;&quot;microservice.plannedFeatures&quot;&gt;
+            &lt;mat-list-item *ngFor&#x3D;&quot;let feature of microservice.plannedFeatures | keyvalue&quot;&gt;
+                &lt;mat-icon mat-list-icon&gt;settings&lt;/mat-icon&gt;
+                &lt;div mat-line *ngIf&#x3D;&quot;feature.key&quot;&gt;{{feature.key}}&lt;/div&gt;
+                &lt;div mat-line *ngIf&#x3D;&quot;feature.value&quot;&gt; {{feature.value}} &lt;/div&gt;
+            &lt;/mat-list-item&gt;
+        &lt;/mat-list&gt;
+
+        &lt;h3&gt;Owned By&lt;/h3&gt;
+        &lt;h4&gt;The following team is responsible for the lifecycle of the service, i.e., it &lt;i&gt;owns&lt;/i&gt; the service.&lt;/h4&gt;
+        &lt;p *ngIf&#x3D;&quot;!microserviceTeam&quot;&gt;service is orphaned. &lt;mat-icon&gt;sentiment_very_dissatisfied&lt;/mat-icon&gt;&lt;/p&gt;
+        &lt;mat-expansion-panel *ngIf&#x3D;&quot;microserviceTeam&quot;&gt;
+            &lt;mat-expansion-panel-header&gt;
+                &lt;mat-panel-title&gt;
+                    &lt;mat-icon color&#x3D;&quot;primary&quot;&gt;group&lt;/mat-icon&gt; {{microserviceTeam.name}}
+                &lt;/mat-panel-title&gt;
+            &lt;/mat-expansion-panel-header&gt;
+            &lt;table&gt;
+                &lt;tr  *ngFor&#x3D;&quot;let member of microserviceTeamMember&quot;&gt;
+                    &lt;td&gt;&lt;mat-icon *ngIf&#x3D;&quot;microservice.contactPersonId &#x3D;&#x3D;&#x3D; member.id&quot;&gt;contact_support&lt;/mat-icon&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;span&gt;{{member.firstname}} {{member.lastname}}&lt;/span&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;a mat-mini-fab href&#x3D;&quot;mailto:{{member.email}}&quot;  class&#x3D;&quot;small-button&quot;&gt;&lt;mat-icon&gt;email&lt;/mat-icon&gt;&lt;/a&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/table&gt;
+        &lt;/mat-expansion-panel&gt;
+
+        &lt;h3&gt;Model Artifacts&lt;/h3&gt;
+        &lt;h4&gt;The following table gives an overview of all available model artifacts for {{microservice.name}}.
+            Click on the view button to open a particular artifact.&lt;/h4&gt;
+
+        &lt;table mat-table [dataSource]&#x3D;&quot;artifactTableDataSource&quot; class&#x3D;&quot;artifact-table&quot;&gt;
+            &lt;!-- Name Column --&gt;
+            &lt;ng-container matColumnDef&#x3D;&quot;name&quot;&gt;
+                &lt;th mat-header-cell *matHeaderCellDef&gt; Name &lt;/th&gt;
+                &lt;td mat-cell *matCellDef&#x3D;&quot;let artifact&quot;&gt; {{artifact.name}} &lt;/td&gt;
+            &lt;/ng-container&gt;
+
+            &lt;ng-container matColumnDef&#x3D;&quot;kind&quot;&gt;
+                &lt;th mat-header-cell *matHeaderCellDef&gt; Kind &lt;/th&gt;
+                &lt;td mat-cell *matCellDef&#x3D;&quot;let artifact&quot;&gt; {{artifact.kind}} &lt;/td&gt;
+            &lt;/ng-container&gt;
+
+            &lt;!-- Action Column --&gt;
+            &lt;ng-container matColumnDef&#x3D;&quot;action&quot;&gt;
+                &lt;th mat-header-cell *matHeaderCellDef&gt; Actions &lt;/th&gt;
+                &lt;td mat-cell *matCellDef&#x3D;&quot;let artifact&quot;&gt;
+                    &lt;button mat-icon-button color&#x3D;&quot;primary&quot;
+                            matTooltip&#x3D;&quot;click to view artifact&quot;
+                            (click)&#x3D;&quot;openViewer(artifact)&quot;&gt;
+                        &lt;mat-icon&gt;pageview&lt;/mat-icon&gt;
+                    &lt;/button&gt;
+                &lt;/td&gt;
+            &lt;/ng-container&gt;
+
+            &lt;tr mat-header-row *matHeaderRowDef&#x3D;&quot;displayedArtifactColumns&quot;&gt;&lt;/tr&gt;
+            &lt;tr mat-row *matRowDef&#x3D;&quot;let row; columns: displayedArtifactColumns;&quot;&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+
+        &lt;h3&gt;Service Stories&lt;/h3&gt;
+
+        &lt;h4&gt;This list displays all service stories that &lt;code&gt;{{microservice.name}}&lt;/code&gt; is involved in.
+            The story names are colored to identify them in the diagram displayed below the list.&lt;/h4&gt;
+
+        &lt;mat-list&gt;
+            &lt;mat-list-item *ngFor&#x3D;&quot;let story of microserviceStories&quot;&gt;
+                &lt;mat-icon mat-list-icon color&#x3D;&quot;#333333&quot;&gt;book&lt;/mat-icon&gt;
+                &lt;div mat-line *ngIf&#x3D;&quot;story.name&quot; [ngStyle]&#x3D;&quot;{&#x27;color&#x27;: uniqolor(story.name, {}).color}&quot;&gt;{{story.name}}&lt;/div&gt;
+                &lt;div mat-line *ngIf&#x3D;&quot;story.description&quot;&gt; {{story.description | truncate:[100]}} &lt;/div&gt;
+            &lt;/mat-list-item&gt;
+        &lt;/mat-list&gt;
+
+        &lt;h4&gt;This diagram shows a unified view of all stories in which the &lt;code&gt;{{microservice.name}}&lt;/code&gt; microservice is involved.
+            The edges are colored based on their origin service story.&lt;/h4&gt;
+
+        &lt;div xmlns:svg&#x3D;&quot;http://www.w3.org/2000/svg&quot; class&#x3D;&quot;ngx-box&quot;&gt;
+            &lt;p *ngIf&#x3D;&quot;!nodesReady&quot;&gt;No nodes and edges to display in diagram.&lt;/p&gt;
+            &lt;ngx-graph
+                    *ngIf&#x3D;&quot;nodesReady&quot;
+                    class&#x3D;&quot;chart-container&quot;
+                    [view]&#x3D;&quot;[800, 300]&quot;
+                    [draggingEnabled] &#x3D;&quot;false&quot;
+                    [showMiniMap]&#x3D;&quot;true&quot;
+                    [links]&#x3D;&quot;this.graphEdges&quot;
+                    [nodes]&#x3D;&quot;this.graphNodes&quot;
+                    layout&#x3D;&quot;dagreCluster&quot;
+                    [layoutSettings]&#x3D;&quot;layoutSettings&quot;
+                    [autoZoom]&#x3D;&quot;true&quot;
+            &gt;
+
+                &lt;!-- defining the arrow head as end of edge --&gt;
+                &lt;ng-template #defsTemplate&gt;
+                    &lt;svg:marker id&#x3D;&quot;arrow&quot; viewBox&#x3D;&quot;0 -5 10 10&quot; refX&#x3D;&quot;8&quot; refY&#x3D;&quot;0&quot;
+                                markerWidth&#x3D;&quot;4&quot; markerHeight&#x3D;&quot;4&quot; orient&#x3D;&quot;auto&quot;&gt;
+                        &lt;svg:path d&#x3D;&quot;M0,-5L10,0L0,5&quot; class&#x3D;&quot;arrow-head&quot;/&gt;
+                    &lt;/svg:marker&gt;
+                &lt;/ng-template&gt;
+
+                &lt;ng-template #nodeTemplate let-node&gt;
+                    &lt;svg xmlns:svg&#x3D;&quot;http://www.w3.org/2000/svg&quot;&gt;
+                        &lt;svg:g class&#x3D;&quot;node&quot;&gt;
+                            &lt;svg:foreignObject width&#x3D;&quot;180&quot; height&#x3D;&quot;50&quot;
+                                               xmlns:svg&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                                               xmlns:xhtml&#x3D;&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+                                &lt;xhtml:div class&#x3D;&quot;nodeBox&quot;&gt;{{ node.label }}&lt;/xhtml:div&gt;
+                            &lt;/svg:foreignObject&gt;
+                        &lt;/svg:g&gt;
+                    &lt;/svg&gt;
+                &lt;/ng-template&gt;
+
+                &lt;!-- defining the style of edges --&gt;
+                &lt;ng-template #linkTemplate let-link&gt;
+                    &lt;svg:g class&#x3D;&quot;edge&quot;&gt;
+                        &lt;svg:path xmlns:svg&#x3D;&quot;http://www.w3.org/2000/svg&quot; class&#x3D;&quot;line&quot; style&#x3D;&quot;stroke: {{link.data.color}}&quot;
+                                  stroke-width&#x3D;&quot;3&quot;
+                                  marker-end&#x3D;&quot;url(#arrow)&quot;&gt;&lt;/svg:path&gt;
+                        &lt;svg:text class&#x3D;&quot;edge-label&quot; text-anchor&#x3D;&quot;middle&quot;&gt;
+                            &lt;textPath class&#x3D;&quot;text-path&quot; [attr.href]&#x3D;&quot;&#x27;#&#x27; + link.id&quot;
+                                      startOffset&#x3D;&quot;50%&quot;&gt;
+                                {{link.label}}
+                            &lt;/textPath&gt;
+                        &lt;/svg:text&gt;
+                    &lt;/svg:g&gt;
+                &lt;/ng-template&gt;
+            &lt;/ngx-graph&gt;
+        &lt;/div&gt;
+
+    &lt;/mat-card-content&gt;
+
+    &lt;mat-card-actions class&#x3D;&quot;full-width&quot;&gt;
+                    &lt;button mat-flat-button color&#x3D;&quot;accent&quot; matTooltip&#x3D;&quot;click to edit service&quot;
+                            [routerLink]&#x3D;&quot;[&#x27;/system&#x27;,sysId,&#x27;microservices&#x27;,&#x27;edit&#x27;, microservice.id]&quot;
+                    style&#x3D;&quot;margin-right:5px;&quot;&gt;
+                        &lt;mat-icon&gt;edit&lt;/mat-icon&gt; Edit
+                    &lt;/button&gt;
+
+                    &lt;button matTooltip&#x3D;&quot;click to delete service&quot; mat-flat-button color&#x3D;&quot;warn&quot; (click)&#x3D;&quot;deleteMicroservice(microservice.id!)&quot;&gt;
+                        &lt;mat-icon&gt;delete&lt;/mat-icon&gt; Delete
+                    &lt;/button&gt;
+    &lt;/mat-card-actions&gt;
+&lt;/mat-card&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./view-microservice.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &#x27;../../../colors.scss&#x27;;
+
+.microservice-button {
+  margin: 5px;
+}
+.microservice-view {
+  margin: 20px;
+}
+.microservice-card-content {
+  padding-left:16px;
+}
+
+.small-button {
+  transform: scale(0.8);
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mat-button {
+  margin-right: 2%;
+}
+h4 {
+  color : dimgray;
+}
+h3 {
+  margin-top: 1em;
+  color : dimgray;
+  font-weight: 600;
+}
+/** styles for code blocks highlighted with highlight.js */
+pre {
+  display: flex;
+  margin-top: 0;
+  margin-bottom: 0;
+  word-wrap: break-word;
+
+  code {
+    flex: 1;
+    line-height: 1.5em;
+    font-size: 14px;
+    min-height: 100%;
+    padding: 1em 1.2em;
+
+    &amp;.hljs-line-numbers {
+      padding: 0 !important;
+    }
+  }
+}
+
+/** MODEL ARTIFACTS */
+
+.artifact-table {
+  min-width: 50%;
+}
+.mat-column-name {
+  width: 40% !important;
+}
+.mat-column-kind {
+  width: 30% !important;
+}
+.mat-column-action {
+  width: 20% !important;
+}
+/** NGX-GRAPH */
+.ngx-box {
+  border: 1px solid gray;
+  border-radius: 5px;
+  width: 800px;
+  height: 300px;
+  align-content: center;
+}
+
+.nodeBox {
+  display: table-cell;
+  border-radius: 5px;
+  background-color: gray;
+  color: white;
+  font-weight: 550;
+  text-align: center;
+  vertical-align: middle;
+  width: 170px;
+  height: 45px;
+}
+
+/** HIGHLIGHTJS */
+.hljs {
+  margin: 0 1em;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  transition: border ease 1s;
+}
+
+.hljs-ln {
+  padding: 8px 0;
+
+  tr {
+    &amp;:first-child td {
+      padding-top: 8px !important;
+    }
+
+    &amp;:last-child td {
+      padding-bottom: 8px !important;
+    }
+  }
+}
+
+/* for block of numbers */
+td.hljs-ln-numbers {
+  user-select: none;
+  text-align: center;
+  border-right: 1px solid gray;
+  vertical-align: top;
+  padding-right: 8px !important;
+  padding-left: 8px !important;
+}
+
+/* for block of code */
+td.hljs-ln-code {
+  padding-left: 8px !important;
+}
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><mat-card class="microservice-view" *ngIf="microservice">    <mat-card-header>        <mat-card-subtitle>Microservice</mat-card-subtitle>        <mat-card-title>{{microservice.name}}</mat-card-title>    </mat-card-header>    <mat-divider class="mat-elevation-z5"></mat-divider>    <mat-card-content class="microservice-card-content">        <p></p>        <h3>Availability</h3>        <p>            <a mat-flat-button matTooltip="click to visit team repository" color="primary" href="{{microservice.repositoryLink}}" target="_blank"               class="mat-button" *ngIf="microservice.repositoryLink">Repository</a>            <a mat-flat-button color="primary" href="{{microservice.repositoryLink}}" target="_blank"               class="mat-button" *ngIf="!microservice.repositoryLink" disabled matTooltip="no repository set.">Repository</a>            <a mat-flat-button color="primary" href="" target="_blank"               class="mat-button" *ngIf="true" disabled matTooltip="not implemented yet.">Documentation</a>            <a mat-flat-button color="primary" href="" target="_blank"               class="mat-button" *ngIf="true" disabled matTooltip="not implemented yet.">Known Bugs</a>        </p>        <h3>Purpose & Planned Features</h3>        <h4>The purpose of the service is as follows.</h4>        <p *ngIf="microservice.purpose">{{microservice.purpose}}</p>        <p></p>        <h4>For the future the following features can be expected.</h4>        <p *ngIf="!microservice.plannedFeatures">Currently no new features planned.</p>        <mat-list *ngIf="microservice.plannedFeatures">            <mat-list-item *ngFor="let feature of microservice.plannedFeatures | keyvalue">                <mat-icon mat-list-icon>settings</mat-icon>                <div mat-line *ngIf="feature.key">{{feature.key}}</div>                <div mat-line *ngIf="feature.value"> {{feature.value}} </div>            </mat-list-item>        </mat-list>        <h3>Owned By</h3>        <h4>The following team is responsible for the lifecycle of the service, i.e., it <i>owns</i> the service.</h4>        <p *ngIf="!microserviceTeam">service is orphaned. <mat-icon>sentiment_very_dissatisfied</mat-icon></p>        <mat-expansion-panel *ngIf="microserviceTeam">            <mat-expansion-panel-header>                <mat-panel-title>                    <mat-icon color="primary">group</mat-icon> {{microserviceTeam.name}}                </mat-panel-title>            </mat-expansion-panel-header>            <table>                <tr  *ngFor="let member of microserviceTeamMember">                    <td><mat-icon *ngIf="microservice.contactPersonId === member.id">contact_support</mat-icon></td>                    <td><span>{{member.firstname}} {{member.lastname}}</span></td>                    <td><a mat-mini-fab href="mailto:{{member.email}}"  class="small-button"><mat-icon>email</mat-icon></a></td>                </tr>            </table>        </mat-expansion-panel>        <h3>Model Artifacts</h3>        <h4>The following table gives an overview of all available model artifacts for {{microservice.name}}.            Click on the view button to open a particular artifact.</h4>        <table mat-table [dataSource]="artifactTableDataSource" class="artifact-table">            <!-- Name Column -->            <ng-container matColumnDef="name">                <th mat-header-cell *matHeaderCellDef> Name </th>                <td mat-cell *matCellDef="let artifact"> {{artifact.name}} </td>            </ng-container>            <ng-container matColumnDef="kind">                <th mat-header-cell *matHeaderCellDef> Kind </th>                <td mat-cell *matCellDef="let artifact"> {{artifact.kind}} </td>            </ng-container>            <!-- Action Column -->            <ng-container matColumnDef="action">                <th mat-header-cell *matHeaderCellDef> Actions </th>                <td mat-cell *matCellDef="let artifact">                    <button mat-icon-button color="primary"                            matTooltip="click to view artifact"                            (click)="openViewer(artifact)">                        <mat-icon>pageview</mat-icon>                    </button>                </td>            </ng-container>            <tr mat-header-row *matHeaderRowDef="displayedArtifactColumns"></tr>            <tr mat-row *matRowDef="let row; columns: displayedArtifactColumns;"></tr>        </table>        <h3>Service Stories</h3>        <h4>This list displays all service stories that <code>{{microservice.name}}</code> is involved in.            The story names are colored to identify them in the diagram displayed below the list.</h4>        <mat-list>            <mat-list-item *ngFor="let story of microserviceStories">                <mat-icon mat-list-icon color="#333333">book</mat-icon>                <div mat-line *ngIf="story.name" [ngStyle]="{\'color\': uniqolor(story.name, {}).color}">{{story.name}}</div>                <div mat-line *ngIf="story.description"> {{story.description | truncate:[100]}} </div>            </mat-list-item>        </mat-list>        <h4>This diagram shows a unified view of all stories in which the <code>{{microservice.name}}</code> microservice is involved.            The edges are colored based on their origin service story.</h4>        <div xmlns:svg="http://www.w3.org/2000/svg" class="ngx-box">            <p *ngIf="!nodesReady">No nodes and edges to display in diagram.</p>            <ngx-graph                    *ngIf="nodesReady"                    class="chart-container"                    [view]="[800, 300]"                    [draggingEnabled] ="false"                    [showMiniMap]="true"                    [links]="this.graphEdges"                    [nodes]="this.graphNodes"                    layout="dagreCluster"                    [layoutSettings]="layoutSettings"                    [autoZoom]="true"            >                <!-- defining the arrow head as end of edge -->                <ng-template #defsTemplate>                    <svg:marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0"                                markerWidth="4" markerHeight="4" orient="auto">                        <svg:path d="M0,-5L10,0L0,5" class="arrow-head"/>                    </svg:marker>                </ng-template>                <ng-template #nodeTemplate let-node>                    <svg xmlns:svg="http://www.w3.org/2000/svg">                        <svg:g class="node">                            <svg:foreignObject width="180" height="50"                                               xmlns:svg="http://www.w3.org/2000/svg"                                               xmlns:xhtml="http://www.w3.org/1999/xhtml">                                <xhtml:div class="nodeBox">{{ node.label }}</xhtml:div>                            </svg:foreignObject>                        </svg:g>                    </svg>                </ng-template>                <!-- defining the style of edges -->                <ng-template #linkTemplate let-link>                    <svg:g class="edge">                        <svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" style="stroke: {{link.data.color}}"                                  stroke-width="3"                                  marker-end="url(#arrow)"></svg:path>                        <svg:text class="edge-label" text-anchor="middle">                            <textPath class="text-path" [attr.href]="\'#\' + link.id"                                      startOffset="50%">                                {{link.label}}                            </textPath>                        </svg:text>                    </svg:g>                </ng-template>            </ngx-graph>        </div>    </mat-card-content>    <mat-card-actions class="full-width">                    <button mat-flat-button color="accent" matTooltip="click to edit service"                            [routerLink]="[\'/system\',sysId,\'microservices\',\'edit\', microservice.id]"                    style="margin-right:5px;">                        <mat-icon>edit</mat-icon> Edit                    </button>                    <button matTooltip="click to delete service" mat-flat-button color="warn" (click)="deleteMicroservice(microservice.id!)">                        <mat-icon>delete</mat-icon> Delete                    </button>    </mat-card-actions></mat-card></div>'
+    var COMPONENTS = [{'name': 'AddFeatureDialogComponent', 'selector': 'app-add-feature-dialog'},{'name': 'AddMemberComponent', 'selector': 'app-add-member'},{'name': 'AddMicroserviceComponent', 'selector': 'app-add-microservice'},{'name': 'AddModelArtifactDialogComponent', 'selector': 'app-add-model-artifact-dialog'},{'name': 'AddStoryComponent', 'selector': 'app-add-story'},{'name': 'AddTeamComponent', 'selector': 'app-add-team'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DeleteSystemDialogComponent', 'selector': 'app-delete-system-dialog'},{'name': 'EditMemberComponent', 'selector': 'app-edit-member'},{'name': 'EditMicroserviceComponent', 'selector': 'app-edit-microservice'},{'name': 'EditStoryComponent', 'selector': 'app-edit-story'},{'name': 'EditTeamComponent', 'selector': 'app-edit-team'},{'name': 'ErrorPageComponent', 'selector': 'app-error-page'},{'name': 'MembersComponent', 'selector': 'app-members'},{'name': 'MicroservicesComponent', 'selector': 'app-microservices'},{'name': 'ModelArtifactsComponent', 'selector': 'app-model-artifacts'},{'name': 'NewSystemComponent', 'selector': 'app-new-system'},{'name': 'SelectMemberDialogComponent', 'selector': 'app-select-member-dialog'},{'name': 'SelectMicroserviceDialogComponent', 'selector': 'app-select-microservice-dialog'},{'name': 'ServiceStoriesComponent', 'selector': 'app-service-stories'},{'name': 'SystemComponent', 'selector': 'app-system'},{'name': 'TeamsComponent', 'selector': 'app-teams'},{'name': 'ViewArtifactDialogComponent', 'selector': 'app-view-artifact-dialog'},{'name': 'ViewMicroserviceComponent', 'selector': 'app-view-microservice'},{'name': 'WidgetMembersComponent', 'selector': 'app-widget-members'},{'name': 'WidgetMicroservicesComponent', 'selector': 'app-widget-microservices'},{'name': 'WidgetStoriesComponent', 'selector': 'app-widget-stories'},{'name': 'WidgetSystemOverviewComponent', 'selector': 'app-widget-system-overview'},{'name': 'WidgetTeamsComponent', 'selector': 'app-widget-teams'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ViewMicroserviceComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ViewMicroserviceComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

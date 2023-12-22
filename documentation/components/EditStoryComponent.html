@@ -1,0 +1,1501 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>HMM documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">HMM documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  EditStoryComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/service-stories/edit-story/edit-story.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+                <code>OnDestroy</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-edit-story</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./edit-story.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./edit-story.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#allMicroservices" >allMicroservices</a>
+                            </li>
+                            <li>
+                                <a href="#allServiceSub" >allServiceSub</a>
+                            </li>
+                            <li>
+                                <a href="#compareFunction" >compareFunction</a>
+                            </li>
+                            <li>
+                                <a href="#editEdges" >editEdges</a>
+                            </li>
+                            <li>
+                                <a href="#editEdgesWithId" >editEdgesWithId</a>
+                            </li>
+                            <li>
+                                <a href="#editStory" >editStory</a>
+                            </li>
+                            <li>
+                                <a href="#routerSub" >routerSub</a>
+                            </li>
+                            <li>
+                                <a href="#routerSysSub" >routerSysSub</a>
+                            </li>
+                            <li>
+                                <a href="#selectedMicroservices" >selectedMicroservices</a>
+                            </li>
+                            <li>
+                                <a href="#storySub" >storySub</a>
+                            </li>
+                            <li>
+                                <a href="#sysId" >sysId</a>
+                            </li>
+                            <li>
+                                <a href="#updateSub" >updateSub</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#abort" >abort</a>
+                            </li>
+                            <li>
+                                <a href="#addEdge" >addEdge</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#checkIfEdgesFilled" >checkIfEdgesFilled</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#openSnackBar" >openSnackBar</a>
+                            </li>
+                            <li>
+                                <a href="#removeEdge" >removeEdge</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#save" >save</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(microserviceService: <a href="../injectables/MicroserviceService.html" target="_self">MicroserviceService</a>, storyService: <a href="../injectables/ServiceStoryService.html" target="_self">ServiceStoryService</a>, edgeService: <a href="../injectables/ServiceStoryEdgeService.html" target="_self">ServiceStoryEdgeService</a>, memberService: <a href="../injectables/MemberService.html" target="_self">MemberService</a>, activatedRoute: ActivatedRoute, router: Router, snackBar: MatSnackBar)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/service-stories/edit-story/edit-story.component.ts:41</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>microserviceService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MicroserviceService.html" target="_self" >MicroserviceService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>storyService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ServiceStoryService.html" target="_self" >ServiceStoryService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>edgeService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ServiceStoryEdgeService.html" target="_self" >ServiceStoryEdgeService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>memberService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MemberService.html" target="_self" >MemberService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>activatedRoute</td>
+                                                  
+                                                        <td>
+                                                                    <code>ActivatedRoute</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>snackBar</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatSnackBar</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="abort"></a>
+                    <span class="name">
+                        <span ><b>abort</b></span>
+                        <a href="#abort"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>abort()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="128"
+                                    class="link-to-prism">src/app/service-stories/edit-story/edit-story.component.ts:128</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addEdge"></a>
+                    <span class="name">
+                        <span ><b>addEdge</b></span>
+                        <a href="#addEdge"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addEdge()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="138"
+                                    class="link-to-prism">src/app/service-stories/edit-story/edit-story.component.ts:138</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkIfEdgesFilled"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>checkIfEdgesFilled</b></span>
+                        <a href="#checkIfEdgesFilled"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>checkIfEdgesFilled()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="150"
+                                    class="link-to-prism">src/app/service-stories/edit-story/edit-story.component.ts:150</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/service-stories/edit-story/edit-story.component.ts:90</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="52"
+                                    class="link-to-prism">src/app/service-stories/edit-story/edit-story.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openSnackBar"></a>
+                    <span class="name">
+                        <span ><b>openSnackBar</b></span>
+                        <a href="#openSnackBar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openSnackBar(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, action: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="132"
+                                    class="link-to-prism">src/app/service-stories/edit-story/edit-story.component.ts:132</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>action</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeEdge"></a>
+                    <span class="name">
+                        <span ><b>removeEdge</b></span>
+                        <a href="#removeEdge"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeEdge(edge: <a href="../interfaces/ServiceStoryEdge.html" target="_self">ServiceStoryEdge</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="142"
+                                    class="link-to-prism">src/app/service-stories/edit-story/edit-story.component.ts:142</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>edge</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ServiceStoryEdge.html" target="_self" >ServiceStoryEdge</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="save"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>save</b></span>
+                        <a href="#save"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>save()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">src/app/service-stories/edit-story/edit-story.component.ts:98</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="allMicroservices"></a>
+                    <span class="name">
+                        <span ><b>allMicroservices</b></span>
+                        <a href="#allMicroservices"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Microservice.html" target="_self" >Microservice[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/service-stories/edit-story/edit-story.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="allServiceSub"></a>
+                    <span class="name">
+                        <span ><b>allServiceSub</b></span>
+                        <a href="#allServiceSub"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/service-stories/edit-story/edit-story.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="compareFunction"></a>
+                    <span class="name">
+                        <span ><b>compareFunction</b></span>
+                        <a href="#compareFunction"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/service-stories/edit-story/edit-story.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editEdges"></a>
+                    <span class="name">
+                        <span ><b>editEdges</b></span>
+                        <a href="#editEdges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ServiceStoryEdge[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/service-stories/edit-story/edit-story.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editEdgesWithId"></a>
+                    <span class="name">
+                        <span ><b>editEdgesWithId</b></span>
+                        <a href="#editEdgesWithId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ServiceStoryEdge[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/service-stories/edit-story/edit-story.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editStory"></a>
+                    <span class="name">
+                        <span ><b>editStory</b></span>
+                        <a href="#editStory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ServiceStory.html" target="_self" >ServiceStory | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/service-stories/edit-story/edit-story.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="routerSub"></a>
+                    <span class="name">
+                        <span ><b>routerSub</b></span>
+                        <a href="#routerSub"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/service-stories/edit-story/edit-story.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="routerSysSub"></a>
+                    <span class="name">
+                        <span ><b>routerSysSub</b></span>
+                        <a href="#routerSysSub"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/service-stories/edit-story/edit-story.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedMicroservices"></a>
+                    <span class="name">
+                        <span ><b>selectedMicroservices</b></span>
+                        <a href="#selectedMicroservices"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Microservice.html" target="_self" >Microservice[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/service-stories/edit-story/edit-story.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="storySub"></a>
+                    <span class="name">
+                        <span ><b>storySub</b></span>
+                        <a href="#storySub"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/service-stories/edit-story/edit-story.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sysId"></a>
+                    <span class="name">
+                        <span ><b>sysId</b></span>
+                        <a href="#sysId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/service-stories/edit-story/edit-story.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateSub"></a>
+                    <span class="name">
+                        <span ><b>updateSub</b></span>
+                        <a href="#updateSub"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/service-stories/edit-story/edit-story.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, OnDestroy, OnInit} from &#x27;@angular/core&#x27;;
+import {Microservice} from &quot;../../shared/models/microservice.model&quot;;
+import {forkJoin, lastValueFrom, Observable, Subscription} from &quot;rxjs&quot;;
+import {MicroserviceService} from &quot;../../shared/services/microservice.service&quot;;
+import {MemberService} from &quot;../../shared/services/member.service&quot;;
+import {ActivatedRoute, Router} from &quot;@angular/router&quot;;
+import {MatSnackBar} from &quot;@angular/material/snack-bar&quot;;
+import {ServiceStory} from &quot;../../shared/models/servicestory.model&quot;;
+import {ServiceStoryService} from &quot;../../shared/services/servicestory.service&quot;;
+import {ServiceStoryEdge} from &quot;../../shared/models/servicestoryedge.model&quot;;
+import {ServiceStoryEdgeService} from &quot;../../shared/services/service-story-edge.service&quot;;
+import {MatSelectionListChange} from &quot;@angular/material/list&quot;;
+
+
+export interface SimpleEdge {
+    sourceId: number;
+    targetId: number;
+    desc: string;
+}
+
+@Component({
+    selector: &#x27;app-edit-story&#x27;,
+    templateUrl: &#x27;./edit-story.component.html&#x27;,
+    styleUrls: [&#x27;./edit-story.component.scss&#x27;]
+})
+export class EditStoryComponent implements OnInit, OnDestroy {
+    sysId: number &#x3D; 0;
+
+    editStory: ServiceStory | undefined;
+    editEdges: ServiceStoryEdge[] &#x3D; [];
+    editEdgesWithId: ServiceStoryEdge[] &#x3D; [];
+    selectedMicroservices: Microservice[] &#x3D; [];
+    allMicroservices: Microservice[] &#x3D; [];
+
+    routerSub: Subscription | undefined;
+    storySub: Subscription | undefined;
+    allServiceSub: Subscription | undefined;
+    updateSub: Subscription | undefined;
+    routerSysSub: Subscription | undefined;
+
+    compareFunction &#x3D; (o1: any, o2: any) &#x3D;&gt; o1.id &#x3D;&#x3D;&#x3D; o2.id;
+
+    constructor(private microserviceService: MicroserviceService,
+                private storyService: ServiceStoryService,
+                private edgeService: ServiceStoryEdgeService,
+                private memberService: MemberService,
+                private activatedRoute: ActivatedRoute,
+                private router: Router,
+                private snackBar: MatSnackBar) {
+    }
+
+    ngOnInit(): void {
+        this.routerSysSub &#x3D; this.activatedRoute.paramMap.subscribe((params) &#x3D;&gt; {
+            this.sysId &#x3D; parseInt(&lt;string&gt;params.get(&#x27;sysId&#x27;));
+        });
+
+        this.routerSub &#x3D; this.activatedRoute.paramMap.subscribe((params) &#x3D;&gt; {
+            var id: number &#x3D; parseInt(&lt;string&gt;params.get(&#x27;id&#x27;))
+            this.storySub &#x3D; this.storyService.getServiceStory(id).subscribe(
+                (story) &#x3D;&gt; {
+                    this.editStory &#x3D; story;
+                    if (this.editStory) {
+                        this.allServiceSub &#x3D; this.microserviceService.getMicroservices(this.sysId).subscribe(services &#x3D;&gt; {
+                            // get all microservices
+                            this.allMicroservices &#x3D; services;
+
+                            //fill the selectedMicroservices array with the actual starting vertices based on all microservices
+                            this.editStory?.vertexIds?.forEach(vertexId &#x3D;&gt; {
+                                console.log(&quot;VertexID already included&quot; + JSON.stringify(vertexId))
+                                let tempService &#x3D; this.allMicroservices.find(value &#x3D;&gt; value.id &#x3D;&#x3D;&#x3D; vertexId)
+                                if (tempService) this.selectedMicroservices.push(tempService)
+                            })
+                            console.log(&quot;these values are here for allMicroservices: &quot; + JSON.stringify(this.allMicroservices))
+                            console.log(&quot;these values are here for selectedMicroservices: &quot; + JSON.stringify(this.selectedMicroservices))
+                        })
+
+
+                        //fill the editEdge array with the actual starting values
+                        this.editStory?.directedEdgeIds?.forEach(edgeId &#x3D;&gt; {
+                            this.edgeService.getServiceStoryEdge(edgeId).subscribe(edge &#x3D;&gt; {
+                                this.editEdges.push(edge);
+                            })
+                        })
+                    }
+                }
+            )
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.routerSub?.unsubscribe();
+        this.allServiceSub?.unsubscribe();
+        this.updateSub?.unsubscribe();
+        this.storySub?.unsubscribe();
+        this.routerSysSub?.unsubscribe();
+    }
+
+    async save(): Promise&lt;void&gt; {
+      //TODO edges that were removed are currently NOT removed from the backend, i.e. there are a bunch of edges that are not used.
+      //TODO we need to take care of this probably in the backend and not frontend. For the test we leave it as is.
+        if (this.editStory &amp;&amp; this.editStory.name &amp;&amp; this.checkIfEdgesFilled()) {
+            const promises: any[] &#x3D; [];
+            this.editEdges.forEach(oldEdge &#x3D;&gt; {
+                if (oldEdge.id) {
+                    promises.push(lastValueFrom(this.edgeService.updateServiceStoryEdge(oldEdge)))
+                } else {
+                    if(!oldEdge.description)
+                        oldEdge.description&#x3D;&quot;&quot;
+                    promises.push(lastValueFrom(this.edgeService.createServiceStoryEdge(oldEdge.sourceId!, oldEdge.targetId!, oldEdge.description!, this.editStory!.sysId!)))
+                }
+            })
+            const updatedEdges &#x3D; await Promise.all(promises)
+            updatedEdges.forEach(updatedEdge &#x3D;&gt; {
+                this.editEdgesWithId.push(updatedEdge)
+            })
+
+            this.editStory.directedEdgeIds &#x3D; this.editEdgesWithId.map(e &#x3D;&gt; e.id!)
+            this.editStory.vertexIds &#x3D; this.selectedMicroservices.map(ms &#x3D;&gt; ms.id!)
+            this.updateSub &#x3D; this.storyService.updateServiceStory(this.editStory).subscribe(story &#x3D;&gt; {
+                this.openSnackBar(&#x60;${story.name} updated!&#x60;, &quot;SUCCESS&quot;)
+                this.router.navigate([&#x60;/system/${this.sysId}/stories&#x60;]);
+            })
+        } else {
+            this.openSnackBar(&quot;Something went wrong. Please fill all required fields.&quot;, &quot;ERROR&quot;)
+        }
+    }
+
+    abort() {
+        this.router.navigate([&#x60;/system/${this.sysId}/stories&#x60;]);
+    }
+
+    openSnackBar(message: string, action: string) {
+        this.snackBar.open(message, action, {
+            duration: 2000,
+        });
+    }
+
+    addEdge() {
+        this.editEdges.push({})
+    }
+
+    removeEdge(edge: ServiceStoryEdge) {
+        const index &#x3D; this.editEdges.indexOf(edge, 0);
+        if (index &gt; -1) {
+            this.editEdges.splice(index, 1);
+        }
+    }
+
+    //checks if targetId and sourceId is filled for each edge. does not check for duplicates!
+    private checkIfEdgesFilled(): boolean {
+        return this.editEdges.every((e) &#x3D;&gt; e.targetId !&#x3D;&#x3D; undefined &amp;&amp; e.sourceId !&#x3D;&#x3D; undefined)
+    }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;mat-card class&#x3D;&quot;story-edit&quot; *ngIf&#x3D;&quot;editStory&quot;&gt;
+    &lt;mat-card-header&gt;
+        &lt;mat-card-title&gt;Edit Story {{editStory.name}}&lt;/mat-card-title&gt;
+    &lt;/mat-card-header&gt;
+    &lt;mat-card-content&gt;
+        &lt;div class&#x3D;&quot;story-edit-form&quot;&gt;
+            &lt;h2 class&#x3D;&quot;card-headline&quot;&gt;Name&lt;/h2&gt;
+
+            &lt;mat-form-field appearance&#x3D;&quot;outline&quot; class&#x3D;&quot;full-width&quot;&gt;
+                &lt;mat-label&gt;Story Name&lt;/mat-label&gt;
+                &lt;input matInput name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;A New Story&quot; [(ngModel)]&#x3D;&quot;editStory.name&quot; required&gt;
+            &lt;/mat-form-field&gt;
+
+            &lt;h2 class&#x3D;&quot;card-headline&quot;&gt;Description&lt;/h2&gt;
+
+            &lt;mat-form-field appearance&#x3D;&quot;outline&quot; class&#x3D;&quot;full-width&quot;&gt;
+                &lt;mat-label&gt;Story Description&lt;/mat-label&gt;
+                &lt;textarea matInput name&#x3D;&quot;desc&quot; placeholder&#x3D;&quot;Once upon a time, there was a microservice...&quot;
+                          [(ngModel)]&#x3D;&quot;editStory.description&quot; required&gt;&lt;/textarea&gt;
+            &lt;/mat-form-field&gt;
+
+            &lt;h2 class&#x3D;&quot;card-headline&quot;&gt;Involved Microservices&lt;/h2&gt;
+
+            &lt;!-- check this https://stackoverflow.com/questions/47349528/binding-an-angular-material-selection-list --&gt;
+            &lt;mat-selection-list [(ngModel)]&#x3D;&quot;selectedMicroservices&quot; [compareWith]&#x3D;&quot;compareFunction&quot;&gt;
+                &lt;mat-list-option *ngFor&#x3D;&quot;let service of allMicroservices&quot; [value]&#x3D;&quot;service&quot;&gt;
+                    {{service.name}}
+                &lt;/mat-list-option&gt;
+            &lt;/mat-selection-list&gt;
+
+
+            &lt;h2 class&#x3D;&quot;card-headline&quot;&gt;Edges&lt;/h2&gt;
+
+            &lt;table&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;&lt;button mat-icon-button color&#x3D;&quot;primary&quot; (click)&#x3D;&quot;addEdge()&quot;&gt;&lt;mat-icon&gt;add&lt;/mat-icon&gt;&lt;/button&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr *ngFor&#x3D;&quot;let edge of editEdges&quot;&gt;
+                    &lt;td&gt;
+                        &lt;mat-form-field appearance&#x3D;&quot;outline&quot;&gt;
+                            &lt;mat-label&gt;Source&lt;/mat-label&gt;
+                            &lt;mat-select [(value)]&#x3D;&quot;edge.sourceId&quot;&gt;
+                                &lt;mat-option *ngFor&#x3D;&quot;let service of selectedMicroservices&quot; [value]&#x3D;&quot;service.id&quot;&gt;{{service.name}}&lt;/mat-option&gt;
+                            &lt;/mat-select&gt;
+                        &lt;/mat-form-field&gt;
+                    &lt;/td&gt;
+
+                    &lt;td&gt;
+                        &lt;mat-form-field appearance&#x3D;&quot;outline&quot;&gt;
+                            &lt;mat-label&gt;Target&lt;/mat-label&gt;
+                            &lt;mat-select [(value)]&#x3D;&quot;edge.targetId&quot;&gt;
+                                &lt;mat-option *ngFor&#x3D;&quot;let service of selectedMicroservices&quot; [value]&#x3D;&quot;service.id&quot;&gt;{{service.name}}&lt;/mat-option&gt;
+                            &lt;/mat-select&gt;
+                        &lt;/mat-form-field&gt;
+                    &lt;/td&gt;
+                    &lt;td&gt;
+                        &lt;mat-form-field appearance&#x3D;&quot;outline&quot; class&#x3D;&quot;full-width&quot;&gt;
+                            &lt;mat-label&gt;Description&lt;/mat-label&gt;
+                            &lt;input matInput placeholder&#x3D;&quot;Label for the edge&quot; [(ngModel)]&#x3D;&quot;edge.description&quot;&gt;
+                        &lt;/mat-form-field&gt;
+                    &lt;/td&gt;
+                    &lt;td&gt;&lt;button mat-icon-button color&#x3D;&quot;warn&quot; (click)&#x3D;&quot;removeEdge(edge)&quot;&gt;&lt;mat-icon&gt;delete&lt;/mat-icon&gt;&lt;/button&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/table&gt;
+        &lt;/div&gt;
+    &lt;/mat-card-content&gt;
+    &lt;mat-card-actions&gt;
+        &lt;a mat-flat-button class&#x3D;&quot;story-button&quot; color&#x3D;&quot;primary&quot; (click)&#x3D;&quot;save()&quot;&gt;Save&lt;/a&gt;
+        &lt;a mat-flat-button class&#x3D;&quot;story-button&quot; color&#x3D;&quot;warn&quot; (click)&#x3D;&quot;abort()&quot;&gt;Abort&lt;/a&gt;
+    &lt;/mat-card-actions&gt;
+&lt;/mat-card&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./edit-story.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.story-button {
+  margin: 5px;
+}
+.story-edit {
+  margin: 20px;
+}
+
+.story-edit-form {
+  min-width: 350px;
+  max-width: 700px;
+  width:50%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.card-headline {
+  margin-top: 1em;
+  color : darkgray;
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><mat-card class="story-edit" *ngIf="editStory">    <mat-card-header>        <mat-card-title>Edit Story {{editStory.name}}</mat-card-title>    </mat-card-header>    <mat-card-content>        <div class="story-edit-form">            <h2 class="card-headline">Name</h2>            <mat-form-field appearance="outline" class="full-width">                <mat-label>Story Name</mat-label>                <input matInput name="name" placeholder="A New Story" [(ngModel)]="editStory.name" required>            </mat-form-field>            <h2 class="card-headline">Description</h2>            <mat-form-field appearance="outline" class="full-width">                <mat-label>Story Description</mat-label>                <textarea matInput name="desc" placeholder="Once upon a time, there was a microservice..."                          [(ngModel)]="editStory.description" required></textarea>            </mat-form-field>            <h2 class="card-headline">Involved Microservices</h2>            <!-- check this https://stackoverflow.com/questions/47349528/binding-an-angular-material-selection-list -->            <mat-selection-list [(ngModel)]="selectedMicroservices" [compareWith]="compareFunction">                <mat-list-option *ngFor="let service of allMicroservices" [value]="service">                    {{service.name}}                </mat-list-option>            </mat-selection-list>            <h2 class="card-headline">Edges</h2>            <table>                <tr>                    <td><button mat-icon-button color="primary" (click)="addEdge()"><mat-icon>add</mat-icon></button></td>                </tr>                <tr *ngFor="let edge of editEdges">                    <td>                        <mat-form-field appearance="outline">                            <mat-label>Source</mat-label>                            <mat-select [(value)]="edge.sourceId">                                <mat-option *ngFor="let service of selectedMicroservices" [value]="service.id">{{service.name}}</mat-option>                            </mat-select>                        </mat-form-field>                    </td>                    <td>                        <mat-form-field appearance="outline">                            <mat-label>Target</mat-label>                            <mat-select [(value)]="edge.targetId">                                <mat-option *ngFor="let service of selectedMicroservices" [value]="service.id">{{service.name}}</mat-option>                            </mat-select>                        </mat-form-field>                    </td>                    <td>                        <mat-form-field appearance="outline" class="full-width">                            <mat-label>Description</mat-label>                            <input matInput placeholder="Label for the edge" [(ngModel)]="edge.description">                        </mat-form-field>                    </td>                    <td><button mat-icon-button color="warn" (click)="removeEdge(edge)"><mat-icon>delete</mat-icon></button></td>                </tr>            </table>        </div>    </mat-card-content>    <mat-card-actions>        <a mat-flat-button class="story-button" color="primary" (click)="save()">Save</a>        <a mat-flat-button class="story-button" color="warn" (click)="abort()">Abort</a>    </mat-card-actions></mat-card></div>'
+    var COMPONENTS = [{'name': 'AddFeatureDialogComponent', 'selector': 'app-add-feature-dialog'},{'name': 'AddMemberComponent', 'selector': 'app-add-member'},{'name': 'AddMicroserviceComponent', 'selector': 'app-add-microservice'},{'name': 'AddModelArtifactDialogComponent', 'selector': 'app-add-model-artifact-dialog'},{'name': 'AddStoryComponent', 'selector': 'app-add-story'},{'name': 'AddTeamComponent', 'selector': 'app-add-team'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DeleteSystemDialogComponent', 'selector': 'app-delete-system-dialog'},{'name': 'EditMemberComponent', 'selector': 'app-edit-member'},{'name': 'EditMicroserviceComponent', 'selector': 'app-edit-microservice'},{'name': 'EditStoryComponent', 'selector': 'app-edit-story'},{'name': 'EditTeamComponent', 'selector': 'app-edit-team'},{'name': 'ErrorPageComponent', 'selector': 'app-error-page'},{'name': 'MembersComponent', 'selector': 'app-members'},{'name': 'MicroservicesComponent', 'selector': 'app-microservices'},{'name': 'ModelArtifactsComponent', 'selector': 'app-model-artifacts'},{'name': 'NewSystemComponent', 'selector': 'app-new-system'},{'name': 'SelectMemberDialogComponent', 'selector': 'app-select-member-dialog'},{'name': 'SelectMicroserviceDialogComponent', 'selector': 'app-select-microservice-dialog'},{'name': 'ServiceStoriesComponent', 'selector': 'app-service-stories'},{'name': 'SystemComponent', 'selector': 'app-system'},{'name': 'TeamsComponent', 'selector': 'app-teams'},{'name': 'ViewArtifactDialogComponent', 'selector': 'app-view-artifact-dialog'},{'name': 'ViewMicroserviceComponent', 'selector': 'app-view-microservice'},{'name': 'WidgetMembersComponent', 'selector': 'app-widget-members'},{'name': 'WidgetMicroservicesComponent', 'selector': 'app-widget-microservices'},{'name': 'WidgetStoriesComponent', 'selector': 'app-widget-stories'},{'name': 'WidgetSystemOverviewComponent', 'selector': 'app-widget-system-overview'},{'name': 'WidgetTeamsComponent', 'selector': 'app-widget-teams'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'EditStoryComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'EditStoryComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

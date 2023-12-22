@@ -36,7 +36,6 @@ export class MicroserviceService {
             return this.http.get<Microservice>(this.entityUrl + '/' + id)
                 .pipe(catchError(Utils.handleError));
         }
-
     }
 
     /** GET all microservices */

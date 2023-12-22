@@ -1,0 +1,908 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>HMM documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">HMM documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-variables">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Miscellaneous</li>
+  <li class="breadcrumb-item">Variables</li>
+</ol>
+
+<section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#environment" title="src/environments/environment.prod.ts" ><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.prod.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#environment" title="src/environments/environment.ts" ><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#httpOptions" title="src/app/shared/services/member.service.ts" ><b>httpOptions</b>&nbsp;&nbsp;&nbsp;(src/.../member.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#httpOptions" title="src/app/shared/services/microservice.service.ts" ><b>httpOptions</b>&nbsp;&nbsp;&nbsp;(src/.../microservice.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#httpOptions" title="src/app/shared/services/modelartifact.service.ts" ><b>httpOptions</b>&nbsp;&nbsp;&nbsp;(src/.../modelartifact.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#httpOptions" title="src/app/shared/services/organization.service.ts" ><b>httpOptions</b>&nbsp;&nbsp;&nbsp;(src/.../organization.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#httpOptions" title="src/app/shared/services/service-story-edge.service.ts" ><b>httpOptions</b>&nbsp;&nbsp;&nbsp;(src/.../service-story-edge.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#httpOptions" title="src/app/shared/services/servicestory.service.ts" ><b>httpOptions</b>&nbsp;&nbsp;&nbsp;(src/.../servicestory.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#httpOptions" title="src/app/shared/services/softwaresystem.service.ts" ><b>httpOptions</b>&nbsp;&nbsp;&nbsp;(src/.../softwaresystem.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#httpOptions" title="src/app/shared/services/team.service.ts" ><b>httpOptions</b>&nbsp;&nbsp;&nbsp;(src/.../team.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MEMBERS" title="src/assets/mock-data/mock-members.ts" ><b>MEMBERS</b>&nbsp;&nbsp;&nbsp;(src/.../mock-members.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MICROSERVICES" title="src/assets/mock-data/mock-microservices.ts" ><b>MICROSERVICES</b>&nbsp;&nbsp;&nbsp;(src/.../mock-microservices.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#STORIES" title="src/assets/mock-data/mock-stories.ts" ><b>STORIES</b>&nbsp;&nbsp;&nbsp;(src/.../mock-stories.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#STORIES_EDGES" title="src/assets/mock-data/mock-stories-edges.ts" ><b>STORIES_EDGES</b>&nbsp;&nbsp;&nbsp;(src/.../mock-stories-edges.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SYSTEMS" title="src/assets/mock-data/mock-softwaresystems.ts" ><b>SYSTEMS</b>&nbsp;&nbsp;&nbsp;(src/.../mock-softwaresystems.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TEAMS" title="src/assets/mock-data/mock-teams.ts" ><b>TEAMS</b>&nbsp;&nbsp;&nbsp;(src/.../mock-teams.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/environments/environment.prod.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="environment"></a>
+                    <span class="name">
+                        <span ><b>environment</b></span>
+                        <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  useMockData: false,
+  production: true,
+  serverUrl: &#x27;https://api.&#x27;+window.location.host
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/environments/environment.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="environment"></a>
+                    <span class="name">
+                        <span ><b>environment</b></span>
+                        <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  useMockData: false,
+  production: false,
+  serverUrl: &#x27;http://localhost:8080&#x27;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/shared/services/member.service.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="httpOptions"></a>
+                    <span class="name">
+                        <span ><b>httpOptions</b></span>
+                        <a href="#httpOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    headers: new HttpHeaders({
+        &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
+        //Authorization: &#x27;my-auth-token&#x27;
+    })
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/shared/services/microservice.service.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="httpOptions"></a>
+                    <span class="name">
+                        <span ><b>httpOptions</b></span>
+                        <a href="#httpOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    headers: new HttpHeaders({
+        &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
+        //Authorization: &#x27;my-auth-token&#x27;
+    })
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/shared/services/modelartifact.service.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="httpOptions"></a>
+                    <span class="name">
+                        <span ><b>httpOptions</b></span>
+                        <a href="#httpOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  headers: new HttpHeaders({
+    &#x27;Content-Type&#x27;:  &#x27;application/json&#x27;,
+    //Authorization: &#x27;my-auth-token&#x27;
+  })
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/shared/services/organization.service.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="httpOptions"></a>
+                    <span class="name">
+                        <span ><b>httpOptions</b></span>
+                        <a href="#httpOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  headers: new HttpHeaders({
+    &#x27;Content-Type&#x27;:  &#x27;application/json&#x27;,
+    //Authorization: &#x27;my-auth-token&#x27;
+  })
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/shared/services/service-story-edge.service.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="httpOptions"></a>
+                    <span class="name">
+                        <span ><b>httpOptions</b></span>
+                        <a href="#httpOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  headers: new HttpHeaders({
+    &#x27;Content-Type&#x27;:  &#x27;application/json&#x27;,
+    //Authorization: &#x27;my-auth-token&#x27;
+  })
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/shared/services/servicestory.service.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="httpOptions"></a>
+                    <span class="name">
+                        <span ><b>httpOptions</b></span>
+                        <a href="#httpOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  headers: new HttpHeaders({
+    &#x27;Content-Type&#x27;:  &#x27;application/json&#x27;,
+    //Authorization: &#x27;my-auth-token&#x27;
+  })
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/shared/services/softwaresystem.service.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="httpOptions"></a>
+                    <span class="name">
+                        <span ><b>httpOptions</b></span>
+                        <a href="#httpOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  headers: new HttpHeaders({
+    &#x27;Content-Type&#x27;:  &#x27;application/json&#x27;,
+    //Authorization: &#x27;my-auth-token&#x27;
+  })
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/shared/services/team.service.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="httpOptions"></a>
+                    <span class="name">
+                        <span ><b>httpOptions</b></span>
+                        <a href="#httpOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    headers: new HttpHeaders({
+        &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
+        //Authorization: &#x27;my-auth-token&#x27;
+    })
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/assets/mock-data/mock-members.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MEMBERS"></a>
+                    <span class="name">
+                        <span ><b>MEMBERS</b></span>
+                        <a href="#MEMBERS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Member.html" target="_self" >Member[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+        firstname: &#x27;Jonas&#x27;,
+        lastname: &#x27;Sorgalla&#x27;,
+        email: &#x27;jonas.sorgalla@fh-dortmund.de&#x27;,
+        profileLink: &#x27;https://example.com/janedoe&#x27;,
+        expertise: &#x27;Despair&#x27;,
+        sysId: 1,
+        id: 1,
+    },
+    {
+        firstname: &#x27;Philip&#x27;,
+        lastname: &#x27;Wizenty&#x27;,
+        email: &#x27;philip.wizenty@fh-dortmund.de&#x27;,
+        profileLink: &#x27;https://github.com/pwizenty&#x27;,
+        expertise: &#x27;Operations, PaaS like AWS, Azure etc.&#x27;,
+        sysId: 1,
+        id: 2,
+    },
+    {
+        firstname: &#x27;Florian&#x27;,
+        lastname: &#x27;Rademacher&#x27;,
+        email: &#x27;rademacher@se-rwth.de&#x27;,
+        profileLink: &#x27;https://github.com/frademacher&#x27;,
+        expertise: &#x27;Model-Driven Engineering and LEMMA&#x27;,
+        sysId: 1,
+        id: 3,
+    }, {
+        firstname: &#x27;Philipp&#x27;,
+        lastname: &#x27;Heisig&#x27;,
+        email: &#x27;philipp.heisig@fh-dortmund.de&#x27;,
+        expertise: &#x27;Data-intensive Applications&#x27;,
+        sysId: 1,
+        id: 4,
+    }
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/assets/mock-data/mock-microservices.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MICROSERVICES"></a>
+                    <span class="name">
+                        <span ><b>MICROSERVICES</b></span>
+                        <a href="#MICROSERVICES"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Microservice.html" target="_self" >Microservice[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+        name: &quot;User Service&quot;,
+        repositoryLink: &quot;https://github.com/user-service&quot;,
+        contactPersonId: 1,
+        plannedFeatures: {&quot;Authentication&quot;: &quot;super desc of auth feature&quot;, &quot;Profile Management&quot;: &quot;super desc of profile feature&quot;},
+        sysId: 1,
+        id: 1
+    },
+    {
+        name: &quot;Product Service&quot;,
+        repositoryLink: &quot;https://github.com/product-service&quot;,
+        contactPersonId: 2,
+        plannedFeatures: {&quot;Inventory Management&quot;: &quot;super desc of inv management feature&quot;, &quot;Order Tracking&quot;: &quot;super desc of tracking feature&quot;},
+        sysId: 1,
+        id: 2
+    },
+    {
+        name: &quot;Payment Service&quot;,
+        repositoryLink: &quot;https://github.com/payment-service&quot;,
+        contactPersonId: 4,
+        plannedFeatures: {&quot;Credit Card Processing&quot;: &quot;super desc of credit card feature&quot;, &quot;Refunds&quot;: &quot;super desc of refund feature&quot;},
+        sysId: 1,
+        id: 3
+    },
+    {
+        name: &quot;Messaging Service&quot;,
+        repositoryLink: &quot;https://github.com/messaging-service&quot;,
+        contactPersonId: 3,
+        plannedFeatures: {&quot;Email Notifications&quot;: &quot;super desc of mail notifications feature&quot;, &quot;SMS Notifications&quot;: &quot;super desc of sms notification feature&quot;},
+        sysId: 1,
+        id: 4
+    }
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/assets/mock-data/mock-stories.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="STORIES"></a>
+                    <span class="name">
+                        <span ><b>STORIES</b></span>
+                        <a href="#STORIES"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ServiceStory.html" target="_self" >ServiceStory[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+        name: &quot;Story One&quot;,
+        description: &quot;This is the first story&quot;,
+        vertexIds: [1, 2, 3],
+        directedEdgeIds: [4, 5, 6],
+        sysId: 1,
+        id: 1,
+    },
+    {
+        name: &quot;Story Two&quot;,
+        description: &quot;This is the second story&quot;,
+        vertexIds: [3, 1, 4],
+        directedEdgeIds: [7, 8, 9],
+        sysId: 1,
+        id: 2,
+    },
+    {
+        name: &quot;Story Three&quot;,
+        description: &quot;This is the third story&quot;,
+        vertexIds: [1, 2, 3, 4],
+        directedEdgeIds: [10, 11, 12],
+        sysId: 1,
+        id: 3,
+    },
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/assets/mock-data/mock-stories-edges.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="STORIES_EDGES"></a>
+                    <span class="name">
+                        <span ><b>STORIES_EDGES</b></span>
+                        <a href="#STORIES_EDGES"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ServiceStoryEdge[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+        sourceId: 1,
+        targetId: 2,
+        description: &quot;This is the first edge1&quot;,
+        id: 4,
+    },
+    {
+        sourceId: 1,
+        targetId: 3,
+        description: &quot;This is the first edge2&quot;,
+        id: 5,
+    },
+    {
+        sourceId: 3,
+        targetId: 2,
+        description: &quot;This is the first edge3&quot;,
+        id: 6,
+    },
+    {
+        sourceId: 3,
+        targetId: 1,
+        description: &quot;This is the second edge&quot;,
+        id: 7,
+    },
+    {
+        sourceId: 1,
+        targetId: 4,
+        description: &quot;This is the third edge&quot;,
+        id: 8,
+    },
+    {
+        sourceId: 4,
+        targetId: 3,
+        description: &quot;This is the fourth edge&quot;,
+        id: 9,
+    },
+    {
+        sourceId: 1,
+        targetId: 2,
+        description: &quot;this&quot;,
+        id: 10,
+    },
+    {
+        sourceId: 2,
+        targetId: 3,
+        description: &quot;is a&quot;,
+        id: 11,
+    },
+    {
+        sourceId: 3,
+        targetId: 4,
+        description: &quot;chain&quot;,
+        id: 12,
+    },
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/assets/mock-data/mock-softwaresystems.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SYSTEMS"></a>
+                    <span class="name">
+                        <span ><b>SYSTEMS</b></span>
+                        <a href="#SYSTEMS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Softwaresystem.html" target="_self" >Softwaresystem[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    { name: &quot;Inventory Management System&quot;, description: &quot;This is a billing system.&quot;, id: 1 },
+    { name: &quot;Billing System&quot;, description: &quot;This is a billing system.&quot;, id: 2 },
+    { name: &quot;HR Management System&quot;, description: &quot;This is a billing system.&quot;, id: 3 }
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/assets/mock-data/mock-teams.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TEAMS"></a>
+                    <span class="name">
+                        <span ><b>TEAMS</b></span>
+                        <a href="#TEAMS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Team.html" target="_self" >Team[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {name: &quot;Sales&quot;, ownedMicroserviceIds: [1], memberIds: [1, 2], sysId: 1, id: 1},
+    {name: &quot;Engineering&quot;, ownedMicroserviceIds: [3, 4], memberIds: [3, 4], sysId: 1, id: 2},
+    {name: &quot;Product Management&quot;, ownedMicroserviceIds: [2], memberIds: [], sysId: 1, id: 3},
+    {name: &quot;Finance&quot;, ownedMicroserviceIds: [6], memberIds: [1], sysId: 1, id: 4},
+    {name: &quot;Marketing&quot;, ownedMicroserviceIds: [], memberIds: [], sysId: 1, id: 5},
+    {name: &quot;Operations&quot;, ownedMicroserviceIds: [7, 8], memberIds: [3, 1], sysId: 1, id: 6}
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
+            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

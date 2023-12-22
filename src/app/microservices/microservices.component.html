@@ -21,9 +21,10 @@
                 </mat-card-header>
                 <mat-divider class="mat-elevation-z5"></mat-divider>
                 <mat-card-content class="microservice-card-content">
-                    <p style="margin-top: 10px;">
+                    <p class="button-bar">
                         <a mat-flat-button matTooltip="click to visit team repository" color="primary" href="{{microservice.repositoryLink}}" target="_blank"
                            class="mat-button" *ngIf="microservice.repositoryLink">Repository</a>
+
                         <a mat-flat-button color="primary" href="{{microservice.repositoryLink}}" target="_blank"
                            class="mat-button" *ngIf="!microservice.repositoryLink" disabled matTooltip="no repository set.">Repository</a>
 

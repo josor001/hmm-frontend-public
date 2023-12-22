@@ -64,6 +64,13 @@ a.invisLink:active { text-decoration: none; }
 .team-chip {
   background: $my-accent;
 }
+
+.button-bar {
+  margin-top: 0.5em;
+}
+.button-bar a {
+  margin: 0.1em;
+}
 /* CSS classes for 2nd menu bar */
 .menu-section {
   display: table;
