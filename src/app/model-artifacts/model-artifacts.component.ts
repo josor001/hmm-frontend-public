@@ -3,16 +3,12 @@ import {AddModelArtifactDialogComponent} from "./add-model-artifact-dialog/add-m
 import {ModelArtifact} from "../shared/models/modelartifact.model";
 import {Subscription} from "rxjs";
 import {MicroserviceService} from "../shared/services/microservice.service";
-import {TeamService} from "../shared/services/team.service";
-import {MemberService} from "../shared/services/member.service";
-import {BreakpointObserver} from "@angular/cdk/layout";
 import {ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ModelArtifactService} from "../shared/services/modelartifact.service";
 import {Microservice} from "../shared/models/microservice.model";
 import {MatDialog} from "@angular/material/dialog";
 import {MatTable, MatTableDataSource} from "@angular/material/table";
-import {Member} from "../shared/models/member.model";
 
 @Component({
   selector: 'app-model-artifacts',
